@@ -1,0 +1,121 @@
+name: RFP Intelligence Agent
+displayName: RFP Intelligence Agent
+description: >
+  RFP Intelligence Agent transforms a raw Request for Proposal document into a
+  populated, citation-grounded Word proposal draft in under 90 seconds. Upload
+  any RFP PDF or paste a SharePoint URL and the agent searches your organisation's
+  SharePoint, Teams, and Outlook for relevant evidence, scores your coverage,
+  drafts a response grounded in real internal documents, and posts an Adaptive
+  Card to your Teams channel for human review and approval — all without leaving
+  Microsoft 365.
+
+schemaVersion: "2.0"
+
+triggers:
+  - phrase: "analyze this RFP"
+  - phrase: "draft a proposal for"
+  - phrase: "respond to this tender"
+  - phrase: "process this RFP"
+  - phrase: "generate a proposal response"
+
+inputs:
+  - name: rfp_file
+    displayName: RFP Document
+    description: Upload the RFP as a PDF or Word document (.pdf, .docx)
+    type: file
+    required: false
+    acceptedFileTypes:
+      - application/pdf
+      - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+
+  - name: rfp_sharepoint_url
+    displayName: SharePoint URL (optional)
+    description: Alternatively, provide a SharePoint link to the RFP document
+    type: string
+    required: false
+
+  - name: company_name
+    displayName: Your Company Name
+    description: The name of your company as it should appear on the proposal
+    type: string
+    required: true
+
+  - name: rfp_title
+    displayName: RFP Title / Reference
+    description: The RFP reference number or title (e.g. GOV-2026-ICT-0042)
+    type: string
+    required: true
+
+  - name: submission_deadline
+    displayName: Submission Deadline
+    description: The submission deadline for this RFP (e.g. 30 June 2026)
+    type: string
+    required: false
+
+actions:
+  - name: TriggerRFPPipeline
+    displayName: Trigger RFP Intelligence Pipeline
+    type: httpRequest
+    method: POST
+    url: "${AZURE_FOUNDRY_ENDPOINT}/run_pipeline"
+    headers:
+      Content-Type: application/json
+      api-key: "${AZURE_FOUNDRY_API_KEY}"
+    body:
+      rfp_source: "${rfp_sharepoint_url}"
+      company_name: "${company_name}"
+      rfp_title: "${rfp_title}"
+      submission_deadline: "${submission_deadline}"
+    timeout: 300
+    onSuccess:
+      - type: adaptiveCard
+        card: "${response.teams_card}"
+      - type: message
+        text: >
+          Your RFP draft is ready. Win probability: ${response.win_probability}%.
+          Gaps requiring action: ${response.gap_count}.
+          Review and approve via the card above.
+    onError:
+      - type: message
+        text: >
+          The pipeline encountered an error: ${error.message}.
+          Please check the pipeline logs or try again.
+
+outputs:
+  - name: docx_path
+    displayName: Draft Document Path
+    description: SharePoint path to the generated proposal draft
+    type: string
+
+  - name: win_probability
+    displayName: Win Probability
+    description: Estimated fit score as a percentage (0–100)
+    type: integer
+
+  - name: gap_count
+    displayName: Gap Count
+    description: Number of requirements with no internal evidence — require human input
+    type: integer
+
+  - name: status
+    displayName: Pipeline Status
+    description: complete, partial, or failed
+    type: string
+
+requiredPermissions:
+  - Files.ReadWrite
+  - Sites.ReadWrite.All
+  - Mail.Read
+  - ChannelMessage.Read.All
+  - Chat.Read
+
+authentication:
+  type: entraId
+  tenantId: "${AZURE_TENANT_ID}"
+  clientId: "${AZURE_CLIENT_ID}"
+
+settings:
+  conversationHistory: false
+  fallbackResponse: >
+    I can help you respond to RFPs. Try: "Analyze this RFP" and upload your document,
+    or paste a SharePoint link to the RFP.

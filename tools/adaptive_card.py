@@ -1,5 +1,4 @@
 """Teams Adaptive Card builder for the RFP review/approval workflow."""
-import json
 
 
 def build_approval_card(data: dict) -> dict:
@@ -9,7 +8,7 @@ def build_approval_card(data: dict) -> dict:
         data: dict with keys:
             rfp_title (str), submission_deadline (str|None), win_probability (int),
             gap_count (int), requirements_found (int), covered_count (int),
-            partial_count (int), sharepoint_url (str), approve_webhook_url (str)
+            partial_count (int), docx_path (str)
 
     Returns:
         Valid Adaptive Card JSON payload dict (schema v1.5).
@@ -21,8 +20,7 @@ def build_approval_card(data: dict) -> dict:
     reqs_found = data.get("requirements_found", 0)
     covered = data.get("covered_count", 0)
     partial = data.get("partial_count", 0)
-    sharepoint_url = data.get("sharepoint_url", "https://sharepoint.example.com")
-    approve_webhook = data.get("approve_webhook_url", "https://webhook.example.com/approve")
+    docx_path = data.get("docx_path", "")
 
     win_color = "Good" if win_prob >= 70 else ("Warning" if win_prob >= 50 else "Attention")
 
@@ -89,27 +87,23 @@ def build_approval_card(data: dict) -> dict:
             "wrap": True,
         })
 
+    # Action.Submit payloads are consumed by whatever host renders the card
+    # (Teams bot / Copilot) — routing them is deployment roadmap.
     actions = [
         {
-            "type": "Action.OpenUrl",
+            "type": "Action.Submit",
             "title": "View Draft",
-            "url": sharepoint_url,
+            "data": {"action": "view_draft", "docx_path": docx_path},
         },
         {
-            "type": "Action.Http",
-            "title": "Approve & Send to SharePoint",
-            "method": "POST",
-            "url": approve_webhook,
-            "headers": [{"name": "Content-Type", "value": "application/json"}],
-            "body": json.dumps({"action": "approve", "rfp_title": rfp_title}),
+            "type": "Action.Submit",
+            "title": "Approve Draft",
+            "data": {"action": "approve", "rfp_title": rfp_title},
         },
         {
-            "type": "Action.OpenUrl",
+            "type": "Action.Submit",
             "title": "Request Changes",
-            "url": data.get(
-                "teams_thread_url",
-                "https://teams.microsoft.com/l/channel/placeholder"
-            ),
+            "data": {"action": "request_changes", "rfp_title": rfp_title},
         },
     ]
 

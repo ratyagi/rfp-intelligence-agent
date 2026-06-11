@@ -87,7 +87,14 @@ def test_docx_no_unfilled_placeholders(pipeline_result):
     )
 
 
-def test_teams_card_posted(pipeline_result):
-    assert pipeline_result.get("teams_card_posted") is True, (
-        "Teams card was not posted (expected True in STUB mode)"
-    )
+def test_approval_card_artifact_written(pipeline_result):
+    import json
+    card_path = pipeline_result.get("card_path")
+    assert card_path is not None, "card_path is None"
+    assert os.path.exists(card_path), f"Approval card not found at: {card_path}"
+    card = json.loads(open(card_path, encoding="utf-8").read())
+    assert card.get("type") == "AdaptiveCard"
+    assert card.get("body"), "Adaptive Card has no body"
+    assert {a.get("data", {}).get("action") for a in card.get("actions", [])} == {
+        "view_draft", "approve", "request_changes"
+    }

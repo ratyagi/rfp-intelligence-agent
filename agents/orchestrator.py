@@ -36,7 +36,7 @@ def run_pipeline(input: dict) -> dict:
             "docx_path": str|None,
             "win_probability": int|None,
             "gap_count": int,
-            "teams_card_posted": bool
+            "card_path": str|None
         }
     """
     pipeline_start = time.time()
@@ -56,7 +56,7 @@ def run_pipeline(input: dict) -> dict:
         "docx_path": None,
         "win_probability": None,
         "gap_count": 0,
-        "teams_card_posted": False,
+        "card_path": None,
         "errors": [],
     }
 
@@ -105,14 +105,14 @@ def run_pipeline(input: dict) -> dict:
     else:
         result["docx_path"] = docx_path
 
-    # ── AGENT 5: REVIEW ──────────────────────────────────────────────────────
+    # ── AGENT 6: REVIEW ──────────────────────────────────────────────────────
     if docx_path:
         from agents.review_agent import run as review_run
-        review_result = _run_agent("Agent5:Review", review_run, result, docx_path, scored_manifest, meta)
+        review_result = _run_agent("Agent6:Review", review_run, result, docx_path, scored_manifest, meta)
         if review_result:
-            result["teams_card_posted"] = review_result.get("card_posted", False)
+            result["card_path"] = review_result.get("card_path")
     else:
-        logger.warning("orchestrator: skipping Agent 5 — no DOCX available")
+        logger.warning("orchestrator: skipping Agent 6 — no DOCX available")
 
     elapsed = time.time() - pipeline_start
     if not result["errors"] and result["docx_path"]:
@@ -131,11 +131,10 @@ def run_pipeline(input: dict) -> dict:
 def _agent1_intake(rfp_source: str) -> dict:
     from tools.doc_intelligence import parse_rfp
     if rfp_source.startswith("http"):
-        # STUB: SharePoint URL source not yet implemented
-        # TODO: download file from SharePoint via Graph API before parsing
-        logger.warning("orchestrator: SharePoint URL source not yet implemented — using STUB doc")
-        from tools.doc_intelligence import _stub_result
-        return _stub_result()
+        raise ValueError(
+            "URL sources are not supported — download the RFP and pass a local "
+            ".pdf or .docx path (remote sources are deployment roadmap)"
+        )
     return parse_rfp(rfp_source)
 
 

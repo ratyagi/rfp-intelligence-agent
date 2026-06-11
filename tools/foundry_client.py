@@ -1,11 +1,18 @@
-"""Single Foundry model-call client used by every reasoning stage.
+"""Single model-call client used by every reasoning stage.
+
+Two providers behind one interface (MODEL_PROVIDER):
+  foundry        — Azure OpenAI-compatible endpoint exposed by a Microsoft
+                   Foundry resource (the primary, documented path).
+  github_models  — GitHub Models free tier (https://models.github.ai), a
+                   zero-cost Microsoft inference service. Used when Azure
+                   model quota is unavailable (e.g. free/student
+                   subscriptions). gpt-4o-mini: 15 req/min, 150 req/day.
 
 Design constraints:
-- Plain REST against the Azure OpenAI-compatible chat completions API that
-  Foundry resources expose — no preview-SDK version landmines.
-- Rate-limit aware: free-trial subscriptions cap models at ~1,000 tokens/min,
-  so the client keeps a token budget, spaces calls out, and honours 429
-  Retry-After with exponential backoff instead of failing the pipeline.
+- Plain REST — no preview-SDK version landmines.
+- Rate-limit aware: free tiers throttle hard, so the client keeps a token
+  budget, spaces calls out, and honours 429 Retry-After with exponential
+  backoff instead of failing the pipeline.
 - JSON-first: every agent consumes structured output, so chat_json() requests
   JSON mode and retries once with the parse error fed back to the model.
 """
@@ -69,19 +76,45 @@ def _pace(prompt_tokens: int, max_tokens: int) -> None:
     _last_call_tokens = needed
 
 
+def _request_target() -> tuple[str, dict, dict]:
+    """Return (url, headers, payload_extras) for the configured provider."""
+    provider = os.getenv("MODEL_PROVIDER", "foundry").lower()
+
+    if provider == "github_models":
+        token = os.getenv("GITHUB_MODELS_TOKEN", "")
+        if not token:
+            raise EnvironmentError(
+                "MODEL_PROVIDER=github_models requires GITHUB_MODELS_TOKEN in .env "
+                "(a GitHub PAT with the models:read permission)"
+            )
+        model = os.getenv("GITHUB_MODELS_MODEL", "openai/gpt-4o-mini")
+        return (
+            "https://models.github.ai/inference/chat/completions",
+            {"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+            {"model": model},
+        )
+
+    if provider == "foundry":
+        api_key = os.getenv("AZURE_FOUNDRY_API_KEY", "")
+        deployment = os.getenv("FOUNDRY_MODEL_DEPLOYMENT", "gpt-4o-mini")
+        if not api_key:
+            raise EnvironmentError("AZURE_FOUNDRY_API_KEY must be set in .env")
+        url = (
+            f"{_base_url()}/openai/deployments/{deployment}"
+            f"/chat/completions?api-version={API_VERSION}"
+        )
+        return url, {"api-key": api_key, "Content-Type": "application/json"}, {}
+
+    raise ValueError(
+        f"Unknown MODEL_PROVIDER '{provider}' — expected 'foundry' or 'github_models'"
+    )
+
+
 def chat(system_prompt: str, user_message: str, *,
          max_tokens: int = 1000, temperature: float = 0.0,
          json_mode: bool = False) -> str:
     """One chat completion. Returns the assistant message content as text."""
-    api_key = os.getenv("AZURE_FOUNDRY_API_KEY", "")
-    deployment = os.getenv("FOUNDRY_MODEL_DEPLOYMENT", "gpt-4o-mini")
-    if not api_key:
-        raise EnvironmentError("AZURE_FOUNDRY_API_KEY must be set in .env")
-
-    url = (
-        f"{_base_url()}/openai/deployments/{deployment}"
-        f"/chat/completions?api-version={API_VERSION}"
-    )
+    url, headers, payload_extras = _request_target()
     payload = {
         "messages": [
             {"role": "system", "content": system_prompt},
@@ -89,6 +122,7 @@ def chat(system_prompt: str, user_message: str, *,
         ],
         "max_tokens": max_tokens,
         "temperature": temperature,
+        **payload_extras,
     }
     if json_mode:
         payload["response_format"] = {"type": "json_object"}
@@ -99,7 +133,7 @@ def chat(system_prompt: str, user_message: str, *,
     for attempt in range(MAX_RETRIES_429 + 1):
         response = requests.post(
             url,
-            headers={"api-key": api_key, "Content-Type": "application/json"},
+            headers=headers,
             json=payload,
             timeout=REQUEST_TIMEOUT_SECONDS,
         )

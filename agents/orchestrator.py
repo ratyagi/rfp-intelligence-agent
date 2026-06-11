@@ -57,6 +57,7 @@ def run_pipeline(input: dict) -> dict:
         "win_probability": None,
         "gap_count": 0,
         "card_path": None,
+        "report_path": None,
         "errors": [],
     }
 
@@ -115,10 +116,11 @@ def run_pipeline(input: dict) -> dict:
     # Unverified drafts do not ship — Review only runs on Verifier output.
     if verified_draft is not None:
         from agents.review_agent import run as review_run
-        review_result = _run_agent("Stage6:Review", review_run, result, verified_draft, meta)
+        review_result = _run_agent("Stage6:Review", review_run, result, verified_draft, evidence_map, meta)
         if review_result:
             result["docx_path"] = review_result.get("docx_path")
             result["card_path"] = review_result.get("card_path")
+            result["report_path"] = review_result.get("report_path")
     else:
         logger.warning("orchestrator: skipping Review — no verified draft available")
 

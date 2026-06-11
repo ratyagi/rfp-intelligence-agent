@@ -16,6 +16,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from tools.adaptive_card import build_approval_card
+from tools.bid_report import append_report_to_docx, build_report
 from tools.docx_builder import build_proposal
 
 load_dotenv()
@@ -25,11 +26,12 @@ OUTPUT_DIR = Path(os.getenv("OUTPUT_DIR", "./output"))
 TEMPLATE_PATH = Path(__file__).parent.parent / "templates" / "proposal_template.docx"
 
 
-def run(verified_draft: dict, meta: dict | None = None) -> dict:
-    """Produce the proposal DOCX and approval card from the verified draft.
+def run(verified_draft: dict, evidence_map: dict, meta: dict | None = None) -> dict:
+    """Produce the proposal DOCX, Bid Decision Report, and approval card.
 
     Returns:
-        {"docx_path": str, "card_path": str, "status": "pending_human_review"}
+        {"docx_path": str, "card_path": str, "report_path": str,
+         "status": "pending_human_review"}
     """
     if meta is None:
         meta = {}
@@ -42,7 +44,14 @@ def run(verified_draft: dict, meta: dict | None = None) -> dict:
         str(TEMPLATE_PATH),
         str(OUTPUT_DIR / f"draft_proposal_{timestamp}.docx"),
     )
-    logger.info(f"ReviewAgent: DOCX written to {docx_path}")
+
+    report = build_report(verified_draft, evidence_map)
+    append_report_to_docx(docx_path, report)
+    report_path = OUTPUT_DIR / f"draft_proposal_{timestamp}_bid_report.json"
+    report_path.write_text(
+        json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+    logger.info(f"ReviewAgent: DOCX with Bid Decision Report written to {docx_path}")
 
     requirements = verified_draft.get("requirements", [])
     verification = verified_draft.get("verification", {})
@@ -68,5 +77,6 @@ def run(verified_draft: dict, meta: dict | None = None) -> dict:
     return {
         "docx_path": docx_path,
         "card_path": str(card_path),
+        "report_path": str(report_path),
         "status": "pending_human_review",
     }

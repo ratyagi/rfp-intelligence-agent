@@ -162,7 +162,7 @@ if __name__ == "__main__":
     import json
     import sys
 
-    rfp_path = sys.argv[1] if len(sys.argv) > 1 else "tests/sample_rfp.pdf"
+    rfp_path = sys.argv[1] if len(sys.argv) > 1 else "demo/sample_rfp.pdf"
     output = run_pipeline({
         "rfp_source": rfp_path,
         "company_name": "Contoso Cloud Solutions",

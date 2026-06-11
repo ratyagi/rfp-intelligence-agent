@@ -10,7 +10,7 @@
 
 - [ ] Open Teams in a browser tab — navigate to the channel where the Copilot Studio agent is deployed
 - [ ] Open the SharePoint RFP-Outputs folder in a second tab
-- [ ] Have `tests/sample_rfp.pdf` (47-page government cloud RFP) ready to drag in
+- [ ] Have `demo/sample_rfp.pdf` (8-page fictional government cloud RFP) ready to drag in
 - [ ] Pre-load `demo/sample_output.docx` in Word as a tab — fallback only
 - [ ] Set `STUB_MODE=false` and confirm `.env` has live credentials
 
@@ -22,7 +22,7 @@ Open the Teams channel. Say:
 
 > "I'm going to drop a real government RFP — 47 pages, due in two weeks. Watch what happens."
 
-Drag `tests/sample_rfp.pdf` into the agent chat and hit send.
+Drag `demo/sample_rfp.pdf` into the agent chat and hit send.
 
 ---
 

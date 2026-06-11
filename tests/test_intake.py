@@ -8,7 +8,7 @@ from tools.doc_intelligence import parse_rfp
 
 
 def test_parse_rfp_stub_returns_correct_shape():
-    result = parse_rfp("tests/sample_rfp.pdf")
+    result = parse_rfp("demo/sample_rfp.pdf")
     assert isinstance(result, dict), "Result must be a dict"
     assert "full_text" in result
     assert "pages" in result
@@ -16,19 +16,19 @@ def test_parse_rfp_stub_returns_correct_shape():
 
 
 def test_parse_rfp_stub_full_text_nonempty():
-    result = parse_rfp("tests/sample_rfp.pdf")
+    result = parse_rfp("demo/sample_rfp.pdf")
     assert isinstance(result["full_text"], str)
     assert len(result["full_text"]) > 50
 
 
 def test_parse_rfp_stub_pages_positive():
-    result = parse_rfp("tests/sample_rfp.pdf")
+    result = parse_rfp("demo/sample_rfp.pdf")
     assert isinstance(result["pages"], int)
     assert result["pages"] > 0
 
 
 def test_parse_rfp_stub_sections_structure():
-    result = parse_rfp("tests/sample_rfp.pdf")
+    result = parse_rfp("demo/sample_rfp.pdf")
     assert isinstance(result["sections"], list)
     assert len(result["sections"]) >= 1
     for section in result["sections"]:

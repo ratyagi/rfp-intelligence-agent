@@ -9,7 +9,7 @@ os.environ["STUB_MODE"] = "true"
 def pipeline_result():
     from agents.orchestrator import run_pipeline
     return run_pipeline({
-        "rfp_source": "tests/sample_rfp.pdf",
+        "rfp_source": "demo/sample_rfp.pdf",
         "company_name": "Contoso Cloud Solutions",
         "rfp_title": "GOV-2026-ICT-0042 Cloud Infrastructure Modernisation",
         "submission_deadline": "30 June 2026",

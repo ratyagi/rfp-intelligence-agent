@@ -79,7 +79,7 @@ def _stub_draft(scored: dict, evidence: list) -> dict:
     req_id = scored["id"]
     score = scored["score"]
     citations = "\n".join(
-        f"[Source: {e['title']} — {e.get('url', 'internal')}]"
+        f"[{e['doc_id']}: {e['title']} — {e.get('source_path', 'corpus')}]"
         for e in evidence[:3]
     )
     response = (

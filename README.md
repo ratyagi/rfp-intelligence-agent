@@ -2,10 +2,12 @@
 
 AI-powered five-agent pipeline that transforms a raw RFP PDF into a populated, citation-grounded Word proposal draft in under 90 seconds — running entirely inside Microsoft 365.
 
-## Tracks
+## Track
 
-- **Enterprise Agents** (primary)
-- **Reasoning Agents** (secondary)
+- **🧠 Reasoning Agents** — built with Microsoft Foundry
+- **Microsoft IQ layer:** Foundry IQ (knowledge-base-backed agentic retrieval)
+
+Architecture decisions are locked in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ## The Problem
 
@@ -13,15 +15,16 @@ Sales and BD teams spend 3–5 days on every RFP response, and win rates sit at 
 
 ## The Solution
 
-A five-agent pipeline orchestrated on Azure AI Foundry:
+A six-stage reasoning pipeline built with Microsoft Foundry:
 
 1. **Intake Agent** — parses the RFP with Azure AI Document Intelligence, extracts a structured requirement manifest (REQ-001, REQ-002…) with priority and category.
-2. **Research Agent** — queries SharePoint, Teams, and Outlook via Microsoft Graph API for evidence matching each requirement.
-3. **Scorer Agent** — scores each requirement COVERED / PARTIAL / GAP and calculates a win-probability estimate.
-4. **Drafter Agent** — writes 100–200 word response sections with inline citations to real company documents; flags GAPs for human action.
-5. **Review Agent** — posts an Adaptive Card to Teams with win probability and gap count; routes approved drafts to SharePoint.
+2. **Research Agent** — retrieves evidence for each requirement from a **Foundry IQ knowledge base** built over the company evidence corpus.
+3. **Scorer Agent** — scores each requirement COVERED / PARTIAL / GAP and computes a priority-weighted win probability.
+4. **Drafter Agent** — writes response sections that may cite only documents returned by retrieval; flags GAPs for human action.
+5. **Verifier** — deterministic citation check: every citation must resolve to a retrieved document, or the claim is stripped and the section flagged.
+6. **Review Agent** — produces the proposal DOCX with a Bid Decision Report appendix (the full per-requirement reasoning trace) and the human-approval Adaptive Card.
 
-The entry point is a **Copilot Studio agent** in Teams — one file drop, no terminal, no config.
+A Teams / Microsoft 365 Copilot entry point is on the deployment roadmap — not claimed as part of the live submission.
 
 ## Setup
 
@@ -40,28 +43,26 @@ pytest tests/
 ## Architecture
 
 ```
-User (Teams / Copilot Chat)
-  └─► Copilot Studio agent
-        └─► Azure AI Foundry orchestrator
-              ├─► Agent 1: Azure AI Document Intelligence (PDF parse)
-              ├─► Agent 2: Microsoft Graph API (SharePoint, Teams, Outlook)
-              │           via MCP connector
-              ├─► Agent 3: Foundry reasoning model — requirement scoring
-              ├─► Agent 4: Foundry reasoning model + python-docx
-              └─► Agent 5: Teams Adaptive Card + SharePoint output
+RFP PDF
+  └─► Orchestrator (validated contracts between every stage)
+        ├─► 1. Intake    — Azure AI Document Intelligence + Foundry model
+        ├─► 2. Research  — ★ Foundry IQ knowledge base (agentic retrieval)
+        ├─► 3. Scorer    — Foundry model + priority-weighted win probability
+        ├─► 4. Drafter   — Foundry model, citations restricted to evidence map
+        ├─► 5. Verifier  — deterministic citation verification (no LLM)
+        └─► 6. Review    — proposal DOCX + Bid Decision Report + Adaptive Card
 ```
+
+Full diagram and locked decisions: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 
 ## Microsoft Technologies Used
 
 | Service | Purpose |
 |---|---|
-| Azure AI Foundry Agent Service | Multi-agent orchestration |
+| Microsoft Foundry | Model inference for all reasoning stages |
+| **Foundry IQ** | Knowledge base + agentic retrieval over the evidence corpus |
 | Azure AI Document Intelligence | PDF/DOCX parsing (`prebuilt-layout`) |
-| Microsoft Graph API | SharePoint, Teams, Outlook search |
-| Microsoft Copilot Studio | Teams / Copilot Chat entry point |
-| Microsoft Teams Adaptive Cards | Human-in-the-loop approval UX |
-| SharePoint Online | Evidence retrieval + approved draft storage |
-| Azure Entra ID | Auth for Graph API and Foundry |
+| Microsoft Teams Adaptive Cards | Human-in-the-loop approval UX (rendered artifact) |
 
 ## Team
 

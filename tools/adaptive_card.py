@@ -24,6 +24,8 @@ def build_approval_card(data: dict) -> dict:
 
     win_color = "Good" if win_prob >= 70 else ("Warning" if win_prob >= 50 else "Attention")
 
+    citations_verified = data.get("citations_verified", "")
+
     body = [
         {
             "type": "TextBlock",
@@ -73,6 +75,7 @@ def build_approval_card(data: dict) -> dict:
                 {"title": "Covered", "value": str(covered)},
                 {"title": "Partial", "value": str(partial)},
                 {"title": "Gaps", "value": str(gap_count)},
+                {"title": "Citations verified", "value": citations_verified or "n/a"},
                 {"title": "Win probability", "value": f"{win_prob}%"},
             ]
         },

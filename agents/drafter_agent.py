@@ -20,14 +20,15 @@ logger = logging.getLogger(__name__)
 
 STUB_MODE = lambda: os.getenv("STUB_MODE", "false").lower() == "true"
 PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
-OUTPUT_DIR = Path(os.getenv("OUTPUT_DIR", "./output"))
 
 
-def run(scored_manifest: dict, evidence_map: dict, meta: dict | None = None) -> str:
-    """Draft proposal sections and produce the output DOCX.
+def run(scored_manifest: dict, evidence_map: dict, meta: dict | None = None) -> dict:
+    """Draft proposal sections for every scored requirement.
 
     Returns:
-        File path of the generated DOCX.
+        Draft data for the Verifier and Review stages:
+        {company_name, rfp_title, submission_date, executive_summary,
+         win_probability, requirements: [drafted requirement dicts]}
     """
     if meta is None:
         meta = {}
@@ -44,6 +45,7 @@ def run(scored_manifest: dict, evidence_map: dict, meta: dict | None = None) -> 
             drafted_requirements.append({
                 "id": req_id,
                 "text": scored.get("text", ""),
+                "priority": scored.get("priority", "medium"),
                 "score": "GAP",
                 "response_text": None,
                 "evidence_citations": None,
@@ -55,13 +57,9 @@ def run(scored_manifest: dict, evidence_map: dict, meta: dict | None = None) -> 
             drafted_requirements.append(_draft_one(scored, evidence))
 
     executive_summary = _write_executive_summary(drafted_requirements, meta, win_probability)
+    logger.info(f"DrafterAgent: drafted {len(drafted_requirements)} sections")
 
-    from tools.docx_builder import build_proposal
-    template_path = str(Path(__file__).parent.parent / "templates" / "proposal_template.docx")
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_path = str(OUTPUT_DIR / f"draft_proposal_{timestamp}.docx")
-
-    data = {
+    return {
         "company_name": meta.get("company_name", "Your Company Name"),
         "rfp_title": meta.get("rfp_title", "RFP Response"),
         "submission_date": meta.get("submission_date", datetime.now().strftime("%d %B %Y")),
@@ -69,10 +67,6 @@ def run(scored_manifest: dict, evidence_map: dict, meta: dict | None = None) -> 
         "win_probability": win_probability,
         "requirements": drafted_requirements,
     }
-
-    path = build_proposal(data, template_path, output_path)
-    logger.info(f"DrafterAgent: DOCX written to {path}")
-    return path
 
 
 def _draft_one(scored: dict, evidence: list) -> dict:
@@ -98,6 +92,7 @@ def _draft_one(scored: dict, evidence: list) -> dict:
     return {
         "id": scored["id"],
         "text": scored.get("text", ""),
+        "priority": scored.get("priority", "medium"),
         "score": scored["score"],
         "response_text": result.get("response_text"),
         "evidence_citations": result.get("evidence_citations"),
@@ -123,6 +118,7 @@ def _stub_draft(scored: dict, evidence: list) -> dict:
     return {
         "id": req_id,
         "text": scored.get("text", ""),
+        "priority": scored.get("priority", "medium"),
         "score": scored["score"],
         "response_text": response,
         "evidence_citations": citations,

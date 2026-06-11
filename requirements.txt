@@ -1,7 +1,6 @@
 azure-ai-projects
 azure-ai-documentintelligence
 azure-identity
-msgraph-sdk-python
 python-docx
 python-dotenv
 requests

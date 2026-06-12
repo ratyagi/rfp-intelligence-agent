@@ -1,73 +1,138 @@
 # RFP Intelligence Agent
 
-AI-powered five-agent pipeline that transforms a raw RFP PDF into a populated, citation-grounded Word proposal draft in under 90 seconds — running entirely inside Microsoft 365.
+A six-stage reasoning pipeline that turns a raw RFP PDF into a citation-grounded draft proposal — where **every claim must point at the exact internal document it came from, or it doesn't ship**.
 
-## Track
-
-- **🧠 Reasoning Agents** — built with Microsoft Foundry
-- **Microsoft IQ layer:** Foundry IQ (knowledge-base-backed agentic retrieval)
-
-Architecture decisions are locked in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+**Microsoft Agents League @ AI Skills Fest 2026 — 🧠 Reasoning Agents track · Microsoft IQ layer: Foundry IQ**
 
 ## The Problem
 
-Sales and BD teams spend 3–5 days on every RFP response, and win rates sit at 20–30% because proposals are generic. The relevant internal knowledge — past proposals, case studies, pricing, objections handled — is buried in SharePoint, Teams chats, and Outlook threads with no fast way to retrieve and apply it.
+Sales and BD teams spend 3–5 days on every RFP response, and win rates sit at 20–30% because proposals are generic. The relevant internal knowledge — past case studies, certifications, pricing schedules, reference projects — is scattered across the organisation with no fast way to retrieve it, apply it, and *prove* it supports each claim. Worse, an LLM drafting a proposal unsupervised will happily invent capabilities the company doesn't have. A hallucinated claim in a signed government tender isn't an oops — it's a contract breach.
 
 ## The Solution
 
-A six-stage reasoning pipeline built with Microsoft Foundry:
+A pipeline that treats **grounding as the product**: multi-step reasoning extracts and scores requirements, retrieval supplies evidence with citation keys, and a deterministic verifier guarantees nothing un-evidenced survives to the final document.
 
-1. **Intake Agent** — parses the RFP with Azure AI Document Intelligence, extracts a structured requirement manifest (REQ-001, REQ-002…) with priority and category.
-2. **Research Agent** — retrieves evidence for each requirement from a **Foundry IQ knowledge base** built over the company evidence corpus.
-3. **Scorer Agent** — scores each requirement COVERED / PARTIAL / GAP and computes a priority-weighted win probability.
-4. **Drafter Agent** — writes response sections that may cite only documents returned by retrieval; flags GAPs for human action.
-5. **Verifier** — deterministic citation check: every citation must resolve to a retrieved document, or the claim is stripped and the section flagged.
-6. **Review Agent** — produces the proposal DOCX with a Bid Decision Report appendix (the full per-requirement reasoning trace) and the human-approval Adaptive Card.
+```mermaid
+flowchart TD
+    RFP[/"📄 RFP PDF / DOCX"/] --> S1
 
-A Teams / Microsoft 365 Copilot entry point is on the deployment roadmap — not claimed as part of the live submission.
+    subgraph PIPELINE["Six-stage reasoning pipeline (orchestrator validates a Pydantic contract at every boundary)"]
+        S1["1 · Intake Agent<br/>Azure AI Document Intelligence (pypdf fallback)<br/>→ RequirementManifest: REQ-001…REQ-NNN<br/>with priority + category"]
+        S2["2 · Research Agent<br/>★ Foundry IQ knowledge retrieval<br/>(Azure AI Search index over evidence corpus)<br/>→ EvidenceMap: cited excerpts per requirement"]
+        S3["3 · Scorer Agent<br/>Foundry model judges COVERED / PARTIAL / GAP<br/>win probability = deterministic priority-weighted math"]
+        S4["4 · Drafter Agent<br/>writes sections that may cite ONLY<br/>retrieved [DOC-xxx] evidence"]
+        S5["5 · Verifier — deterministic, NO LLM<br/>every citation must resolve to retrieved evidence<br/>unresolvable → stripped · ungrounded → withheld as GAP"]
+        S6["6 · Review Agent<br/>proposal DOCX + Bid Decision Report<br/>+ human-approval Adaptive Card"]
+        S1 --> S2 --> S3 --> S4 --> S5 --> S6
+    end
 
-## Setup
+    subgraph IQ["🧠 Microsoft IQ layer — Foundry IQ"]
+        KB["Azure AI Search index<br/>(evidence corpus, doc_id citation keys,<br/>semantic ranking)"]
+        AGENT["Foundry IQ knowledge agent<br/>(agentic retrieval / query planning)"]
+        AGENT -. targets .-> KB
+    end
+
+    subgraph MODELS["Model inference — shared rate-limit-aware client"]
+        FOUNDRY["Microsoft Foundry deployment<br/>(documented path)"]
+        GHM["GitHub Models free tier<br/>(zero-quota fallback, used in demo)"]
+    end
+
+    S2 <--> KB
+    S1 & S3 & S4 <--> MODELS
+    S6 --> OUT[/"📝 draft_proposal.docx · bid_report.json · approval_card.json"/]
+    OUT --> HUMAN{"👤 Human approval gate<br/>nothing is sent anywhere<br/>without a person deciding"}
+```
+
+### Why this is a *reasoning* agent, not a wrapper
+
+- **Multi-step decomposition** — an 8-page RFP becomes 40+ atomic requirements, each independently researched, scored, and drafted.
+- **Judgement is separated from arithmetic** — the model judges evidence sufficiency per requirement; the win probability is deterministic priority-weighted math in code. The model never picks the final number and never decides whether to bid.
+- **Adversarial self-checking** — the Verifier (stage 5) is deliberately not an LLM: citation verification is a trust mechanism, and running it through a model would reintroduce the failure mode it exists to catch.
+- **A first-class reasoning trace** — the Bid Decision Report records the full decision chain per requirement (evidence considered → score + confidence → citation verification outcome → action required), streamed to the console, appended to the DOCX, and saved as JSON.
+
+## Live run results (June 12, 2026 — real, not stubbed)
+
+| Metric | Result |
+|---|---|
+| Requirements extracted from 8-page sample RFP | 41 |
+| Scored | 10 COVERED · 8 PARTIAL · 23 GAP |
+| Priority-weighted win probability | 33% |
+| Citations verified by stage 5 | **24/24, 0 stripped** |
+| Recommendation | REVIEW BID DECISION (deterministic band) |
+| Pipeline status | `complete`, 0 errors |
+
+The 23 gaps are the system working as designed: requirements the evidence corpus genuinely doesn't cover (insurance schedules, timeline commitments, tender boilerplate) are flagged for human action instead of being papered over with confident prose.
+
+## Microsoft technologies used
+
+| Service | Role |
+|---|---|
+| **Foundry IQ** (Azure AI Search) | Knowledge retrieval over the evidence corpus with citation keys — the Microsoft IQ layer |
+| **Microsoft Foundry** | Model inference architecture (shared client, `MODEL_PROVIDER=foundry`) |
+| **GitHub Models** | Free-tier inference used for the live demo (see honesty note) |
+| **Azure AI Document Intelligence** | RFP parsing, `prebuilt-layout` (pypdf fallback when no resource available) |
+| **Adaptive Cards** | Human-in-the-loop approval artifact (Teams delivery is roadmap) |
+| **GitHub Copilot / AI-assisted development** | Used throughout development |
+
+## An honest note on free-tier constraints
+
+This project was built end-to-end on **$0**: a free-trial Azure subscription and an Azure for Students subscription, neither of which can deploy Azure OpenAI models (quota requires pay-as-you-go, which we deliberately avoid — agent demos shouldn't require an uncapped credit card).
+
+That constraint shaped two engineering decisions, both visible in the code rather than hidden:
+
+1. **Inference** — `tools/foundry_client.py` serves two providers behind one interface: Microsoft Foundry (documented path) and GitHub Models free tier (demo path). The client is rate-limit aware: proactive tokens-per-minute pacing, `Retry-After` backoff, JSON-mode with schema-validated retries.
+2. **Retrieval** — `scripts/setup_foundry_iq.py` builds the complete Foundry IQ stack: Azure AI Search index → corpus upload → knowledge agent. The knowledge agent (agentic query planning) requires a model deployment, so on quota-blocked subscriptions the script skips it and the pipeline queries **the same index directly** (`RETRIEVAL_MODE=azure_search`, semantic ranking when the tier supports it). The full agentic client (`FoundryIQRetriever`) is implemented and ready for subscriptions with model quota.
+
+## Run it yourself
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/ratyagi/rfp-intelligence-agent.git
 cd rfp-intelligence-agent
-cp .env.example .env
-# Fill in .env with your Azure and M365 credentials
 pip install -r requirements.txt
-# Run in STUB mode (no live Azure credentials needed)
-STUB_MODE=true python -m agents.orchestrator
-# Run tests
-pytest tests/
+cp .env.example .env   # then fill in the variables for your chosen mode
+
+# Zero-credential smoke run (stubbed inference, local BM25 retrieval)
+STUB_MODE=true RETRIEVAL_MODE=local python -m agents.orchestrator demo/sample_rfp.pdf
+
+# Live run on the GitHub Models free tier (PAT with Models:read)
+#   .env: MODEL_PROVIDER=github_models, GITHUB_MODELS_TOKEN=..., STUB_MODE=false
+python -m agents.orchestrator demo/sample_rfp.pdf
+
+# Foundry IQ retrieval (after creating an Azure AI Search resource)
+python scripts/setup_foundry_iq.py     # builds index + uploads corpus (+ agent if you have model quota)
+#   .env: RETRIEVAL_MODE=azure_search  (or foundry_iq with model quota)
+
+# Tests (47, no credentials needed)
+STUB_MODE=true RETRIEVAL_MODE=local python -m pytest tests/ -q
 ```
 
-## Architecture
+Outputs land in `output/`: the proposal DOCX (with the Bid Decision Report appendix), the machine-readable bid report JSON, and the approval Adaptive Card JSON.
+
+## Reliability & safety patterns
+
+- Pydantic contracts validated at **every** stage boundary; schema-invalid model output is retried once with the validation error fed back, then handled fail-soft (skip chunk / score as GAP / withhold section).
+- Deterministic citation verification — ungrounded text never reaches the output document.
+- Human approval gate — the pipeline produces artifacts; it never sends, posts, or submits anything itself.
+- Rate-limit-aware client so the pipeline degrades to *slower*, not *broken*, on throttled free tiers.
+- No secrets in the repo (`.env` is gitignored); the corpus and sample RFP are fully synthetic.
+
+## Repository map
 
 ```
-RFP PDF
-  └─► Orchestrator (validated contracts between every stage)
-        ├─► 1. Intake    — Azure AI Document Intelligence + Foundry model
-        ├─► 2. Research  — ★ Foundry IQ knowledge base (agentic retrieval)
-        ├─► 3. Scorer    — Foundry model + priority-weighted win probability
-        ├─► 4. Drafter   — Foundry model, citations restricted to evidence map
-        ├─► 5. Verifier  — deterministic citation verification (no LLM)
-        └─► 6. Review    — proposal DOCX + Bid Decision Report + Adaptive Card
+agents/          orchestrator + the six stage implementations
+tools/           model client, retrieval (3 backends), contracts, DOCX/report/card builders
+prompts/         system prompts (input/output contracts per agent)
+corpus/          synthetic evidence corpus (DOC-001…DOC-014, front-matter citation keys)
+demo/            8-page sample RFP + demo script
+scripts/         one-time Foundry IQ / Azure AI Search setup
+tests/           47 tests, all runnable with zero credentials
+docs/            ARCHITECTURE.md (locked decisions) + session notes
 ```
-
-Full diagram and locked decisions: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
-
-## Microsoft Technologies Used
-
-| Service | Purpose |
-|---|---|
-| Microsoft Foundry | Model inference for all reasoning stages |
-| **Foundry IQ** | Knowledge base + agentic retrieval over the evidence corpus |
-| Azure AI Document Intelligence | PDF/DOCX parsing (`prebuilt-layout`) |
-| Microsoft Teams Adaptive Cards | Human-in-the-loop approval UX (rendered artifact) |
 
 ## Team
 
-[Your name / team here]
+Rashi Tyagi ([@ratyagi](https://github.com/ratyagi))
 
-## Demo
+## Demo video
 
-[DEMO VIDEO — to be added]
+[DEMO VIDEO — link to be added before submission]

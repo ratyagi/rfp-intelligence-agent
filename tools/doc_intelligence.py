@@ -1,8 +1,12 @@
+import logging
 import os
+import re
 from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
+
+logger = logging.getLogger(__name__)
 
 
 def _stub_mode() -> bool:
@@ -43,9 +47,12 @@ def _parse_pdf_with_document_intelligence(path: Path) -> dict:
     key = os.getenv("DOC_INTELLIGENCE_KEY")
 
     if not endpoint or not key:
-        raise EnvironmentError(
-            "DOC_INTELLIGENCE_ENDPOINT and DOC_INTELLIGENCE_KEY must be set in .env"
+        logger.warning(
+            "DOC_INTELLIGENCE_ENDPOINT / DOC_INTELLIGENCE_KEY not set — falling back "
+            "to local pypdf parsing. Azure Document Intelligence is the documented "
+            "path and gives higher-fidelity layout/section extraction."
         )
+        return _parse_pdf_with_pypdf(path)
 
     try:
         from azure.ai.documentintelligence import DocumentIntelligenceClient
@@ -97,6 +104,53 @@ def _parse_pdf_with_document_intelligence(path: Path) -> dict:
     return {
         "full_text": "\n".join(full_text_parts),
         "pages": len(result.pages or []),
+        "sections": sections,
+    }
+
+
+_PYPDF_HEADING_RE = re.compile(r"^(?:\d+\.\s+\S.*|Appendix\s+[A-Z]\b.*)$")
+
+
+def _parse_pdf_with_pypdf(path: Path) -> dict:
+    try:
+        from pypdf import PdfReader
+    except ImportError as e:
+        raise ImportError("pypdf is required for local PDF parsing. Run: pip install pypdf") from e
+
+    reader = PdfReader(str(path))
+    full_text_parts = []
+    sections = []
+    current_heading = "Introduction"
+    current_content_parts = []
+
+    for page in reader.pages:
+        text = page.extract_text() or ""
+        for raw_line in text.splitlines():
+            line = raw_line.strip()
+            if not line:
+                continue
+            full_text_parts.append(line)
+
+            if _PYPDF_HEADING_RE.match(line):
+                if current_content_parts:
+                    sections.append({
+                        "heading": current_heading,
+                        "content": " ".join(current_content_parts).strip(),
+                    })
+                    current_content_parts = []
+                current_heading = line
+            else:
+                current_content_parts.append(line)
+
+    if current_content_parts:
+        sections.append({
+            "heading": current_heading,
+            "content": " ".join(current_content_parts).strip(),
+        })
+
+    return {
+        "full_text": "\n".join(full_text_parts),
+        "pages": len(reader.pages),
         "sections": sections,
     }
 

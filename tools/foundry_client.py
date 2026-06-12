@@ -158,11 +158,43 @@ def chat(system_prompt: str, user_message: str, *,
 
 
 def chat_json(system_prompt: str, user_message: str, *,
-              max_tokens: int = 1000, temperature: float = 0.0) -> dict:
+              max_tokens: int = 1000, temperature: float = 0.0,
+              schema: type | None = None) -> dict:
     """Chat completion that must return a JSON object.
 
     Retries once on invalid JSON, feeding the parse error back to the model.
+    If `schema` (a pydantic BaseModel subclass) is given, the parsed object is
+    validated against it, with one further retry on schema-invalid output —
+    the validation error is fed back to the model. A second schema failure
+    propagates (pydantic.ValidationError) for the caller to handle.
     """
+    parsed = _chat_parsed(system_prompt, user_message,
+                          max_tokens=max_tokens, temperature=temperature)
+    if schema is None:
+        return parsed
+
+    from pydantic import ValidationError
+    try:
+        return schema.model_validate(parsed).model_dump()
+    except ValidationError as first_error:
+        logger.warning(
+            f"foundry_client: schema-invalid output for {schema.__name__}, "
+            f"retrying once: {first_error.error_count()} validation error(s)"
+        )
+        retry_message = (
+            f"{user_message}\n\nYour previous reply was valid JSON but did not "
+            f"match the required output contract. Validation errors:\n"
+            f"{first_error}\n\nReply again with ONLY a valid JSON object that "
+            f"fixes these errors."
+        )
+        parsed = _chat_parsed(system_prompt, retry_message,
+                              max_tokens=max_tokens, temperature=temperature)
+        return schema.model_validate(parsed).model_dump()
+
+
+def _chat_parsed(system_prompt: str, user_message: str, *,
+                 max_tokens: int, temperature: float) -> dict:
+    """JSON-mode chat with one retry on unparseable output."""
     raw = chat(system_prompt, user_message,
                max_tokens=max_tokens, temperature=temperature, json_mode=True)
     try:

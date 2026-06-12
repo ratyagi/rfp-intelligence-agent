@@ -6,6 +6,9 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from pydantic import ValidationError
+
+from tools.contracts import IntakeExtraction
 from tools.foundry_client import chat_json, estimate_tokens
 
 load_dotenv()
@@ -41,16 +44,19 @@ def run(parsed_doc: dict) -> dict:
     for chunk_index, chunk in enumerate(_chunk_sections(sections), start=1):
         logger.info(f"IntakeAgent: extracting from chunk {chunk_index} "
                     f"({len(chunk)} section(s))")
-        result = chat_json(
-            system_prompt,
-            json.dumps({"sections": chunk}, ensure_ascii=False),
-            max_tokens=900,
-        )
-        chunk_reqs = result.get("requirements", [])
-        if not isinstance(chunk_reqs, list):
-            logger.warning(f"IntakeAgent: chunk {chunk_index} returned no requirement list")
+        try:
+            result = chat_json(
+                system_prompt,
+                json.dumps({"sections": chunk}, ensure_ascii=False),
+                max_tokens=900,
+                schema=IntakeExtraction,
+            )
+        except ValidationError as e:
+            # One chunk failing schema twice loses its requirements, not the run.
+            logger.warning(f"IntakeAgent: chunk {chunk_index} failed schema validation twice "
+                           f"({e.error_count()} error(s)) — skipping chunk")
             continue
-        requirements.extend(chunk_reqs)
+        requirements.extend(result["requirements"])
 
     # Renumber sequentially — chunked calls each start from REQ-001, and the
     # rest of the pipeline keys everything on unique IDs.

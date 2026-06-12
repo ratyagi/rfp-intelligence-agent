@@ -13,6 +13,9 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from pydantic import ValidationError
+
+from tools.contracts import DraftedSection
 from tools.foundry_client import chat, chat_json
 
 load_dotenv()
@@ -73,24 +76,31 @@ def run(scored_manifest: dict, evidence_map: dict, meta: dict | None = None) -> 
 
 def _draft_one(scored: dict, evidence: list) -> dict:
     system_prompt = (PROMPTS_DIR / "drafter_system.md").read_text(encoding="utf-8")
-    result = chat_json(
-        system_prompt,
-        json.dumps({
-            "requirement": {
-                "id": scored["id"],
-                "text": scored.get("text", ""),
-                "score": scored["score"],
-                "priority": scored.get("priority", "medium"),
-                "category": scored.get("category", "other"),
-            },
-            "evidence": [
-                {"doc_id": e["doc_id"], "title": e["title"], "excerpt": e["excerpt"]}
-                for e in evidence
-            ],
-        }, ensure_ascii=False),
-        max_tokens=450,
-        temperature=0.2,
-    )
+    try:
+        result = chat_json(
+            system_prompt,
+            json.dumps({
+                "requirement": {
+                    "id": scored["id"],
+                    "text": scored.get("text", ""),
+                    "score": scored["score"],
+                    "priority": scored.get("priority", "medium"),
+                    "category": scored.get("category", "other"),
+                },
+                "evidence": [
+                    {"doc_id": e["doc_id"], "title": e["title"], "excerpt": e["excerpt"]}
+                    for e in evidence
+                ],
+            }, ensure_ascii=False),
+            max_tokens=450,
+            temperature=0.2,
+            schema=DraftedSection,
+        )
+    except ValidationError as e:
+        # No valid draft → no response text; the Verifier surfaces it as a GAP.
+        logger.warning(f"DrafterAgent: {scored['id']} failed schema validation twice "
+                       f"({e.error_count()} error(s)) — withholding section")
+        result = {"response_text": None, "evidence_citations": None}
     return {
         "id": scored["id"],
         "text": scored.get("text", ""),

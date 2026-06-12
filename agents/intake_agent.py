@@ -6,11 +6,17 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from tools.foundry_client import chat_json, estimate_tokens
+
 load_dotenv()
 logger = logging.getLogger(__name__)
 
 STUB_MODE = lambda: os.getenv("STUB_MODE", "false").lower() == "true"
 PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
+
+# Each extraction call stays small so the pipeline runs even on free-trial
+# subscriptions throttled to ~1,000 tokens/minute.
+MAX_CHUNK_TOKENS = 550
 
 
 def run(parsed_doc: dict) -> dict:
@@ -27,54 +33,71 @@ def run(parsed_doc: dict) -> dict:
         return _stub_manifest()
 
     system_prompt = (PROMPTS_DIR / "intake_system.md").read_text(encoding="utf-8")
-    user_message = json.dumps({
-        "full_text": parsed_doc.get("full_text", ""),
-        "sections": parsed_doc.get("sections", []),
-    }, ensure_ascii=False)
+    sections = parsed_doc.get("sections", [])
+    if not sections:
+        sections = [{"heading": "Document", "content": parsed_doc.get("full_text", "")}]
 
-    raw = _call_foundry(system_prompt, user_message)
-
-    try:
-        manifest = json.loads(raw)
-    except json.JSONDecodeError as e:
-        logger.error(f"IntakeAgent: failed to parse model output as JSON: {e}")
-        return {"requirements": [], "error": "Model returned invalid JSON"}
-
-    if "requirements" not in manifest:
-        return {"requirements": [], "error": "Model output missing 'requirements' key"}
-
-    logger.info(f"IntakeAgent: extracted {len(manifest['requirements'])} requirements")
-    return manifest
-
-
-def _call_foundry(system_prompt: str, user_message: str) -> str:
-    endpoint = os.getenv("AZURE_FOUNDRY_ENDPOINT")
-    api_key = os.getenv("AZURE_FOUNDRY_API_KEY")
-    deployment = os.getenv("FOUNDRY_MODEL_DEPLOYMENT", "gpt-4o")
-
-    if not endpoint or not api_key:
-        raise EnvironmentError(
-            "AZURE_FOUNDRY_ENDPOINT and AZURE_FOUNDRY_API_KEY must be set in .env"
+    requirements = []
+    for chunk_index, chunk in enumerate(_chunk_sections(sections), start=1):
+        logger.info(f"IntakeAgent: extracting from chunk {chunk_index} "
+                    f"({len(chunk)} section(s))")
+        result = chat_json(
+            system_prompt,
+            json.dumps({"sections": chunk}, ensure_ascii=False),
+            max_tokens=900,
         )
+        chunk_reqs = result.get("requirements", [])
+        if not isinstance(chunk_reqs, list):
+            logger.warning(f"IntakeAgent: chunk {chunk_index} returned no requirement list")
+            continue
+        requirements.extend(chunk_reqs)
 
-    try:
-        from azure.ai.projects import AIProjectClient
-        from azure.core.credentials import AzureKeyCredential
-    except ImportError as e:
-        raise ImportError("azure-ai-projects is required. Run: pip install azure-ai-projects") from e
+    # Renumber sequentially — chunked calls each start from REQ-001, and the
+    # rest of the pipeline keys everything on unique IDs.
+    for i, req in enumerate(requirements, start=1):
+        req["id"] = f"REQ-{i:03d}"
+        req.setdefault("priority", "medium")
+        req.setdefault("category", "other")
 
-    client = AIProjectClient(endpoint=endpoint, credential=AzureKeyCredential(api_key))
+    logger.info(f"IntakeAgent: extracted {len(requirements)} requirements")
+    return {"requirements": requirements}
 
-    response = client.inference.get_chat_completions(
-        model=deployment,
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_message},
-        ],
-        max_tokens=4000,
-        temperature=0.0,
-    )
-    return response.choices[0].message.content.strip()
+
+def _chunk_sections(sections: list) -> list:
+    """Group sections into chunks that fit the per-call token budget.
+
+    A single oversized section is split on paragraph boundaries.
+    """
+    chunks = []
+    current, current_tokens = [], 0
+    for section in sections:
+        for piece in _split_section(section):
+            piece_tokens = estimate_tokens(piece["heading"] + piece["content"])
+            if current and current_tokens + piece_tokens > MAX_CHUNK_TOKENS:
+                chunks.append(current)
+                current, current_tokens = [], 0
+            current.append(piece)
+            current_tokens += piece_tokens
+    if current:
+        chunks.append(current)
+    return chunks
+
+
+def _split_section(section: dict) -> list:
+    heading = section.get("heading", "")
+    content = section.get("content", "")
+    if estimate_tokens(content) <= MAX_CHUNK_TOKENS:
+        return [{"heading": heading, "content": content}]
+
+    pieces, buffer = [], ""
+    for paragraph in content.split("\n"):
+        if buffer and estimate_tokens(buffer + paragraph) > MAX_CHUNK_TOKENS:
+            pieces.append({"heading": heading, "content": buffer.strip()})
+            buffer = ""
+        buffer += paragraph + "\n"
+    if buffer.strip():
+        pieces.append({"heading": heading, "content": buffer.strip()})
+    return pieces
 
 
 def _stub_manifest() -> dict:

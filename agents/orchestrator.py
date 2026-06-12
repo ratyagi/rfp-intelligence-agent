@@ -1,4 +1,4 @@
-"""Foundry orchestrator — runs Agents 1–5 sequentially and returns a final status dict."""
+"""Foundry orchestrator — runs the six pipeline stages sequentially and returns a final status dict."""
 import logging
 import os
 import time
@@ -20,7 +20,7 @@ PIPELINE_TIMEOUT_SECONDS = 300
 
 
 def run_pipeline(input: dict) -> dict:
-    """Run the full five-agent RFP pipeline.
+    """Run the full six-stage RFP pipeline.
 
     Args:
         input: {
@@ -36,7 +36,7 @@ def run_pipeline(input: dict) -> dict:
             "docx_path": str|None,
             "win_probability": int|None,
             "gap_count": int,
-            "teams_card_posted": bool
+            "card_path": str|None
         }
     """
     pipeline_start = time.time()
@@ -56,32 +56,33 @@ def run_pipeline(input: dict) -> dict:
         "docx_path": None,
         "win_probability": None,
         "gap_count": 0,
-        "teams_card_posted": False,
+        "card_path": None,
+        "report_path": None,
         "errors": [],
     }
 
-    # ── AGENT 1: INTAKE ──────────────────────────────────────────────────────
-    parsed_doc = _run_agent("Agent1:Intake", _agent1_intake, result, rfp_source)
+    # ── STAGE 1: INTAKE ──────────────────────────────────────────────────────
+    parsed_doc = _run_agent("Stage1:Parse", _agent1_intake, result, rfp_source)
     if parsed_doc is None:
         result["status"] = "failed"
         return result
 
-    # ── AGENT 2: RESEARCH ────────────────────────────────────────────────────
+    # ── STAGE 2: RESEARCH ────────────────────────────────────────────────────
     from agents.intake_agent import run as intake_run
-    manifest = _run_agent("Agent2a:IntakeExtract", intake_run, result, parsed_doc)
+    manifest = _run_agent("Stage1:Extract", intake_run, result, parsed_doc)
     if manifest is None:
         result["status"] = "failed"
         return result
 
     from agents.research_agent import run as research_run
-    evidence_map = _run_agent("Agent2b:Research", research_run, result, manifest)
+    evidence_map = _run_agent("Stage2:Research", research_run, result, manifest)
     if evidence_map is None:
         result["status"] = "partial"
         evidence_map = {}
 
-    # ── AGENT 3: SCORER ──────────────────────────────────────────────────────
+    # ── STAGE 3: SCORER ──────────────────────────────────────────────────────
     from agents.scorer_agent import run as scorer_run
-    scored_manifest = _run_agent("Agent3:Scorer", scorer_run, result, manifest, evidence_map)
+    scored_manifest = _run_agent("Stage3:Scorer", scorer_run, result, manifest, evidence_map)
     if scored_manifest is None:
         result["status"] = "partial"
         scored_manifest = {"scored_requirements": [], "win_probability": None, "gap_count": 0, "gaps_requiring_action": []}
@@ -97,22 +98,31 @@ def run_pipeline(input: dict) -> dict:
         sr.setdefault("priority", orig.get("priority", "medium"))
         sr.setdefault("category", orig.get("category", "other"))
 
-    # ── AGENT 4: DRAFTER ─────────────────────────────────────────────────────
+    # ── STAGE 4: DRAFTER ─────────────────────────────────────────────────────
     from agents.drafter_agent import run as drafter_run
-    docx_path = _run_agent("Agent4:Drafter", drafter_run, result, scored_manifest, evidence_map, meta)
-    if docx_path is None:
-        result["status"] = "partial"
-    else:
-        result["docx_path"] = docx_path
+    draft = _run_agent("Stage4:Drafter", drafter_run, result, scored_manifest, evidence_map, meta)
 
-    # ── AGENT 5: REVIEW ──────────────────────────────────────────────────────
-    if docx_path:
+    # ── STAGE 5: VERIFIER ────────────────────────────────────────────────────
+    verified_draft = None
+    if draft is not None:
+        from agents.verifier import run as verifier_run
+        verified_draft = _run_agent("Stage5:Verifier", verifier_run, result, draft, evidence_map)
+        if verified_draft is not None:
+            # Post-verification numbers supersede the Scorer's.
+            result["win_probability"] = verified_draft.get("win_probability")
+            result["gap_count"] = verified_draft.get("gap_count", result["gap_count"])
+
+    # ── STAGE 6: REVIEW ──────────────────────────────────────────────────────
+    # Unverified drafts do not ship — Review only runs on Verifier output.
+    if verified_draft is not None:
         from agents.review_agent import run as review_run
-        review_result = _run_agent("Agent5:Review", review_run, result, docx_path, scored_manifest, meta)
+        review_result = _run_agent("Stage6:Review", review_run, result, verified_draft, evidence_map, meta)
         if review_result:
-            result["teams_card_posted"] = review_result.get("card_posted", False)
+            result["docx_path"] = review_result.get("docx_path")
+            result["card_path"] = review_result.get("card_path")
+            result["report_path"] = review_result.get("report_path")
     else:
-        logger.warning("orchestrator: skipping Agent 5 — no DOCX available")
+        logger.warning("orchestrator: skipping Review — no verified draft available")
 
     elapsed = time.time() - pipeline_start
     if not result["errors"] and result["docx_path"]:
@@ -131,11 +141,10 @@ def run_pipeline(input: dict) -> dict:
 def _agent1_intake(rfp_source: str) -> dict:
     from tools.doc_intelligence import parse_rfp
     if rfp_source.startswith("http"):
-        # STUB: SharePoint URL source not yet implemented
-        # TODO: download file from SharePoint via Graph API before parsing
-        logger.warning("orchestrator: SharePoint URL source not yet implemented — using STUB doc")
-        from tools.doc_intelligence import _stub_result
-        return _stub_result()
+        raise ValueError(
+            "URL sources are not supported — download the RFP and pass a local "
+            ".pdf or .docx path (remote sources are deployment roadmap)"
+        )
     return parse_rfp(rfp_source)
 
 

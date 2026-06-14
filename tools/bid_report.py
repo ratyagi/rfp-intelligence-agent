@@ -9,7 +9,7 @@ evidence considered → score and confidence → citation verification outcome
   3. written as a machine-readable JSON artifact (the Review stage saves it).
 
 The bid recommendation is deterministic, derived from the priority-weighted
-win probability — the model never decides whether to bid.
+requirement coverage score — the model never decides whether to bid.
 """
 import logging
 
@@ -35,14 +35,14 @@ def build_report(verified_draft: dict, evidence_map: dict) -> dict:
     """Assemble the decision chain for every requirement and the bid summary."""
     requirements = verified_draft.get("requirements", [])
     verification = verified_draft.get("verification") or {}
-    win_probability = verified_draft.get("win_probability", 0)
+    coverage_score = verified_draft.get("coverage_score", 0)
 
-    recommendation, rationale = _recommend(win_probability)
+    recommendation, rationale = _recommend(coverage_score)
     entries = [_entry(req, evidence_map.get(req["id"], [])) for req in requirements]
 
     report = {
         "rfp_title": verified_draft.get("rfp_title", ""),
-        "win_probability": win_probability,
+        "coverage_score": coverage_score,
         "recommendation": recommendation,
         "recommendation_rationale": rationale,
         "counts": {
@@ -88,9 +88,9 @@ def _entry(req: dict, evidence: list) -> dict:
     }
 
 
-def _recommend(win_probability: int) -> tuple[str, str]:
+def _recommend(coverage_score: int) -> tuple[str, str]:
     for threshold, label, rationale in RECOMMENDATION_BANDS:
-        if win_probability >= threshold:
+        if coverage_score >= threshold:
             return label, rationale
     return RECOMMENDATION_BANDS[-1][1], RECOMMENDATION_BANDS[-1][2]
 
@@ -100,8 +100,8 @@ def _stream(report: dict) -> None:
     counts = report["counts"]
     citations = report["citations"]
     logger.info(
-        f"BidReport: {report['recommendation']} — win probability "
-        f"{report['win_probability']}% ({counts['covered']} covered, "
+        f"BidReport: {report['recommendation']} — requirement coverage score "
+        f"{report['coverage_score']}% ({counts['covered']} covered, "
         f"{counts['partial']} partial, {counts['gap']} gap; "
         f"citations {citations['verified']}/{citations['total']} verified)"
     )
@@ -134,7 +134,7 @@ def append_report_to_docx(docx_path: str, report: dict) -> None:
     summary = doc.add_paragraph()
     run = summary.add_run(
         f"Recommendation: {report['recommendation']} — "
-        f"priority-weighted win probability {report['win_probability']}%. "
+        f"priority-weighted requirement coverage score {report['coverage_score']}%. "
     )
     run.bold = True
     summary.add_run(

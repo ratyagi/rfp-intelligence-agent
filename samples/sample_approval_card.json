@@ -1,0 +1,114 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "RFP Draft Ready for Review",
+      "weight": "Bolder",
+      "size": "Large",
+      "color": "Accent",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "GOV-2026-ICT-0042 Cloud Infrastructure Modernisation",
+      "weight": "Bolder",
+      "size": "Medium",
+      "wrap": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Submission deadline: **30 June 2026**",
+              "wrap": true,
+              "size": "Small"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Coverage score: **29%**",
+              "color": "Attention",
+              "weight": "Bolder",
+              "size": "Medium"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "FactSet",
+      "facts": [
+        {
+          "title": "Requirements found",
+          "value": "59"
+        },
+        {
+          "title": "Covered",
+          "value": "6"
+        },
+        {
+          "title": "Partial",
+          "value": "18"
+        },
+        {
+          "title": "Gaps",
+          "value": "35"
+        },
+        {
+          "title": "Citations verified",
+          "value": "52/52"
+        },
+        {
+          "title": "Requirement coverage",
+          "value": "29%"
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "⚠️ 35 gap(s) require your input before submission",
+      "color": "Attention",
+      "weight": "Bolder",
+      "wrap": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "View Draft",
+      "data": {
+        "action": "view_draft",
+        "docx_path": "/home/user/rfp-intelligence-agent/output/draft_proposal_20260614_080241.docx"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Approve Draft",
+      "data": {
+        "action": "approve",
+        "rfp_title": "GOV-2026-ICT-0042 Cloud Infrastructure Modernisation"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Request Changes",
+      "data": {
+        "action": "request_changes",
+        "rfp_title": "GOV-2026-ICT-0042 Cloud Infrastructure Modernisation"
+      }
+    }
+  ]
+}

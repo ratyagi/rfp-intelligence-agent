@@ -45,7 +45,7 @@ RFP PDF
 │                                                                  │
 │  3. SCORER      Manifest + EvidenceMap → ScoredManifest          │
 │     Foundry model scores COVERED / PARTIAL / GAP per requirement │
-│     + priority-weighted win probability (deterministic math)     │
+│     + priority-weighted requirement coverage score (deterministic math)     │
 │                                                                  │
 │  4. DRAFTER     ScoredManifest + EvidenceMap → Draft sections    │
 │     Foundry model writes per-requirement responses; may cite     │
@@ -104,7 +104,7 @@ requirement, strips anything unresolvable, and downgrades the section
   `RequirementManifest`, `EvidenceMap`, `ScoredManifest`, `DraftedProposal`,
   `VerifiedProposal`.
 
-### 4. Win probability is priority-weighted
+### 4. Requirement coverage is priority-weighted
 
 `(Σ weight(req) × credit(score)) / Σ weight(req)` where weight is
 high=3 / medium=2 / low=1 and credit is COVERED=1.0 / PARTIAL=0.5 / GAP=0.

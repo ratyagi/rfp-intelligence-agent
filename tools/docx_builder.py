@@ -16,7 +16,7 @@ def build_proposal(data: dict, template_path: str, output_path: str) -> str:
     Args:
         data: dict with keys:
             company_name, rfp_title, submission_date, executive_summary,
-            win_probability, gap_summary,
+            coverage_score, gap_summary,
             requirements: [{"id", "text", "score", "response_text", "evidence_citations", "gap_note"}]
         template_path: path to proposal_template.docx
         output_path: where to write the populated .docx
@@ -31,7 +31,7 @@ def build_proposal(data: dict, template_path: str, output_path: str) -> str:
         "{{rfp_title}}": str(data.get("rfp_title", "")),
         "{{submission_date}}": str(data.get("submission_date", "")),
         "{{executive_summary}}": str(data.get("executive_summary", "")),
-        "{{win_probability}}": str(data.get("win_probability", "")),
+        "{{coverage_score}}": str(data.get("coverage_score", "")),
         "{{gap_summary}}": _build_gap_summary(data),
     }
 

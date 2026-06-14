@@ -58,7 +58,7 @@ def run(verified_draft: dict, evidence_map: dict, meta: dict | None = None) -> d
     card = build_approval_card({
         "rfp_title": verified_draft.get("rfp_title", "RFP Response"),
         "submission_deadline": meta.get("submission_deadline", "Not specified"),
-        "win_probability": verified_draft.get("win_probability", 0),
+        "coverage_score": verified_draft.get("coverage_score", 0),
         "gap_count": verified_draft.get("gap_count", 0),
         "requirements_found": len(requirements),
         "covered_count": sum(1 for r in requirements if r.get("score") == "COVERED"),

@@ -40,7 +40,7 @@ Drag `demo/sample_rfp.pdf` into the agent chat and hit send.
 
 The Teams Adaptive Card appears in the channel. Point to it:
 
-> "Here's our result. Win probability: [X]%. [N] gap(s) need our input before we can submit."
+> "Here's our result. Requirement coverage: [X]%. [N] gap(s) need our input before we can submit."
 
 Click **"View Draft"** — Word opens.
 

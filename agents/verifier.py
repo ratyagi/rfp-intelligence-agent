@@ -8,7 +8,7 @@ reintroduce the failure mode it exists to catch. This stage:
 2. strips citations that don't resolve,
 3. downgrades affected sections (COVERED → PARTIAL; ungrounded → GAP) with an
    explicit flag, and
-4. recomputes the priority-weighted win probability from post-verification
+4. recomputes the priority-weighted requirement coverage score from post-verification
    scores.
 
 The result is that no claim survives this stage unless the pipeline can point
@@ -47,7 +47,7 @@ def run(draft: dict, evidence_map: dict) -> dict:
         if result["flag"]:
             flags.append(result["flag"])
 
-    draft["win_probability"] = _recompute_win_probability(requirements)
+    draft["coverage_score"] = _recompute_coverage_score(requirements)
     draft["gap_count"] = sum(1 for r in requirements if r.get("score") == "GAP")
     draft["verification"] = {
         "citations_total": citations_total,
@@ -59,7 +59,7 @@ def run(draft: dict, evidence_map: dict) -> dict:
     logger.info(
         f"Verifier: {citations_verified}/{citations_total} citations verified, "
         f"{len(flags)} section(s) flagged — "
-        f"post-verification win probability {draft['win_probability']}%"
+        f"post-verification requirement coverage score {draft['coverage_score']}%"
     )
     return draft
 
@@ -131,7 +131,7 @@ def _verify_requirement(req: dict, evidence: list) -> dict:
     return {"cited_count": len(cited), "verified_count": len(valid), "flag": flag}
 
 
-def _recompute_win_probability(requirements: list) -> int:
+def _recompute_coverage_score(requirements: list) -> int:
     """Same priority-weighted formula as the Scorer, on post-verification scores."""
     total_weight = 0
     earned = 0.0

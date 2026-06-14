@@ -31,13 +31,13 @@ def run(scored_manifest: dict, evidence_map: dict, meta: dict | None = None) -> 
     Returns:
         Draft data for the Verifier and Review stages:
         {company_name, rfp_title, submission_date, executive_summary,
-         win_probability, requirements: [drafted requirement dicts]}
+         coverage_score, requirements: [drafted requirement dicts]}
     """
     if meta is None:
         meta = {}
 
     scored_reqs = scored_manifest.get("scored_requirements", [])
-    win_probability = scored_manifest.get("win_probability", 0)
+    coverage_score = scored_manifest.get("coverage_score", 0)
 
     drafted_requirements = []
     for scored in scored_reqs:
@@ -61,7 +61,7 @@ def run(scored_manifest: dict, evidence_map: dict, meta: dict | None = None) -> 
         else:
             drafted_requirements.append(_draft_one(scored, evidence))
 
-    executive_summary = _write_executive_summary(drafted_requirements, meta, win_probability)
+    executive_summary = _write_executive_summary(drafted_requirements, meta, coverage_score)
     logger.info(f"DrafterAgent: drafted {len(drafted_requirements)} sections")
 
     return {
@@ -69,7 +69,7 @@ def run(scored_manifest: dict, evidence_map: dict, meta: dict | None = None) -> 
         "rfp_title": meta.get("rfp_title", "RFP Response"),
         "submission_date": meta.get("submission_date", datetime.now().strftime("%d %B %Y")),
         "executive_summary": executive_summary,
-        "win_probability": win_probability,
+        "coverage_score": coverage_score,
         "requirements": drafted_requirements,
     }
 
@@ -142,7 +142,7 @@ def _stub_draft(scored: dict, evidence: list) -> dict:
     }
 
 
-def _write_executive_summary(requirements: list, meta: dict, win_probability: int) -> str:
+def _write_executive_summary(requirements: list, meta: dict, coverage_score: int) -> str:
     company = meta.get("company_name", "Our organisation")
     rfp = meta.get("rfp_title", "this RFP")
     covered = sum(1 for r in requirements if r.get("score") == "COVERED")
@@ -154,7 +154,7 @@ def _write_executive_summary(requirements: list, meta: dict, win_probability: in
         return (
             f"{company} submits this proposal in response to {rfp}. "
             f"We have addressed {covered} of {total} requirements with verified internal evidence, "
-            f"yielding an estimated fit score of {win_probability}%. "
+            f"yielding a requirement coverage score of {coverage_score}%. "
             f"{gaps} requirement(s) require additional input from your team before submission. "
             f"Our response is grounded solely in documented project outcomes, certifications, and "
             f"client-approved deliverables — no claims have been made without supporting evidence."
@@ -171,7 +171,7 @@ def _write_executive_summary(requirements: list, meta: dict, win_probability: in
             "covered": covered,
             "partial": partial,
             "gaps": gaps,
-            "win_probability_percent": win_probability,
+            "coverage_score_percent": coverage_score,
             "note": (
                 "The proposal is grounded in the company's verified internal "
                 "evidence base; gaps are explicitly flagged for human input "

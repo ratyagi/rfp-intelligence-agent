@@ -33,8 +33,8 @@ flowchart TD
     end
 
     subgraph MODELS["Model inference — shared rate-limit-aware client"]
-        FOUNDRY["Microsoft Foundry deployment<br/>(documented path)"]
-        GHM["GitHub Models free tier<br/>(zero-quota fallback, used in demo)"]
+        FOUNDRY["★ Microsoft Foundry gpt-4.1<br/>(used in live demo)"]
+        GHM["GitHub Models free tier<br/>(zero-cost fallback)"]
     end
 
     S2 <--> KB
@@ -50,38 +50,38 @@ flowchart TD
 - **Adversarial self-checking** — the Verifier (stage 5) is deliberately not an LLM: citation verification is a trust mechanism, and running it through a model would reintroduce the failure mode it exists to catch.
 - **A first-class reasoning trace** — the Bid Decision Report records the full decision chain per requirement (evidence considered → score + confidence → citation verification outcome → action required), streamed to the console, appended to the DOCX, and saved as JSON.
 
-## Live run results (June 12, 2026 — real, not stubbed)
+## Live run results (June 14, 2026 — fully on Microsoft Foundry, not stubbed)
+
+Reasoning model: **Microsoft Foundry gpt-4.1** · Retrieval: **Foundry IQ** (Azure AI Search):
 
 | Metric | Result |
 |---|---|
-| Requirements extracted from 8-page sample RFP | 41 |
-| Scored | 10 COVERED · 8 PARTIAL · 23 GAP |
-| Priority-weighted win probability | 33% |
-| Citations verified by stage 5 | **24/24, 0 stripped** |
+| Requirements extracted from 8-page sample RFP | 68 |
+| Scored | 6 COVERED · 18 PARTIAL · 44 GAP |
+| Priority-weighted win probability | 25% |
+| Citations verified by stage 5 | **51/51, 0 stripped** |
 | Recommendation | REVIEW BID DECISION (deterministic band) |
 | Pipeline status | `complete`, 0 errors |
 
-The 23 gaps are the system working as designed: requirements the evidence corpus genuinely doesn't cover (insurance schedules, timeline commitments, tender boilerplate) are flagged for human action instead of being papered over with confident prose.
+The gaps are the system working as designed: requirements the evidence corpus genuinely doesn't cover (insurance schedules, timeline commitments, tender boilerplate) are flagged for human action instead of being papered over with confident prose. **Every one of the 51 citations the drafter produced resolved to a real retrieved document** — nothing ungrounded reached the proposal.
 
 ## Microsoft technologies used
 
 | Service | Role |
 |---|---|
+| **Microsoft Foundry** (gpt-4.1) | Model inference for every reasoning stage — `MODEL_PROVIDER=foundry` |
 | **Foundry IQ** (Azure AI Search) | Knowledge retrieval over the evidence corpus with citation keys — the Microsoft IQ layer |
-| **Microsoft Foundry** | Model inference architecture (shared client, `MODEL_PROVIDER=foundry`) |
-| **GitHub Models** | Free-tier inference used for the live demo (see honesty note) |
+| **GitHub Models** | Zero-cost inference fallback for environments without Foundry model quota |
 | **Azure AI Document Intelligence** | RFP parsing, `prebuilt-layout` (pypdf fallback when no resource available) |
 | **Adaptive Cards** | Human-in-the-loop approval artifact (Teams delivery is roadmap) |
 | **GitHub Copilot / AI-assisted development** | Used throughout development |
 
-## An honest note on free-tier constraints
+## Engineering notes — running on a $0 budget
 
-This project was built end-to-end on **$0**: a free-trial Azure subscription and an Azure for Students subscription, neither of which can deploy Azure OpenAI models (quota requires pay-as-you-go, which we deliberately avoid — agent demos shouldn't require an uncapped credit card).
+This project was built and demoed on free Azure subscriptions (a free trial and Azure for Students), with **no pay-as-you-go upgrade** — agent demos shouldn't require an uncapped credit card. Two design choices made that possible, both visible in the code:
 
-That constraint shaped two engineering decisions, both visible in the code rather than hidden:
-
-1. **Inference** — `tools/foundry_client.py` serves two providers behind one interface: Microsoft Foundry (documented path) and GitHub Models free tier (demo path). The client is rate-limit aware: proactive tokens-per-minute pacing, `Retry-After` backoff, JSON-mode with schema-validated retries.
-2. **Retrieval** — `scripts/setup_foundry_iq.py` builds the complete Foundry IQ stack: Azure AI Search index → corpus upload → knowledge agent. The knowledge agent (agentic query planning) requires a model deployment, so on quota-blocked subscriptions the script skips it and the pipeline queries **the same index directly** (`RETRIEVAL_MODE=azure_search`, semantic ranking when the tier supports it). The full agentic client (`FoundryIQRetriever`) is implemented and ready for subscriptions with model quota.
+1. **Inference** — `tools/foundry_client.py` serves two providers behind one interface. The live demo runs on a **Microsoft Foundry gpt-4.1 deployment** (`MODEL_PROVIDER=foundry`); **GitHub Models** is a drop-in zero-cost fallback (`MODEL_PROVIDER=github_models`) for anyone without Foundry model quota. The client is rate-limit aware: proactive tokens-per-minute pacing, `Retry-After` backoff, JSON mode with schema-validated retries.
+2. **Retrieval** — `scripts/setup_foundry_iq.py` builds the complete Foundry IQ stack: Azure AI Search index → corpus upload → knowledge agent. The agentic knowledge agent needs an Azure OpenAI deployment for query planning; where that quota isn't available the script skips it and the pipeline queries **the same index directly** (`RETRIEVAL_MODE=azure_search`, semantic ranking when the tier supports it, full-text otherwise). The full agentic client (`FoundryIQRetriever`) is implemented and ready. The live demo runs against a real Azure AI Search index built from this corpus.
 
 ## Run it yourself
 

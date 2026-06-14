@@ -27,8 +27,8 @@ flowchart TD
     end
 
     subgraph IQ["🧠 Microsoft IQ layer — Foundry IQ"]
-        KB["Azure AI Search index<br/>(evidence corpus, doc_id citation keys,<br/>semantic ranking)"]
-        AGENT["Foundry IQ knowledge agent<br/>(agentic retrieval / query planning)"]
+        KB["Azure AI Search index<br/>(evidence corpus, doc_id citation keys;<br/>full-text on Free tier, semantic ranker on Basic+)"]
+        AGENT["Foundry IQ knowledge agent<br/>(agentic query planning — roadmap;<br/>needs a model deployment)"]
         AGENT -. targets .-> KB
     end
 
@@ -114,7 +114,7 @@ python scripts/setup_foundry_iq.py     # builds index + uploads corpus (+ agent 
 STUB_MODE=true RETRIEVAL_MODE=local python -m pytest tests/ -q
 ```
 
-Outputs land in `output/`: the proposal DOCX (with the Bid Decision Report appendix), the machine-readable bid report JSON, and the approval Adaptive Card JSON.
+Outputs land in `output/`: the proposal DOCX (with the Bid Decision Report appendix), the machine-readable bid report JSON, and the approval Adaptive Card JSON. A real, unedited run is committed under [`samples/`](samples/) so you can see the output without running anything.
 
 ## Reliability & safety patterns
 
@@ -124,6 +124,16 @@ Outputs land in `output/`: the proposal DOCX (with the Bid Decision Report appen
 - Rate-limit-aware client so the pipeline degrades to *slower*, not *broken*, on throttled free tiers.
 - No secrets in the repo (`.env` is gitignored); the corpus and sample RFP are fully synthetic.
 
+## Known limitations & roadmap
+
+Stated plainly, because a tool that decides what evidence is sufficient has to be honest about its own boundaries:
+
+- **Citation verification is provenance-level, not claim-level.** The Verifier confirms each citation resolves to a document that was retrieved for that requirement; it does not yet confirm the cited document's text actually supports the specific sentence. Claim-level grounding (semantic entailment against the excerpt) is the top roadmap item.
+- **Proof of concept on synthetic data.** The corpus and RFP are fictional and co-designed; the pipeline has not been benchmarked on unseen real-world RFPs and corpora.
+- **Coverage score ≠ win probability.** It is a priority-weighted requirement-coverage metric. It deliberately models nothing about price, competitors, incumbency, or evaluator preferences — the real determinants of a tender outcome.
+- **Retrieval quality depends on the search tier.** On the Azure AI Search Free tier there is no semantic ranker, so retrieval is keyword/full-text and more sensitive to vocabulary mismatch; Basic tier (or the full Foundry IQ knowledge agent, which needs a model deployment) improves this.
+- **Parsing.** The live demo uses a local pypdf fallback; Azure AI Document Intelligence (`prebuilt-layout`) is the documented higher-fidelity path and needs its own resource.
+
 ## Repository map
 
 ```
@@ -131,6 +141,7 @@ agents/          orchestrator + the six stage implementations
 tools/           model client, retrieval (3 backends), contracts, DOCX/report/card builders
 prompts/         system prompts (input/output contracts per agent)
 corpus/          synthetic evidence corpus (DOC-001…DOC-014, front-matter citation keys)
+samples/         a real committed run (proposal DOCX + bid report + approval card)
 demo/            8-page sample RFP + demo script
 scripts/         one-time Foundry IQ / Azure AI Search setup
 tests/           47 tests, all runnable with zero credentials

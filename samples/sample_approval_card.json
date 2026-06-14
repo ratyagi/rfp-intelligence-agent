@@ -39,7 +39,7 @@
           "items": [
             {
               "type": "TextBlock",
-              "text": "Coverage score: **28%**",
+              "text": "Coverage score: **33%**",
               "color": "Attention",
               "weight": "Bolder",
               "size": "Medium"
@@ -53,33 +53,33 @@
       "facts": [
         {
           "title": "Requirements found",
-          "value": "71"
+          "value": "65"
         },
         {
           "title": "Covered",
-          "value": "7"
+          "value": "9"
         },
         {
           "title": "Partial",
-          "value": "22"
+          "value": "21"
         },
         {
           "title": "Gaps",
-          "value": "42"
+          "value": "35"
         },
         {
           "title": "Citations verified",
-          "value": "63/63"
+          "value": "68/68"
         },
         {
           "title": "Requirement coverage",
-          "value": "28%"
+          "value": "33%"
         }
       ]
     },
     {
       "type": "TextBlock",
-      "text": "⚠️ 42 gap(s) require your input before submission",
+      "text": "⚠️ 35 gap(s) require your input before submission",
       "color": "Attention",
       "weight": "Bolder",
       "wrap": true
@@ -91,7 +91,7 @@
       "title": "View Draft",
       "data": {
         "action": "view_draft",
-        "docx_path": "/home/user/rfp-intelligence-agent/output/draft_proposal_20260614_113143.docx"
+        "docx_path": "/home/user/rfp-intelligence-agent/output/draft_proposal_20260614_123229.docx"
       }
     },
     {

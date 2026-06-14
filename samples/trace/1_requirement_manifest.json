@@ -1,0 +1,394 @@
+{
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "text": "The vendor must migrate DDT's hosted workloads to Microsoft Azure.",
+      "priority": "high",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-002",
+      "text": "The vendor must provide ongoing managed platform services for DDT's workloads in Microsoft Azure.",
+      "priority": "high",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-003",
+      "text": "The vendor must address every mandatory requirement individually in their proposal.",
+      "priority": "high",
+      "category": "other"
+    },
+    {
+      "id": "REQ-004",
+      "text": "The vendor must provide verifiable evidence for each claim made in their proposal.",
+      "priority": "high",
+      "category": "other"
+    },
+    {
+      "id": "REQ-005",
+      "text": "The proposal must be submitted via the AusTender portal by 17:00 AEST, 30 June 2026.",
+      "priority": "high",
+      "category": "timeline"
+    },
+    {
+      "id": "REQ-006",
+      "text": "The vendor must perform discovery, dependency mapping, and wave planning for all in-scope workloads.",
+      "priority": "high",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-007",
+      "text": "The vendor must design and build an Azure landing zone compliant with the Australian Government Information Security Manual (ISM) at the PROTECTED level.",
+      "priority": "high",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-008",
+      "text": "The vendor must migrate all in-scope workloads to Azure.",
+      "priority": "high",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-009",
+      "text": "The vendor must modernise nominated application workloads, including containerisation where assessed as suitable.",
+      "priority": "medium",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-010",
+      "text": "The vendor must provide managed platform and security operations services for an initial term of three years.",
+      "priority": "high",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-011",
+      "text": "The vendor must provide full decommissioning support for both existing datacentres prior to lease expiry.",
+      "priority": "high",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-012",
+      "text": "The vendor must demonstrate proven experience migrating Windows Server 2012/2016 workloads to Azure IaaS and PaaS services, with a minimum of three completed migrations of comparable scale (500 or more virtual machines each), evidenced by contactable client references for each migration cited.",
+      "priority": "high",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-013",
+      "text": "The proposed managed service must achieve a 99.95% availability SLA for Tier-1 production workloads, with continuous monitoring tooling, documented incident response procedures, and a mean time to recovery (MTTR) under 30 minutes for Priority 1 incidents. Respondents must evidence actual achieved availability and MTTR figures from current or recent operations.",
+      "priority": "high",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-014",
+      "text": "All Agency data must remain within Australian Azure regions (Australia East and Australia Southeast) at all times, including backup and disaster recovery copies. The vendor must hold current ISO/IEC 27001 certification covering its cloud delivery operations, and must evidence an IRAP assessment of its proposed platform architecture at the PROTECTED level under the ISM.",
+      "priority": "high",
+      "category": "legal"
+    },
+    {
+      "id": "REQ-015",
+      "text": "The vendor must provide a zero-downtime migration approach using Azure Site Recovery or an equivalent replication-based mechanism, including rehearsal cutovers and tested rollback plans. Production cutover windows must not exceed four hours per workload group. Respondents must evidence prior cutovers completed within equivalent windows, including any data loss incidents.",
+      "priority": "high",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-016",
+      "text": "The vendor must demonstrate an established application modernisation capability, including production experience designing, deploying, and operating containerised workloads on Azure Kubernetes Service (AKS) at scale, and must provide a modernisation roadmap approach for the Agency's nominated legacy applications.",
+      "priority": "medium",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-017",
+      "text": "Responses must address each requirement under its reference number, citing verifiable evidence (project references, certifications, audited reports, or named personnel) for every claim.",
+      "priority": "high",
+      "category": "references"
+    },
+    {
+      "id": "REQ-018",
+      "text": "Pricing must be submitted as a fixed-price schedule for Years 1, 2, and 3 of the engagement, with annual escalation capped at CPI plus 2%, inclusive of all licences, migration tooling, professional services, and transition costs.",
+      "priority": "high",
+      "category": "commercial"
+    },
+    {
+      "id": "REQ-019",
+      "text": "Respondents should evidence prior acceptance of equivalent fixed-price structures.",
+      "priority": "medium",
+      "category": "commercial"
+    },
+    {
+      "id": "REQ-020",
+      "text": "A milestone-based payment schedule must be provided, with each milestone's completion certified by the DDT Project Director prior to invoicing, and payment terms of net 30 days from receipt of a correctly rendered invoice.",
+      "priority": "medium",
+      "category": "commercial"
+    },
+    {
+      "id": "REQ-021",
+      "text": "The proposed delivery team must include a named Project Manager holding a current PMP or PRINCE2 Practitioner certification with a minimum of seven years of cloud migration programme experience, evidenced by a curriculum vitae.",
+      "priority": "high",
+      "category": "team"
+    },
+    {
+      "id": "REQ-022",
+      "text": "Substitution of key personnel requires the Agency's prior written approval.",
+      "priority": "medium",
+      "category": "team"
+    },
+    {
+      "id": "REQ-023",
+      "text": "The vendor must also name a lead cloud architect holding current Microsoft Azure architecture certification.",
+      "priority": "high",
+      "category": "team"
+    },
+    {
+      "id": "REQ-024",
+      "text": "The vendor must operate a monthly steering committee with Agency executives and provide fortnightly written progress reports covering schedule, risk, and financial status.",
+      "priority": "low",
+      "category": "team"
+    },
+    {
+      "id": "REQ-025",
+      "text": "The vendor must comply with the Privacy Act 1988 (Cth), the Australian Privacy Principles, and the Notifiable Data Breaches scheme.",
+      "priority": "high",
+      "category": "legal"
+    },
+    {
+      "id": "REQ-026",
+      "text": "Any eligible or suspected data breach affecting Agency data must be notified to the Agency within 24 hours of discovery.",
+      "priority": "high",
+      "category": "legal"
+    },
+    {
+      "id": "REQ-027",
+      "text": "Respondents must evidence their privacy management framework and tested breach response procedures.",
+      "priority": "high",
+      "category": "legal"
+    },
+    {
+      "id": "REQ-028",
+      "text": "A minimum of 10% of the total contract value must be delivered through registered Indigenous businesses as subcontractors or suppliers, consistent with the Commonwealth Indigenous Procurement Policy.",
+      "priority": "medium",
+      "category": "commercial"
+    },
+    {
+      "id": "REQ-029",
+      "text": "Respondents must identify the Indigenous businesses they propose to engage, the scope each will deliver, and any existing partnership history.",
+      "priority": "medium",
+      "category": "commercial"
+    },
+    {
+      "id": "REQ-030",
+      "text": "The vendor must provide a quantum-safe cryptography transition plan describing how platform cryptography (data in transit, data at rest, and key management) will migrate to post-quantum algorithms by 2030, including interim crypto-agility measures.",
+      "priority": "medium",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-031",
+      "text": "Quarterly reporting of the carbon footprint attributable to the Agency's Azure consumption, with year-on-year reduction targets.",
+      "priority": "medium",
+      "category": "other"
+    },
+    {
+      "id": "REQ-032",
+      "text": "An ongoing FinOps practice with quarterly optimisation reviews and a shared-savings mechanism for realised cost reductions.",
+      "priority": "medium",
+      "category": "commercial"
+    },
+    {
+      "id": "REQ-033",
+      "text": "Proposals that fail to address any mandatory requirement will be excluded from further evaluation.",
+      "priority": "high",
+      "category": "other"
+    },
+    {
+      "id": "REQ-034",
+      "text": "Technical capability and migration approach will account for 40% of the proposal evaluation score.",
+      "priority": "high",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-035",
+      "text": "Price and commercial terms will account for 30% of the proposal evaluation score.",
+      "priority": "high",
+      "category": "commercial"
+    },
+    {
+      "id": "REQ-036",
+      "text": "Team experience and governance will account for 20% of the proposal evaluation score.",
+      "priority": "high",
+      "category": "team"
+    },
+    {
+      "id": "REQ-037",
+      "text": "Risk management and compliance will account for 10% of the proposal evaluation score.",
+      "priority": "high",
+      "category": "legal"
+    },
+    {
+      "id": "REQ-038",
+      "text": "Proposals scoring below 60% overall will not proceed to the negotiation stage.",
+      "priority": "high",
+      "category": "other"
+    },
+    {
+      "id": "REQ-039",
+      "text": "The Agency may seek clarification, conduct reference checks, and require presentations from shortlisted respondents.",
+      "priority": "medium",
+      "category": "references"
+    },
+    {
+      "id": "REQ-040",
+      "text": "Proposals must be lodged via the AusTender portal no later than 17:00 AEST on 30 June 2026.",
+      "priority": "high",
+      "category": "timeline"
+    },
+    {
+      "id": "REQ-041",
+      "text": "Late submissions will not be accepted under any circumstances.",
+      "priority": "high",
+      "category": "timeline"
+    },
+    {
+      "id": "REQ-042",
+      "text": "Proposals must be submitted as a single PDF of no more than 60 pages, structured to address each requirement reference (MR-1 through MR-12, DR-1 and DR-2) in order.",
+      "priority": "medium",
+      "category": "other"
+    },
+    {
+      "id": "REQ-043",
+      "text": "Questions must be lodged through the AusTender forum no later than 20 June 2026; answers will be published to all registered respondents.",
+      "priority": "low",
+      "category": "timeline"
+    },
+    {
+      "id": "REQ-044",
+      "text": "The Agency is not bound to accept the lowest-priced or any proposal.",
+      "priority": "low",
+      "category": "commercial"
+    },
+    {
+      "id": "REQ-045",
+      "text": "The Agency may discontinue this process at any time.",
+      "priority": "low",
+      "category": "other"
+    },
+    {
+      "id": "REQ-046",
+      "text": "Respondents bear their own costs of participation.",
+      "priority": "low",
+      "category": "commercial"
+    },
+    {
+      "id": "REQ-047",
+      "text": "Proposals must remain valid for 120 days from the submission deadline.",
+      "priority": "medium",
+      "category": "commercial"
+    },
+    {
+      "id": "REQ-048",
+      "text": "The successful respondent will be required to enter into the Commonwealth contract attached as Annex C, including provisions for liquidated damages, key personnel, and step-in rights.",
+      "priority": "high",
+      "category": "legal"
+    },
+    {
+      "id": "REQ-049",
+      "text": "The vendor must support migration and management of approximately 580 virtual machines, including 430 Windows Server 2012 R2/2016, 95 Windows Server 2019, and 55 RHEL 8 instances.",
+      "priority": "high",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-050",
+      "text": "The vendor must be capable of migrating and managing 36 SQL Server instances (2014-2019) totaling 48 TB of data.",
+      "priority": "high",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-051",
+      "text": "The vendor must handle approximately 410 TB of storage across SAN and NAS tiers.",
+      "priority": "medium",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-052",
+      "text": "The vendor must accommodate dual 10 Gbps network links between datacentres and plan for ExpressRoute integration, which is not yet provisioned.",
+      "priority": "medium",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-053",
+      "text": "The vendor must integrate with an Active Directory environment at 2016 functional level with Entra ID Connect synchronisation.",
+      "priority": "medium",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-054",
+      "text": "The vendor must support nightly full backups to disk with 35-day retention and quarterly archive to tape.",
+      "priority": "medium",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-055",
+      "text": "For Tier-1 workloads (24 applications), the vendor must ensure 99.95% availability and limit cutover windows to a maximum of four hours.",
+      "priority": "high",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-056",
+      "text": "The vendor must support migration and management of Tier-2 workloads, including 61 internal corporate and case-management applications.",
+      "priority": "medium",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-057",
+      "text": "The vendor must support migration and management of Tier-3 workloads, including development, test, and archive workloads.",
+      "priority": "medium",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-058",
+      "text": "The vendor must assess 8 nominated legacy applications for containerisation or re-platforming during the engagement.",
+      "priority": "high",
+      "category": "technical"
+    },
+    {
+      "id": "REQ-059",
+      "text": "The vendor must ensure datacentre decommissioning and lease exit is completed by 30 June 2027.",
+      "priority": "high",
+      "category": "timeline"
+    },
+    {
+      "id": "REQ-060",
+      "text": "The vendor may propose an alternative project timeline provided the lease-exit date of 30 June 2027 is met.",
+      "priority": "medium",
+      "category": "timeline"
+    },
+    {
+      "id": "REQ-061",
+      "text": "The vendor bears delivery risk for migration execution, including rollback costs arising from failed cutovers.",
+      "priority": "high",
+      "category": "legal"
+    },
+    {
+      "id": "REQ-062",
+      "text": "Liquidated damages will apply to missed lease-exit milestones attributable to the vendor.",
+      "priority": "high",
+      "category": "legal"
+    },
+    {
+      "id": "REQ-063",
+      "text": "Caps on liability will be negotiated with the preferred respondent within Commonwealth contracting norms; unlimited liability applies for breach of privacy or security obligations.",
+      "priority": "high",
+      "category": "legal"
+    },
+    {
+      "id": "REQ-064",
+      "text": "Mandatory requirements assessed as non-compliant result in exclusion from the process.",
+      "priority": "high",
+      "category": "other"
+    },
+    {
+      "id": "REQ-065",
+      "text": "Partial compliance on mandatory requirements must be justified with a credible remediation plan.",
+      "priority": "high",
+      "category": "other"
+    }
+  ]
+}

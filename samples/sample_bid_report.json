@@ -1,126 +1,171 @@
 {
   "rfp_title": "GOV-2026-ICT-0042 Cloud Infrastructure Modernisation",
-  "coverage_score": 28,
+  "coverage_score": 33,
   "recommendation": "REVIEW BID DECISION",
   "recommendation_rationale": "Material gaps on weighted requirements — escalate before committing.",
   "counts": {
-    "total": 71,
-    "covered": 7,
-    "partial": 22,
-    "gap": 42
+    "total": 65,
+    "covered": 9,
+    "partial": 21,
+    "gap": 35
   },
   "citations": {
-    "total": 63,
-    "verified": 63,
+    "total": 68,
+    "verified": 68,
     "stripped": 0
   },
   "requirements": [
     {
       "id": "REQ-001",
-      "requirement": "The vendor must migrate DDT's hosted workloads, including approximately 580 virtual machines (predominantly Windows Server 2012 R2 and 2016, with a small Red Hat Enterprise Linux estate), 36 Microsoft",
+      "requirement": "The vendor must migrate DDT's hosted workloads to Microsoft Azure.",
       "priority": "high",
       "category": "technical",
       "evidence_considered": [
         {
           "doc_id": "DOC-001",
           "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
-          "retrieval_score": 2.29
+          "retrieval_score": 2.15
         },
         {
-          "doc_id": "DOC-002",
-          "title": "Case Study — StateGov Authority Cloud Transition Program",
-          "retrieval_score": 2.27
-        },
-        {
-          "doc_id": "DOC-003",
-          "title": "Case Study — FinanceDept Agency Core Systems Migration",
-          "retrieval_score": 2.0
-        }
-      ],
-      "decision": {
-        "score": "PARTIAL",
-        "scorer_confidence": 0.65,
-        "citations_verified": [
-          "DOC-001",
-          "DOC-002",
-          "DOC-003"
-        ],
-        "citations_stripped": []
-      },
-      "action_required": "Provide documentation or case studies demonstrating migration of workloads including Windows Server 2012 R2/2016, Microsoft SQL Server instances, and large-scale data volumes (410 TB) to Azure."
-    },
-    {
-      "id": "REQ-002",
-      "requirement": "The vendor must provide ongoing managed platform services for the migrated workloads in Microsoft Azure.",
-      "priority": "high",
-      "category": "technical",
-      "evidence_considered": [
-        {
-          "doc_id": "DOC-002",
-          "title": "Case Study — StateGov Authority Cloud Transition Program",
-          "retrieval_score": 2.08
+          "doc_id": "DOC-013",
+          "title": "Client Reference Register — Government Engagements",
+          "retrieval_score": 2.1
         },
         {
           "doc_id": "DOC-007",
           "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
           "retrieval_score": 2.03
-        },
-        {
-          "doc_id": "DOC-010",
-          "title": "Managed Services Incident Response Runbook (Extract)",
-          "retrieval_score": 2.02
         }
       ],
       "decision": {
         "score": "COVERED",
         "scorer_confidence": 0.85,
         "citations_verified": [
-          "DOC-007",
-          "DOC-010",
-          "DOC-002"
+          "DOC-001",
+          "DOC-013"
         ],
         "citations_stripped": []
       },
       "action_required": null
     },
     {
+      "id": "REQ-002",
+      "requirement": "The vendor must provide ongoing managed platform services for DDT's workloads in Microsoft Azure.",
+      "priority": "high",
+      "category": "technical",
+      "evidence_considered": [
+        {
+          "doc_id": "DOC-010",
+          "title": "Managed Services Incident Response Runbook (Extract)",
+          "retrieval_score": 1.85
+        },
+        {
+          "doc_id": "DOC-001",
+          "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+          "retrieval_score": 1.84
+        },
+        {
+          "doc_id": "DOC-002",
+          "title": "Case Study — StateGov Authority Cloud Transition Program",
+          "retrieval_score": 1.83
+        }
+      ],
+      "decision": {
+        "score": "PARTIAL",
+        "scorer_confidence": 0.6,
+        "citations_verified": [
+          "DOC-010",
+          "DOC-001",
+          "DOC-002"
+        ],
+        "citations_stripped": []
+      },
+      "action_required": "Provide documentation or case studies explicitly demonstrating ongoing managed platform services for client workloads in Microsoft Azure."
+    },
+    {
       "id": "REQ-003",
-      "requirement": "The proposal must address every mandatory requirement individually, providing verifiable evidence for each claim made.",
+      "requirement": "The vendor must address every mandatory requirement individually in their proposal.",
       "priority": "high",
       "category": "other",
       "evidence_considered": [
         {
           "doc_id": "DOC-007",
           "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
-          "retrieval_score": 1.64
+          "retrieval_score": 1.57
         },
         {
-          "doc_id": "DOC-006",
-          "title": "Data Residency and Sovereignty Policy",
-          "retrieval_score": 1.55
+          "doc_id": "DOC-004",
+          "title": "ISO/IEC 27001:2022 Certification Summary",
+          "retrieval_score": 1.53
+        },
+        {
+          "doc_id": "DOC-013",
+          "title": "Client Reference Register — Government Engagements",
+          "retrieval_score": 1.51
         }
       ],
       "decision": {
-        "score": "PARTIAL",
-        "scorer_confidence": 0.5,
-        "citations_verified": [
-          "DOC-007",
-          "DOC-006"
-        ],
+        "score": "GAP",
+        "scorer_confidence": 0.1,
+        "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide a matrix or document that explicitly maps each mandatory requirement to specific, verifiable evidence supporting compliance."
+      "action_required": "Provide a proposal section or mapping table explicitly demonstrating that each mandatory requirement is addressed individually."
     },
     {
       "id": "REQ-004",
-      "requirement": "Unsupported claims in the proposal will be disregarded by the evaluation panel.",
+      "requirement": "The vendor must provide verifiable evidence for each claim made in their proposal.",
       "priority": "high",
       "category": "other",
       "evidence_considered": [
         {
-          "doc_id": "DOC-008",
-          "title": "Commercial Terms Register — Milestone Payments and Invoicing History",
-          "retrieval_score": 1.6
+          "doc_id": "DOC-007",
+          "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+          "retrieval_score": 1.71
+        },
+        {
+          "doc_id": "DOC-004",
+          "title": "ISO/IEC 27001:2022 Certification Summary",
+          "retrieval_score": 1.68
+        },
+        {
+          "doc_id": "DOC-013",
+          "title": "Client Reference Register — Government Engagements",
+          "retrieval_score": 1.62
+        }
+      ],
+      "decision": {
+        "score": "PARTIAL",
+        "scorer_confidence": 0.6,
+        "citations_verified": [
+          "DOC-007",
+          "DOC-004",
+          "DOC-013"
+        ],
+        "citations_stripped": []
+      },
+      "action_required": "Provide a cross-reference matrix or annotated proposal mapping each claim to specific, verifiable supporting evidence."
+    },
+    {
+      "id": "REQ-005",
+      "requirement": "The proposal must be submitted via the AusTender portal by 17:00 AEST, 30 June 2026.",
+      "priority": "high",
+      "category": "timeline",
+      "evidence_considered": [
+        {
+          "doc_id": "DOC-014",
+          "title": "Key Personnel CV — James Liu, Lead Cloud Architect",
+          "retrieval_score": 1.74
+        },
+        {
+          "doc_id": "DOC-009",
+          "title": "Key Personnel CV — Sarah Mitchell, Project Director",
+          "retrieval_score": 1.68
+        },
+        {
+          "doc_id": "DOC-007",
+          "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+          "retrieval_score": 1.61
         }
       ],
       "decision": {
@@ -129,37 +174,7 @@
         "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide a policy or process document demonstrating how unsupported claims are identified and excluded from proposals."
-    },
-    {
-      "id": "REQ-005",
-      "requirement": "Proposals must be submitted via the AusTender portal by 17:00 AEST, 30 June 2026.",
-      "priority": "high",
-      "category": "timeline",
-      "evidence_considered": [
-        {
-          "doc_id": "DOC-014",
-          "title": "Key Personnel CV — James Liu, Lead Cloud Architect",
-          "retrieval_score": 1.68
-        },
-        {
-          "doc_id": "DOC-009",
-          "title": "Key Personnel CV — Sarah Mitchell, Project Director",
-          "retrieval_score": 1.62
-        },
-        {
-          "doc_id": "DOC-007",
-          "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
-          "retrieval_score": 1.56
-        }
-      ],
-      "decision": {
-        "score": "GAP",
-        "scorer_confidence": 0.0,
-        "citations_verified": [],
-        "citations_stripped": []
-      },
-      "action_required": "Provide documentation or confirmation that proposals will be or have been submitted via the AusTender portal by the specified deadline."
+      "action_required": "Provide documentation or confirmation that the proposal will be or has been submitted via the AusTender portal by the specified deadline."
     },
     {
       "id": "REQ-006",
@@ -193,7 +208,7 @@
         ],
         "citations_stripped": []
       },
-      "action_required": "Provide project documentation or client attestations explicitly demonstrating execution of discovery, dependency mapping, and wave planning for in-scope workloads."
+      "action_required": "Provide project documentation or client attestations explicitly demonstrating execution of discovery, dependency mapping, and wave planning for all in-scope workloads."
     },
     {
       "id": "REQ-007",
@@ -252,7 +267,7 @@
       ],
       "decision": {
         "score": "COVERED",
-        "scorer_confidence": 0.9,
+        "scorer_confidence": 0.85,
         "citations_verified": [
           "DOC-001",
           "DOC-002",
@@ -294,7 +309,7 @@
         ],
         "citations_stripped": []
       },
-      "action_required": "Provide case studies or project documentation demonstrating application modernisation and containerisation of workloads."
+      "action_required": "Provide case studies or documentation demonstrating experience with application modernisation and containerisation, not just infrastructure migration."
     },
     {
       "id": "REQ-010",
@@ -320,10 +335,11 @@
       ],
       "decision": {
         "score": "PARTIAL",
-        "scorer_confidence": 0.5,
+        "scorer_confidence": 0.6,
         "citations_verified": [
+          "DOC-004",
           "DOC-007",
-          "DOC-004"
+          "DOC-012"
         ],
         "citations_stripped": []
       },
@@ -360,7 +376,7 @@
         ],
         "citations_stripped": []
       },
-      "action_required": "Provide documentation or case studies explicitly demonstrating full decommissioning support for datacentres prior to lease expiry."
+      "action_required": "Provide documentation or case study excerpts explicitly demonstrating full decommissioning support for datacentres prior to lease expiry."
     },
     {
       "id": "REQ-012",
@@ -388,13 +404,13 @@
         "score": "PARTIAL",
         "scorer_confidence": 0.6,
         "citations_verified": [
-          "DOC-003",
           "DOC-001",
+          "DOC-003",
           "DOC-013"
         ],
         "citations_stripped": []
       },
-      "action_required": "Provide evidence of at least three completed migrations of 500+ Windows Server 2012/2016 VMs each, specifying the Windows Server versions and including contactable client references for each."
+      "action_required": "Provide evidence of a third completed migration of 500 or more Windows Server 2012/2016 virtual machines to Azure IaaS/PaaS, with a contactable client reference."
     },
     {
       "id": "REQ-013",
@@ -515,19 +531,49 @@
         }
       ],
       "decision": {
-        "score": "PARTIAL",
-        "scorer_confidence": 0.5,
-        "citations_verified": [
-          "DOC-012",
-          "DOC-001",
-          "DOC-002"
-        ],
+        "score": "GAP",
+        "scorer_confidence": 0.2,
+        "citations_verified": [],
         "citations_stripped": []
       },
       "action_required": "Provide case studies or documentation demonstrating production experience designing, deploying, and operating containerised workloads on Azure Kubernetes Service (AKS) at scale, and a sample modernisation roadmap for legacy applications."
     },
     {
       "id": "REQ-017",
+      "requirement": "Responses must address each requirement under its reference number, citing verifiable evidence (project references, certifications, audited reports, or named personnel) for every claim.",
+      "priority": "high",
+      "category": "references",
+      "evidence_considered": [
+        {
+          "doc_id": "DOC-013",
+          "title": "Client Reference Register — Government Engagements",
+          "retrieval_score": 1.77
+        },
+        {
+          "doc_id": "DOC-004",
+          "title": "ISO/IEC 27001:2022 Certification Summary",
+          "retrieval_score": 1.58
+        },
+        {
+          "doc_id": "DOC-009",
+          "title": "Key Personnel CV — Sarah Mitchell, Project Director",
+          "retrieval_score": 1.57
+        }
+      ],
+      "decision": {
+        "score": "COVERED",
+        "scorer_confidence": 0.9,
+        "citations_verified": [
+          "DOC-013",
+          "DOC-004",
+          "DOC-009"
+        ],
+        "citations_stripped": []
+      },
+      "action_required": null
+    },
+    {
+      "id": "REQ-018",
       "requirement": "Pricing must be submitted as a fixed-price schedule for Years 1, 2, and 3 of the engagement, with annual escalation capped at CPI plus 2%, inclusive of all licences, migration tooling, professional se",
       "priority": "high",
       "category": "commercial",
@@ -550,7 +596,7 @@
       ],
       "decision": {
         "score": "PARTIAL",
-        "scorer_confidence": 0.5,
+        "scorer_confidence": 0.6,
         "citations_verified": [
           "DOC-007"
         ],
@@ -559,7 +605,7 @@
       "action_required": "Provide a fixed-price schedule document explicitly showing annual escalation capped at CPI plus 2% and inclusivity of all licences, migration tooling, professional services, and transition costs for Years 1, 2, and 3."
     },
     {
-      "id": "REQ-018",
+      "id": "REQ-019",
       "requirement": "Respondents should evidence prior acceptance of equivalent fixed-price structures.",
       "priority": "medium",
       "category": "commercial",
@@ -587,7 +633,7 @@
       "action_required": null
     },
     {
-      "id": "REQ-019",
+      "id": "REQ-020",
       "requirement": "A milestone-based payment schedule must be provided, with each milestone's completion certified by the DDT Project Director prior to invoicing, and payment terms of net 30 days from receipt of a corre",
       "priority": "medium",
       "category": "commercial",
@@ -606,10 +652,10 @@
         ],
         "citations_stripped": []
       },
-      "action_required": "Provide a sample payment schedule explicitly showing Project Director certification prior to invoicing and net 30 payment terms."
+      "action_required": "Provide a sample milestone-based payment schedule explicitly showing Project Director certification prior to invoicing and net 30 payment terms."
     },
     {
-      "id": "REQ-020",
+      "id": "REQ-021",
       "requirement": "The proposed delivery team must include a named Project Manager holding a current PMP or PRINCE2 Practitioner certification with a minimum of seven years of cloud migration programme experience, evide",
       "priority": "high",
       "category": "team",
@@ -638,10 +684,10 @@
         ],
         "citations_stripped": []
       },
-      "action_required": "Provide a CV excerpt or summary explicitly demonstrating at least seven years of cloud migration programme experience for the named Project Manager."
+      "action_required": "Provide a CV or document explicitly evidencing at least seven years of cloud migration programme experience for the named Project Manager."
     },
     {
-      "id": "REQ-021",
+      "id": "REQ-022",
       "requirement": "Substitution of key personnel requires the Agency's prior written approval.",
       "priority": "medium",
       "category": "team",
@@ -658,10 +704,10 @@
         "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide a policy or contract excerpt demonstrating that substitution of key personnel requires the Agency's prior written approval."
+      "action_required": "Provide policy or contract language demonstrating that substitution of key personnel requires the Agency's prior written approval."
     },
     {
-      "id": "REQ-022",
+      "id": "REQ-023",
       "requirement": "The vendor must also name a lead cloud architect holding current Microsoft Azure architecture certification.",
       "priority": "high",
       "category": "team",
@@ -693,7 +739,7 @@
       "action_required": null
     },
     {
-      "id": "REQ-023",
+      "id": "REQ-024",
       "requirement": "The vendor must operate a monthly steering committee with Agency executives and provide fortnightly written progress reports covering schedule, risk, and financial status.",
       "priority": "low",
       "category": "team",
@@ -710,10 +756,10 @@
         "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide meeting schedules, minutes, or reporting templates demonstrating operation of a monthly steering committee and provision of fortnightly progress reports."
+      "action_required": "Provide documentation or reports demonstrating operation of monthly steering committees and delivery of fortnightly written progress reports covering schedule, risk, and financial status."
     },
     {
-      "id": "REQ-024",
+      "id": "REQ-025",
       "requirement": "The vendor must comply with the Privacy Act 1988 (Cth), the Australian Privacy Principles, and the Notifiable Data Breaches scheme.",
       "priority": "high",
       "category": "legal",
@@ -736,17 +782,17 @@
       ],
       "decision": {
         "score": "PARTIAL",
-        "scorer_confidence": 0.65,
+        "scorer_confidence": 0.6,
         "citations_verified": [
           "DOC-011",
           "DOC-006"
         ],
         "citations_stripped": []
       },
-      "action_required": "Provide documentation or attestation specifically demonstrating compliance with the Notifiable Data Breaches scheme."
+      "action_required": "Provide documentation or evidence specifically demonstrating compliance with the Notifiable Data Breaches scheme."
     },
     {
-      "id": "REQ-025",
+      "id": "REQ-026",
       "requirement": "Any eligible or suspected data breach affecting Agency data must be notified to the Agency within 24 hours of discovery.",
       "priority": "high",
       "category": "legal",
@@ -776,7 +822,7 @@
       "action_required": "Provide a documented breach notification procedure explicitly stating notification to the Agency within 24 hours of discovery."
     },
     {
-      "id": "REQ-026",
+      "id": "REQ-027",
       "requirement": "Respondents must evidence their privacy management framework and tested breach response procedures.",
       "priority": "high",
       "category": "legal",
@@ -808,8 +854,8 @@
       "action_required": "Provide documentation or test reports demonstrating that breach response procedures have been tested in practice."
     },
     {
-      "id": "REQ-027",
-      "requirement": "Consistent with the Commonwealth Indigenous Procurement Policy, a minimum of 10% of the total contract value must be delivered through registered Indigenous businesses as subcontractors or suppliers.",
+      "id": "REQ-028",
+      "requirement": "A minimum of 10% of the total contract value must be delivered through registered Indigenous businesses as subcontractors or suppliers, consistent with the Commonwealth Indigenous Procurement Policy.",
       "priority": "medium",
       "category": "commercial",
       "evidence_considered": [
@@ -821,12 +867,12 @@
         {
           "doc_id": "DOC-003",
           "title": "Case Study — FinanceDept Agency Core Systems Migration",
-          "retrieval_score": 1.96
+          "retrieval_score": 1.94
         },
         {
           "doc_id": "DOC-001",
           "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
-          "retrieval_score": 1.6
+          "retrieval_score": 1.62
         }
       ],
       "decision": {
@@ -835,10 +881,10 @@
         "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide contract schedules or supplier registers demonstrating use of registered Indigenous businesses as subcontractors or suppliers meeting the 10% value requirement."
+      "action_required": "Provide contract schedules or supplier registers demonstrating delivery of at least 10% of contract value through registered Indigenous businesses in compliance with the Commonwealth Indigenous Procurement Policy."
     },
     {
-      "id": "REQ-028",
+      "id": "REQ-029",
       "requirement": "Respondents must identify the Indigenous businesses they propose to engage, the scope each will deliver, and any existing partnership history.",
       "priority": "medium",
       "category": "commercial",
@@ -852,7 +898,7 @@
       "action_required": "No internal evidence found for this requirement. Provide documentation covering: Respondents must identify the Indigenous businesses they propose to engage, the scope each will deliver, and any existin..."
     },
     {
-      "id": "REQ-029",
+      "id": "REQ-030",
       "requirement": "The vendor must provide a quantum-safe cryptography transition plan describing how platform cryptography (data in transit, data at rest, and key management) will migrate to post-quantum algorithms by ",
       "priority": "medium",
       "category": "technical",
@@ -877,9 +923,9 @@
       "action_required": "Provide a documented quantum-safe cryptography transition plan detailing migration to post-quantum algorithms and interim crypto-agility measures."
     },
     {
-      "id": "REQ-030",
+      "id": "REQ-031",
       "requirement": "Quarterly reporting of the carbon footprint attributable to the Agency's Azure consumption, with year-on-year reduction targets.",
-      "priority": "low",
+      "priority": "medium",
       "category": "other",
       "evidence_considered": [
         {
@@ -900,16 +946,16 @@
       ],
       "decision": {
         "score": "GAP",
-        "scorer_confidence": 0.0,
+        "scorer_confidence": 0.1,
         "citations_verified": [],
         "citations_stripped": []
       },
       "action_required": "Provide documentation or reports demonstrating quarterly carbon footprint reporting and year-on-year reduction targets for Azure consumption."
     },
     {
-      "id": "REQ-031",
+      "id": "REQ-032",
       "requirement": "An ongoing FinOps practice with quarterly optimisation reviews and a shared-savings mechanism for realised cost reductions.",
-      "priority": "low",
+      "priority": "medium",
       "category": "commercial",
       "evidence_considered": [],
       "decision": {
@@ -921,10 +967,10 @@
       "action_required": "No internal evidence found for this requirement. Provide documentation covering: An ongoing FinOps practice with quarterly optimisation reviews and a shared-savings mechanism for realised cost reductio..."
     },
     {
-      "id": "REQ-032",
+      "id": "REQ-033",
       "requirement": "Proposals that fail to address any mandatory requirement will be excluded from further evaluation.",
       "priority": "high",
-      "category": "technical",
+      "category": "other",
       "evidence_considered": [
         {
           "doc_id": "DOC-012",
@@ -944,40 +990,74 @@
       ],
       "decision": {
         "score": "GAP",
-        "scorer_confidence": 0.1,
+        "scorer_confidence": 0.0,
         "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide a compliance matrix or checklist explicitly mapping each mandatory requirement to supporting evidence."
+      "action_required": "Provide a compliance matrix or checklist explicitly mapping responses to each mandatory requirement to demonstrate all are addressed."
     },
     {
-      "id": "REQ-033",
-      "requirement": "Technical capability and migration approach will be weighted at 40% in the evaluation of proposals.",
+      "id": "REQ-034",
+      "requirement": "Technical capability and migration approach will account for 40% of the proposal evaluation score.",
       "priority": "high",
       "category": "technical",
       "evidence_considered": [
         {
           "doc_id": "DOC-012",
           "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
-          "retrieval_score": 2.24
+          "retrieval_score": 2.22
         },
         {
           "doc_id": "DOC-003",
           "title": "Case Study — FinanceDept Agency Core Systems Migration",
-          "retrieval_score": 1.94
+          "retrieval_score": 1.78
         },
         {
           "doc_id": "DOC-001",
           "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
-          "retrieval_score": 1.89
+          "retrieval_score": 1.77
+        }
+      ],
+      "decision": {
+        "score": "COVERED",
+        "scorer_confidence": 0.9,
+        "citations_verified": [
+          "DOC-001",
+          "DOC-003",
+          "DOC-012"
+        ],
+        "citations_stripped": []
+      },
+      "action_required": null
+    },
+    {
+      "id": "REQ-035",
+      "requirement": "Price and commercial terms will account for 30% of the proposal evaluation score.",
+      "priority": "high",
+      "category": "commercial",
+      "evidence_considered": [
+        {
+          "doc_id": "DOC-007",
+          "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+          "retrieval_score": 1.79
+        },
+        {
+          "doc_id": "DOC-008",
+          "title": "Commercial Terms Register — Milestone Payments and Invoicing History",
+          "retrieval_score": 1.75
+        },
+        {
+          "doc_id": "DOC-001",
+          "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+          "retrieval_score": 1.62
         }
       ],
       "decision": {
         "score": "COVERED",
         "scorer_confidence": 0.85,
         "citations_verified": [
-          "DOC-012",
-          "DOC-003",
+          "DOC-007",
+          "DOC-008",
           "DOC-001"
         ],
         "citations_stripped": []
@@ -985,90 +1065,43 @@
       "action_required": null
     },
     {
-      "id": "REQ-034",
-      "requirement": "Price and commercial terms will be weighted at 30% in the evaluation of proposals.",
-      "priority": "high",
-      "category": "commercial",
-      "evidence_considered": [
-        {
-          "doc_id": "DOC-007",
-          "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
-          "retrieval_score": 1.9
-        },
-        {
-          "doc_id": "DOC-001",
-          "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
-          "retrieval_score": 1.89
-        },
-        {
-          "doc_id": "DOC-003",
-          "title": "Case Study — FinanceDept Agency Core Systems Migration",
-          "retrieval_score": 1.85
-        }
-      ],
-      "decision": {
-        "score": "GAP",
-        "scorer_confidence": 0.2,
-        "citations_verified": [],
-        "citations_stripped": []
-      },
-      "action_required": "Provide documentation explicitly addressing how price and commercial terms are proposed and evaluated in response to RFPs."
-    },
-    {
-      "id": "REQ-035",
-      "requirement": "Team experience and governance will be weighted at 20% in the evaluation of proposals.",
+      "id": "REQ-036",
+      "requirement": "Team experience and governance will account for 20% of the proposal evaluation score.",
       "priority": "high",
       "category": "team",
       "evidence_considered": [
         {
           "doc_id": "DOC-009",
           "title": "Key Personnel CV — Sarah Mitchell, Project Director",
-          "retrieval_score": 1.66
-        },
-        {
-          "doc_id": "DOC-003",
-          "title": "Case Study — FinanceDept Agency Core Systems Migration",
-          "retrieval_score": 1.53
+          "retrieval_score": 1.65
         }
       ],
       "decision": {
         "score": "PARTIAL",
         "scorer_confidence": 0.6,
         "citations_verified": [
-          "DOC-009",
-          "DOC-003"
+          "DOC-009"
         ],
         "citations_stripped": []
       },
-      "action_required": "Provide documentation detailing the team's governance framework and collective experience, not just individual CVs or project summaries."
-    },
-    {
-      "id": "REQ-036",
-      "requirement": "Risk management and compliance will be weighted at 10% in the evaluation of proposals.",
-      "priority": "high",
-      "category": "legal",
-      "evidence_considered": [
-        {
-          "doc_id": "DOC-004",
-          "title": "ISO/IEC 27001:2022 Certification Summary",
-          "retrieval_score": 1.63
-        },
-        {
-          "doc_id": "DOC-002",
-          "title": "Case Study — StateGov Authority Cloud Transition Program",
-          "retrieval_score": 1.52
-        }
-      ],
-      "decision": {
-        "score": "GAP",
-        "scorer_confidence": 0.2,
-        "citations_verified": [],
-        "citations_stripped": []
-      },
-      "action_required": "Provide a risk management framework or compliance program documentation demonstrating the company's approach to risk management and compliance."
+      "action_required": "Provide a governance framework document and additional team CVs to demonstrate overall team experience and governance approach."
     },
     {
       "id": "REQ-037",
+      "requirement": "Risk management and compliance will account for 10% of the proposal evaluation score.",
+      "priority": "high",
+      "category": "legal",
+      "evidence_considered": [],
+      "decision": {
+        "score": "GAP",
+        "scorer_confidence": 0.95,
+        "citations_verified": [],
+        "citations_stripped": []
+      },
+      "action_required": "No internal evidence found for this requirement. Provide documentation covering: Risk management and compliance will account for 10% of the proposal evaluation score...."
+    },
+    {
+      "id": "REQ-038",
       "requirement": "Proposals scoring below 60% overall will not proceed to the negotiation stage.",
       "priority": "high",
       "category": "other",
@@ -1081,14 +1114,14 @@
       ],
       "decision": {
         "score": "GAP",
-        "scorer_confidence": 1.0,
+        "scorer_confidence": 0.0,
         "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide documentation or policy demonstrating the process for scoring proposals and the threshold for proceeding to negotiation."
+      "action_required": "Provide internal policy or process documentation demonstrating compliance with minimum proposal scoring thresholds."
     },
     {
-      "id": "REQ-038",
+      "id": "REQ-039",
       "requirement": "The Agency may seek clarification, conduct reference checks, and require presentations from shortlisted respondents.",
       "priority": "medium",
       "category": "references",
@@ -1113,10 +1146,10 @@
         ],
         "citations_stripped": []
       },
-      "action_required": "Provide documentation or policy demonstrating the company's process for supporting agency clarification requests and delivering presentations to shortlisted respondents."
+      "action_required": "Provide documentation or policy confirming the company's ability to deliver presentations and participate in clarification processes as required by the Agency."
     },
     {
-      "id": "REQ-039",
+      "id": "REQ-040",
       "requirement": "Proposals must be lodged via the AusTender portal no later than 17:00 AEST on 30 June 2026.",
       "priority": "high",
       "category": "timeline",
@@ -1143,10 +1176,10 @@
         "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide documentation or correspondence confirming intent or ability to lodge proposals via AusTender by the specified deadline."
+      "action_required": "Provide internal correspondence or submission confirmation demonstrating proposals have been or will be lodged via the AusTender portal by the specified deadline."
     },
     {
-      "id": "REQ-040",
+      "id": "REQ-041",
       "requirement": "Late submissions will not be accepted under any circumstances.",
       "priority": "high",
       "category": "timeline",
@@ -1160,7 +1193,7 @@
       "action_required": "No internal evidence found for this requirement. Provide documentation covering: Late submissions will not be accepted under any circumstances...."
     },
     {
-      "id": "REQ-041",
+      "id": "REQ-042",
       "requirement": "Proposals must be submitted as a single PDF of no more than 60 pages, structured to address each requirement reference (MR-1 through MR-12, DR-1 and DR-2) in order.",
       "priority": "medium",
       "category": "other",
@@ -1174,10 +1207,10 @@
       "action_required": "No internal evidence found for this requirement. Provide documentation covering: Proposals must be submitted as a single PDF of no more than 60 pages, structured to address each requirement reference (..."
     },
     {
-      "id": "REQ-042",
+      "id": "REQ-043",
       "requirement": "Questions must be lodged through the AusTender forum no later than 20 June 2026; answers will be published to all registered respondents.",
       "priority": "low",
-      "category": "other",
+      "category": "timeline",
       "evidence_considered": [
         {
           "doc_id": "DOC-005",
@@ -1196,10 +1229,10 @@
         "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide correspondence or policy confirming questions are lodged via AusTender forum by the specified deadline and answers are published to all respondents."
+      "action_required": "Provide correspondence or process documentation confirming questions are lodged via AusTender forum by the specified deadline."
     },
     {
-      "id": "REQ-043",
+      "id": "REQ-044",
       "requirement": "The Agency is not bound to accept the lowest-priced or any proposal.",
       "priority": "low",
       "category": "commercial",
@@ -1226,10 +1259,10 @@
         "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide a copy of the RFP terms or correspondence explicitly stating the Agency's right not to accept the lowest-priced or any proposal."
+      "action_required": "Provide a copy of the RFP terms or proposal cover letter explicitly acknowledging the Agency's right not to accept the lowest-priced or any proposal."
     },
     {
-      "id": "REQ-044",
+      "id": "REQ-045",
       "requirement": "The Agency may discontinue this process at any time.",
       "priority": "low",
       "category": "other",
@@ -1252,14 +1285,14 @@
       ],
       "decision": {
         "score": "GAP",
-        "scorer_confidence": 1.0,
+        "scorer_confidence": 0.0,
         "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide documentation or policy acknowledging the Agency's right to discontinue the process at any time."
+      "action_required": "Provide contract terms or correspondence explicitly acknowledging the Agency's right to discontinue the process at any time."
     },
     {
-      "id": "REQ-045",
+      "id": "REQ-046",
       "requirement": "Respondents bear their own costs of participation.",
       "priority": "low",
       "category": "commercial",
@@ -1273,7 +1306,7 @@
       "action_required": "No internal evidence found for this requirement. Provide documentation covering: Respondents bear their own costs of participation...."
     },
     {
-      "id": "REQ-046",
+      "id": "REQ-047",
       "requirement": "Proposals must remain valid for 120 days from the submission deadline.",
       "priority": "medium",
       "category": "commercial",
@@ -1303,7 +1336,7 @@
       "action_required": "Provide a proposal or contractual document explicitly stating proposal validity for at least 120 days from submission."
     },
     {
-      "id": "REQ-047",
+      "id": "REQ-048",
       "requirement": "The successful respondent will be required to enter into the Commonwealth contract attached as Annex C, including provisions for liquidated damages, key personnel, and step-in rights.",
       "priority": "high",
       "category": "legal",
@@ -1333,116 +1366,118 @@
       "action_required": "Provide executed contract excerpts or legal correspondence demonstrating acceptance of Commonwealth contract terms, including liquidated damages, key personnel, and step-in rights."
     },
     {
-      "id": "REQ-048",
-      "requirement": "The vendor must assess and potentially migrate approximately 580 virtual machines, including 430 Windows Server 2012 R2/2016, 95 Windows Server 2019, and 55 RHEL 8 instances.",
-      "priority": "medium",
+      "id": "REQ-049",
+      "requirement": "The vendor must support migration and management of approximately 580 virtual machines, including 430 Windows Server 2012 R2/2016, 95 Windows Server 2019, and 55 RHEL 8 instances.",
+      "priority": "high",
       "category": "technical",
       "evidence_considered": [
         {
           "doc_id": "DOC-002",
           "title": "Case Study — StateGov Authority Cloud Transition Program",
-          "retrieval_score": 1.99
-        },
-        {
-          "doc_id": "DOC-001",
-          "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
-          "retrieval_score": 1.94
+          "retrieval_score": 2.01
         },
         {
           "doc_id": "DOC-003",
           "title": "Case Study — FinanceDept Agency Core Systems Migration",
-          "retrieval_score": 1.94
+          "retrieval_score": 1.92
+        },
+        {
+          "doc_id": "DOC-001",
+          "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+          "retrieval_score": 1.92
         }
       ],
       "decision": {
         "score": "PARTIAL",
-        "scorer_confidence": 0.65,
+        "scorer_confidence": 0.6,
         "citations_verified": [
           "DOC-002",
-          "DOC-001",
-          "DOC-003"
+          "DOC-003",
+          "DOC-001"
         ],
         "citations_stripped": []
       },
-      "action_required": "Provide documentation specifying migration experience with Windows Server 2012 R2/2016, Windows Server 2019, and RHEL 8 instances at the required scale."
+      "action_required": "Provide documentation or case studies explicitly demonstrating migration and management of Windows Server 2012 R2/2016, Windows Server 2019, and RHEL 8 instances at the specified scale."
     },
     {
-      "id": "REQ-049",
-      "requirement": "The vendor must manage the migration or modernisation of 36 SQL Server instances (2014-2019) totaling 48 TB of data.",
-      "priority": "medium",
+      "id": "REQ-050",
+      "requirement": "The vendor must be capable of migrating and managing 36 SQL Server instances (2014-2019) totaling 48 TB of data.",
+      "priority": "high",
       "category": "technical",
       "evidence_considered": [
         {
-          "doc_id": "DOC-012",
-          "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
-          "retrieval_score": 1.95
-        },
-        {
           "doc_id": "DOC-001",
           "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
-          "retrieval_score": 1.94
+          "retrieval_score": 2.07
+        },
+        {
+          "doc_id": "DOC-012",
+          "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
+          "retrieval_score": 1.99
         },
         {
           "doc_id": "DOC-003",
           "title": "Case Study — FinanceDept Agency Core Systems Migration",
-          "retrieval_score": 1.86
+          "retrieval_score": 1.91
         }
       ],
       "decision": {
         "score": "PARTIAL",
         "scorer_confidence": 0.5,
         "citations_verified": [
-          "DOC-012",
           "DOC-001",
+          "DOC-012",
           "DOC-003"
         ],
         "citations_stripped": []
       },
-      "action_required": "Provide a case study or reference explicitly demonstrating migration or modernisation of at least 36 SQL Server instances (2014-2019) totaling 48 TB of data."
+      "action_required": "Provide a case study or reference explicitly demonstrating migration and management of at least 36 SQL Server instances (2014-2019) totaling 48 TB of data."
     },
     {
-      "id": "REQ-050",
-      "requirement": "The vendor must handle the migration of approximately 410 TB of storage across SAN and NAS tiers.",
+      "id": "REQ-051",
+      "requirement": "The vendor must handle approximately 410 TB of storage across SAN and NAS tiers.",
       "priority": "medium",
       "category": "technical",
       "evidence_considered": [
         {
-          "doc_id": "DOC-002",
-          "title": "Case Study — StateGov Authority Cloud Transition Program",
-          "retrieval_score": 1.71
-        },
-        {
           "doc_id": "DOC-001",
           "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
-          "retrieval_score": 1.71
+          "retrieval_score": 1.62
+        },
+        {
+          "doc_id": "DOC-002",
+          "title": "Case Study — StateGov Authority Cloud Transition Program",
+          "retrieval_score": 1.61
         },
         {
           "doc_id": "DOC-004",
           "title": "ISO/IEC 27001:2022 Certification Summary",
-          "retrieval_score": 1.6
+          "retrieval_score": 1.53
         }
       ],
       "decision": {
-        "score": "PARTIAL",
-        "scorer_confidence": 0.5,
-        "citations_verified": [
-          "DOC-001",
-          "DOC-002"
-        ],
+        "score": "GAP",
+        "scorer_confidence": 0.2,
+        "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide case studies or migration summaries specifying experience with migrating at least 410 TB of SAN and NAS storage."
+      "action_required": "Provide case studies or project documentation demonstrating management of at least 410 TB of SAN and NAS storage."
     },
     {
-      "id": "REQ-051",
-      "requirement": "The vendor must accommodate a network environment with dual 10 Gbps links between datacentres, noting that ExpressRoute is not yet provisioned.",
+      "id": "REQ-052",
+      "requirement": "The vendor must accommodate dual 10 Gbps network links between datacentres and plan for ExpressRoute integration, which is not yet provisioned.",
       "priority": "medium",
       "category": "technical",
       "evidence_considered": [
         {
           "doc_id": "DOC-013",
           "title": "Client Reference Register — Government Engagements",
-          "retrieval_score": 1.58
+          "retrieval_score": 1.63
+        },
+        {
+          "doc_id": "DOC-008",
+          "title": "Commercial Terms Register — Milestone Payments and Invoicing History",
+          "retrieval_score": 1.51
         }
       ],
       "decision": {
@@ -1451,17 +1486,42 @@
         "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide documentation or case studies demonstrating experience accommodating dual 10 Gbps links between datacentres without ExpressRoute."
+      "action_required": "Provide technical documentation or project evidence demonstrating experience with dual 10 Gbps datacentre links and ExpressRoute integration planning."
     },
     {
-      "id": "REQ-052",
-      "requirement": "The vendor must integrate with an identity environment using Active Directory (2016 functional level) and Entra ID Connect synchronisation.",
+      "id": "REQ-053",
+      "requirement": "The vendor must integrate with an Active Directory environment at 2016 functional level with Entra ID Connect synchronisation.",
       "priority": "medium",
       "category": "technical",
       "evidence_considered": [
         {
           "doc_id": "DOC-002",
           "title": "Case Study — StateGov Authority Cloud Transition Program",
+          "retrieval_score": 1.64
+        },
+        {
+          "doc_id": "DOC-001",
+          "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+          "retrieval_score": 1.56
+        }
+      ],
+      "decision": {
+        "score": "GAP",
+        "scorer_confidence": 0.2,
+        "citations_verified": [],
+        "citations_stripped": []
+      },
+      "action_required": "Provide documentation or case studies explicitly demonstrating integration with Active Directory at 2016 functional level and Entra ID Connect synchronisation."
+    },
+    {
+      "id": "REQ-054",
+      "requirement": "The vendor must support nightly full backups to disk with 35-day retention and quarterly archive to tape.",
+      "priority": "medium",
+      "category": "technical",
+      "evidence_considered": [
+        {
+          "doc_id": "DOC-006",
+          "title": "Data Residency and Sovereignty Policy",
           "retrieval_score": 1.53
         }
       ],
@@ -1471,40 +1531,10 @@
         "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide documentation or case studies demonstrating integration with Active Directory (2016 functional level) and Entra ID Connect synchronisation."
+      "action_required": "Provide backup policy documentation demonstrating nightly full backups to disk with 35-day retention and quarterly archive to tape."
     },
     {
-      "id": "REQ-053",
-      "requirement": "The vendor must ensure backup processes are maintained, including nightly full backups to disk with 35-day retention and quarterly archive to tape.",
-      "priority": "medium",
-      "category": "technical",
-      "evidence_considered": [
-        {
-          "doc_id": "DOC-002",
-          "title": "Case Study — StateGov Authority Cloud Transition Program",
-          "retrieval_score": 1.69
-        },
-        {
-          "doc_id": "DOC-006",
-          "title": "Data Residency and Sovereignty Policy",
-          "retrieval_score": 1.64
-        },
-        {
-          "doc_id": "DOC-003",
-          "title": "Case Study — FinanceDept Agency Core Systems Migration",
-          "retrieval_score": 1.55
-        }
-      ],
-      "decision": {
-        "score": "GAP",
-        "scorer_confidence": 0.1,
-        "citations_verified": [],
-        "citations_stripped": []
-      },
-      "action_required": "Provide backup policy documentation or operational evidence demonstrating nightly full disk backups with 35-day retention and quarterly tape archiving."
-    },
-    {
-      "id": "REQ-054",
+      "id": "REQ-055",
       "requirement": "For Tier-1 workloads (24 applications), the vendor must ensure 99.95% availability and limit cutover windows to a maximum of four hours.",
       "priority": "high",
       "category": "technical",
@@ -1529,32 +1559,34 @@
         "score": "PARTIAL",
         "scorer_confidence": 0.6,
         "citations_verified": [
-          "DOC-010"
+          "DOC-010",
+          "DOC-001",
+          "DOC-003"
         ],
         "citations_stripped": []
       },
-      "action_required": "Provide documentation or case studies demonstrating that cutover windows for Tier-1 workloads were limited to a maximum of four hours."
+      "action_required": "Provide documentation or case studies demonstrating that cutover windows for Tier-1 workloads are consistently limited to a maximum of four hours."
     },
     {
-      "id": "REQ-055",
-      "requirement": "The vendor must support the migration or modernisation of Tier-2 workloads, which include 61 internal corporate and case-management applications.",
+      "id": "REQ-056",
+      "requirement": "The vendor must support migration and management of Tier-2 workloads, including 61 internal corporate and case-management applications.",
       "priority": "medium",
       "category": "technical",
       "evidence_considered": [
         {
           "doc_id": "DOC-012",
           "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
-          "retrieval_score": 1.99
+          "retrieval_score": 1.94
         },
         {
           "doc_id": "DOC-001",
           "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
-          "retrieval_score": 1.88
+          "retrieval_score": 1.9
         },
         {
-          "doc_id": "DOC-013",
-          "title": "Client Reference Register — Government Engagements",
-          "retrieval_score": 1.86
+          "doc_id": "DOC-007",
+          "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+          "retrieval_score": 1.83
         }
       ],
       "decision": {
@@ -1562,66 +1594,121 @@
         "scorer_confidence": 0.6,
         "citations_verified": [
           "DOC-012",
-          "DOC-001"
+          "DOC-001",
+          "DOC-007"
         ],
         "citations_stripped": []
       },
-      "action_required": "Provide evidence specifically demonstrating migration or modernisation of Tier-2 workloads, including internal corporate and case-management applications."
+      "action_required": "Provide documentation or case studies specifically demonstrating migration and management of Tier-2 workloads, including internal corporate and case-management applications, at the required scale."
     },
     {
-      "id": "REQ-056",
-      "requirement": "The vendor must address Tier-3 workloads, including development, test, and archive workloads, as part of the migration or modernisation effort.",
+      "id": "REQ-057",
+      "requirement": "The vendor must support migration and management of Tier-3 workloads, including development, test, and archive workloads.",
       "priority": "medium",
       "category": "technical",
       "evidence_considered": [
         {
-          "doc_id": "DOC-012",
-          "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
+          "doc_id": "DOC-001",
+          "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
           "retrieval_score": 1.87
         },
         {
-          "doc_id": "DOC-001",
-          "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
-          "retrieval_score": 1.84
+          "doc_id": "DOC-007",
+          "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+          "retrieval_score": 1.82
         },
         {
           "doc_id": "DOC-003",
           "title": "Case Study — FinanceDept Agency Core Systems Migration",
-          "retrieval_score": 1.77
+          "retrieval_score": 1.75
         }
       ],
       "decision": {
         "score": "PARTIAL",
-        "scorer_confidence": 0.5,
+        "scorer_confidence": 0.6,
         "citations_verified": [
-          "DOC-012",
           "DOC-001",
-          "DOC-003"
+          "DOC-007"
         ],
         "citations_stripped": []
       },
-      "action_required": "Provide case studies or technical documentation explicitly demonstrating migration or modernisation of Tier-3 workloads such as development, test, and archive environments."
+      "action_required": "Provide documentation or case studies explicitly demonstrating migration and management of Tier-3 workloads, including development, test, and archive workloads."
     },
     {
-      "id": "REQ-057",
-      "requirement": "The vendor must assess and provide recommendations for containerisation or re-platforming of 8 nominated legacy applications during the engagement.",
-      "priority": "medium",
+      "id": "REQ-058",
+      "requirement": "The vendor must assess 8 nominated legacy applications for containerisation or re-platforming during the engagement.",
+      "priority": "high",
       "category": "technical",
       "evidence_considered": [
         {
           "doc_id": "DOC-012",
           "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
           "retrieval_score": 2.12
+        },
+        {
+          "doc_id": "DOC-003",
+          "title": "Case Study — FinanceDept Agency Core Systems Migration",
+          "retrieval_score": 1.76
+        },
+        {
+          "doc_id": "DOC-001",
+          "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+          "retrieval_score": 1.74
+        }
+      ],
+      "decision": {
+        "score": "GAP",
+        "scorer_confidence": 0.2,
+        "citations_verified": [],
+        "citations_stripped": []
+      },
+      "action_required": "Provide a case study or project documentation demonstrating assessment of nominated legacy applications specifically for containerisation or re-platforming."
+    },
+    {
+      "id": "REQ-059",
+      "requirement": "The vendor must ensure datacentre decommissioning and lease exit is completed by 30 June 2027.",
+      "priority": "high",
+      "category": "timeline",
+      "evidence_considered": [
+        {
+          "doc_id": "DOC-001",
+          "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+          "retrieval_score": 2.09
+        },
+        {
+          "doc_id": "DOC-002",
+          "title": "Case Study — StateGov Authority Cloud Transition Program",
+          "retrieval_score": 2.04
+        },
+        {
+          "doc_id": "DOC-008",
+          "title": "Commercial Terms Register — Milestone Payments and Invoicing History",
+          "retrieval_score": 1.89
+        }
+      ],
+      "decision": {
+        "score": "GAP",
+        "scorer_confidence": 0.2,
+        "citations_verified": [],
+        "citations_stripped": []
+      },
+      "action_required": "Provide contract evidence or project plans demonstrating datacentre decommissioning and lease exit completed by 30 June 2027."
+    },
+    {
+      "id": "REQ-060",
+      "requirement": "The vendor may propose an alternative project timeline provided the lease-exit date of 30 June 2027 is met.",
+      "priority": "medium",
+      "category": "timeline",
+      "evidence_considered": [
+        {
+          "doc_id": "DOC-002",
+          "title": "Case Study — StateGov Authority Cloud Transition Program",
+          "retrieval_score": 1.73
         },
         {
           "doc_id": "DOC-001",
           "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
           "retrieval_score": 1.58
-        },
-        {
-          "doc_id": "DOC-007",
-          "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
-          "retrieval_score": 1.56
         }
       ],
       "decision": {
@@ -1630,210 +1717,10 @@
         "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide a case study or deliverable demonstrating assessment and recommendations for containerisation or re-platforming of at least 8 legacy applications."
-    },
-    {
-      "id": "REQ-058",
-      "requirement": "The contract must be executed by August 2026.",
-      "priority": "high",
-      "category": "timeline",
-      "evidence_considered": [
-        {
-          "doc_id": "DOC-009",
-          "title": "Key Personnel CV — Sarah Mitchell, Project Director",
-          "retrieval_score": 2.12
-        },
-        {
-          "doc_id": "DOC-003",
-          "title": "Case Study — FinanceDept Agency Core Systems Migration",
-          "retrieval_score": 1.77
-        },
-        {
-          "doc_id": "DOC-001",
-          "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
-          "retrieval_score": 1.73
-        }
-      ],
-      "decision": {
-        "score": "GAP",
-        "scorer_confidence": 0.0,
-        "citations_verified": [],
-        "citations_stripped": []
-      },
-      "action_required": "Provide a signed project plan, contract, or commitment letter explicitly confirming execution by August 2026."
-    },
-    {
-      "id": "REQ-059",
-      "requirement": "Discovery and landing zone build must occur between August and November 2026.",
-      "priority": "medium",
-      "category": "timeline",
-      "evidence_considered": [
-        {
-          "doc_id": "DOC-001",
-          "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
-          "retrieval_score": 2.2
-        },
-        {
-          "doc_id": "DOC-012",
-          "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
-          "retrieval_score": 2.07
-        },
-        {
-          "doc_id": "DOC-014",
-          "title": "Key Personnel CV — James Liu, Lead Cloud Architect",
-          "retrieval_score": 2.03
-        }
-      ],
-      "decision": {
-        "score": "GAP",
-        "scorer_confidence": 0.2,
-        "citations_verified": [],
-        "citations_stripped": []
-      },
-      "action_required": "Provide a project plan, schedule, or commitment letter demonstrating ability to execute discovery and landing zone build specifically between August and November 2026."
-    },
-    {
-      "id": "REQ-060",
-      "requirement": "Migration waves must take place from December 2026 to March 2027.",
-      "priority": "medium",
-      "category": "timeline",
-      "evidence_considered": [
-        {
-          "doc_id": "DOC-001",
-          "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
-          "retrieval_score": 1.96
-        },
-        {
-          "doc_id": "DOC-008",
-          "title": "Commercial Terms Register — Milestone Payments and Invoicing History",
-          "retrieval_score": 1.91
-        },
-        {
-          "doc_id": "DOC-002",
-          "title": "Case Study — StateGov Authority Cloud Transition Program",
-          "retrieval_score": 1.9
-        }
-      ],
-      "decision": {
-        "score": "GAP",
-        "scorer_confidence": 0.1,
-        "citations_verified": [],
-        "citations_stripped": []
-      },
-      "action_required": "Provide project plans or case studies demonstrating migration waves scheduled specifically between December 2026 and March 2027."
+      "action_required": "Provide a project plan or schedule explicitly demonstrating the ability to meet a lease-exit date of 30 June 2027."
     },
     {
       "id": "REQ-061",
-      "requirement": "Modernisation assessments must commence from January 2027.",
-      "priority": "medium",
-      "category": "timeline",
-      "evidence_considered": [
-        {
-          "doc_id": "DOC-012",
-          "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
-          "retrieval_score": 1.78
-        },
-        {
-          "doc_id": "DOC-013",
-          "title": "Client Reference Register — Government Engagements",
-          "retrieval_score": 1.73
-        },
-        {
-          "doc_id": "DOC-004",
-          "title": "ISO/IEC 27001:2022 Certification Summary",
-          "retrieval_score": 1.72
-        }
-      ],
-      "decision": {
-        "score": "GAP",
-        "scorer_confidence": 0.1,
-        "citations_verified": [],
-        "citations_stripped": []
-      },
-      "action_required": "Provide a project plan, schedule, or commitment letter explicitly confirming that modernisation assessments will commence from January 2027."
-    },
-    {
-      "id": "REQ-062",
-      "requirement": "Datacentre decommissioning and lease exit must be completed by 30 June 2027.",
-      "priority": "high",
-      "category": "timeline",
-      "evidence_considered": [
-        {
-          "doc_id": "DOC-001",
-          "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
-          "retrieval_score": 2.19
-        },
-        {
-          "doc_id": "DOC-002",
-          "title": "Case Study — StateGov Authority Cloud Transition Program",
-          "retrieval_score": 2.13
-        },
-        {
-          "doc_id": "DOC-008",
-          "title": "Commercial Terms Register — Milestone Payments and Invoicing History",
-          "retrieval_score": 1.99
-        }
-      ],
-      "decision": {
-        "score": "GAP",
-        "scorer_confidence": 0.2,
-        "citations_verified": [],
-        "citations_stripped": []
-      },
-      "action_required": "Provide contract evidence or project documentation confirming datacentre decommissioning and lease exit completed by 30 June 2027."
-    },
-    {
-      "id": "REQ-063",
-      "requirement": "Managed services steady state must begin from April 2027 for the remainder of the three-year term.",
-      "priority": "medium",
-      "category": "timeline",
-      "evidence_considered": [
-        {
-          "doc_id": "DOC-007",
-          "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
-          "retrieval_score": 2.0
-        },
-        {
-          "doc_id": "DOC-004",
-          "title": "ISO/IEC 27001:2022 Certification Summary",
-          "retrieval_score": 1.88
-        },
-        {
-          "doc_id": "DOC-005",
-          "title": "IRAP Assessment Summary — ISM PROTECTED Level",
-          "retrieval_score": 1.72
-        }
-      ],
-      "decision": {
-        "score": "GAP",
-        "scorer_confidence": 0.1,
-        "citations_verified": [],
-        "citations_stripped": []
-      },
-      "action_required": "Provide an executed contract or schedule explicitly confirming managed services steady state commences April 2027 and continues for three years."
-    },
-    {
-      "id": "REQ-064",
-      "requirement": "Respondents may propose an alternative timeline provided the lease-exit date of 30 June 2027 is met.",
-      "priority": "medium",
-      "category": "timeline",
-      "evidence_considered": [
-        {
-          "doc_id": "DOC-002",
-          "title": "Case Study — StateGov Authority Cloud Transition Program",
-          "retrieval_score": 1.64
-        }
-      ],
-      "decision": {
-        "score": "GAP",
-        "scorer_confidence": 0.2,
-        "citations_verified": [],
-        "citations_stripped": []
-      },
-      "action_required": "Provide project plans or schedules explicitly demonstrating the ability to meet or propose alternative timelines aligned with the 30 June 2027 lease-exit date."
-    },
-    {
-      "id": "REQ-065",
       "requirement": "The vendor bears delivery risk for migration execution, including rollback costs arising from failed cutovers.",
       "priority": "high",
       "category": "legal",
@@ -1860,48 +1747,18 @@
         "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide executed contract language or SOW excerpts explicitly stating the vendor assumes delivery risk and rollback costs for failed migration cutovers."
+      "action_required": "Provide executed contract language or SOW excerpts explicitly stating the vendor assumes delivery risk and rollback cost liability for failed migration cutovers."
     },
     {
-      "id": "REQ-066",
-      "requirement": "The Agency bears risk for delays caused by Agency-side approvals exceeding agreed turnaround times.",
-      "priority": "medium",
-      "category": "legal",
-      "evidence_considered": [
-        {
-          "doc_id": "DOC-003",
-          "title": "Case Study — FinanceDept Agency Core Systems Migration",
-          "retrieval_score": 1.79
-        },
-        {
-          "doc_id": "DOC-001",
-          "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
-          "retrieval_score": 1.74
-        },
-        {
-          "doc_id": "DOC-002",
-          "title": "Case Study — StateGov Authority Cloud Transition Program",
-          "retrieval_score": 1.73
-        }
-      ],
-      "decision": {
-        "score": "GAP",
-        "scorer_confidence": 0.1,
-        "citations_verified": [],
-        "citations_stripped": []
-      },
-      "action_required": "Provide contract language or policy documentation explicitly stating that the Agency bears risk for delays caused by Agency-side approvals exceeding agreed turnaround times."
-    },
-    {
-      "id": "REQ-067",
-      "requirement": "Liquidated damages apply to missed lease-exit milestones attributable to the vendor.",
+      "id": "REQ-062",
+      "requirement": "Liquidated damages will apply to missed lease-exit milestones attributable to the vendor.",
       "priority": "high",
       "category": "legal",
       "evidence_considered": [
         {
           "doc_id": "DOC-008",
           "title": "Commercial Terms Register — Milestone Payments and Invoicing History",
-          "retrieval_score": 2.27
+          "retrieval_score": 2.28
         }
       ],
       "decision": {
@@ -1910,70 +1767,43 @@
         "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide contract clauses or correspondence explicitly confirming acceptance of liquidated damages for missed lease-exit milestones."
+      "action_required": "Provide contract excerpts or policy documents explicitly confirming acceptance of liquidated damages for missed lease-exit milestones."
     },
     {
-      "id": "REQ-068",
-      "requirement": "Caps on liability will be negotiated with the preferred respondent within Commonwealth contracting norms.",
-      "priority": "medium",
-      "category": "legal",
-      "evidence_considered": [
-        {
-          "doc_id": "DOC-011",
-          "title": "Privacy Act 1988 Compliance Statement and Breach Notification Procedure",
-          "retrieval_score": 1.81
-        },
-        {
-          "doc_id": "DOC-003",
-          "title": "Case Study — FinanceDept Agency Core Systems Migration",
-          "retrieval_score": 1.75
-        },
-        {
-          "doc_id": "DOC-008",
-          "title": "Commercial Terms Register — Milestone Payments and Invoicing History",
-          "retrieval_score": 1.57
-        }
-      ],
-      "decision": {
-        "score": "GAP",
-        "scorer_confidence": 0.1,
-        "citations_verified": [],
-        "citations_stripped": []
-      },
-      "action_required": "Provide contract excerpts or policy documents demonstrating willingness to negotiate liability caps within Commonwealth norms."
-    },
-    {
-      "id": "REQ-069",
-      "requirement": "Unlimited liability applies for breach of privacy or security obligations.",
+      "id": "REQ-063",
+      "requirement": "Caps on liability will be negotiated with the preferred respondent within Commonwealth contracting norms; unlimited liability applies for breach of privacy or security obligations.",
       "priority": "high",
       "category": "legal",
       "evidence_considered": [
         {
           "doc_id": "DOC-011",
           "title": "Privacy Act 1988 Compliance Statement and Breach Notification Procedure",
-          "retrieval_score": 2.11
+          "retrieval_score": 2.14
         },
         {
-          "doc_id": "DOC-006",
-          "title": "Data Residency and Sovereignty Policy",
-          "retrieval_score": 1.66
+          "doc_id": "DOC-003",
+          "title": "Case Study — FinanceDept Agency Core Systems Migration",
+          "retrieval_score": 1.59
         },
         {
-          "doc_id": "DOC-004",
-          "title": "ISO/IEC 27001:2022 Certification Summary",
-          "retrieval_score": 1.66
+          "doc_id": "DOC-005",
+          "title": "IRAP Assessment Summary — ISM PROTECTED Level",
+          "retrieval_score": 1.55
         }
       ],
       "decision": {
-        "score": "GAP",
-        "scorer_confidence": 0.2,
-        "citations_verified": [],
+        "score": "PARTIAL",
+        "scorer_confidence": 0.5,
+        "citations_verified": [
+          "DOC-011",
+          "DOC-005"
+        ],
         "citations_stripped": []
       },
-      "action_required": "Provide contract language or policy explicitly stating unlimited liability for breach of privacy or security obligations."
+      "action_required": "Provide contract excerpts or policy documents explicitly stating acceptance of unlimited liability for privacy or security breaches in line with Commonwealth contracting norms."
     },
     {
-      "id": "REQ-070",
+      "id": "REQ-064",
       "requirement": "Mandatory requirements assessed as non-compliant result in exclusion from the process.",
       "priority": "high",
       "category": "other",
@@ -1996,14 +1826,14 @@
       ],
       "decision": {
         "score": "GAP",
-        "scorer_confidence": 1.0,
+        "scorer_confidence": 0.0,
         "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide a signed statement or policy explicitly acknowledging acceptance of exclusion for non-compliance with mandatory requirements."
+      "action_required": "Provide a compliance matrix or statement explicitly confirming that mandatory requirements assessed as non-compliant will result in exclusion from the process."
     },
     {
-      "id": "REQ-071",
+      "id": "REQ-065",
       "requirement": "Partial compliance on mandatory requirements must be justified with a credible remediation plan.",
       "priority": "high",
       "category": "other",
@@ -2030,7 +1860,7 @@
         "citations_verified": [],
         "citations_stripped": []
       },
-      "action_required": "Provide a documented remediation plan justifying partial compliance on mandatory requirements."
+      "action_required": "Provide a remediation plan document or justification template demonstrating how partial compliance on mandatory requirements is addressed and remediated."
     }
   ]
 }

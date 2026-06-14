@@ -1,4 +1,5 @@
 """Foundry orchestrator — runs the six pipeline stages sequentially and returns a final status dict."""
+import json
 import logging
 import os
 import time
@@ -60,6 +61,9 @@ def run_pipeline(input: dict) -> dict:
         "submission_deadline": submission_deadline,
     }
 
+    run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
+    trace_dir = Path(os.getenv("OUTPUT_DIR", "./output")) / f"trace_{run_id}"
+
     result = {
         "status": "failed",
         "docx_path": None,
@@ -68,6 +72,7 @@ def run_pipeline(input: dict) -> dict:
         "card_path": None,
         "report_path": None,
         "dashboard_path": None,
+        "trace_dir": str(trace_dir),
         "errors": [],
     }
 
@@ -76,6 +81,7 @@ def run_pipeline(input: dict) -> dict:
     if parsed_doc is None:
         result["status"] = "failed"
         return result
+    _trace(trace_dir, "0_parsed_document", parsed_doc)
 
     # ── STAGE 2: RESEARCH ────────────────────────────────────────────────────
     from agents.intake_agent import run as intake_run
@@ -84,6 +90,7 @@ def run_pipeline(input: dict) -> dict:
     if manifest is None:
         result["status"] = "failed"
         return result
+    _trace(trace_dir, "1_requirement_manifest", manifest)
 
     from agents.research_agent import run as research_run
     evidence_map = _run_agent("Stage2:Research", research_run, result, manifest)
@@ -91,6 +98,7 @@ def run_pipeline(input: dict) -> dict:
     if evidence_map is None:
         result["status"] = "partial"
         evidence_map = {}
+    _trace(trace_dir, "2_evidence_map", evidence_map)
 
     # ── STAGE 3: SCORER ──────────────────────────────────────────────────────
     from agents.scorer_agent import run as scorer_run
@@ -112,11 +120,13 @@ def run_pipeline(input: dict) -> dict:
         sr["text"] = orig.get("text") or sr.get("text", "")
         sr["priority"] = orig.get("priority") or sr.get("priority", "medium")
         sr["category"] = orig.get("category") or sr.get("category", "other")
+    _trace(trace_dir, "3_scored_manifest", scored_manifest)
 
     # ── STAGE 4: DRAFTER ─────────────────────────────────────────────────────
     from agents.drafter_agent import run as drafter_run
     draft = _run_agent("Stage4:Drafter", drafter_run, result, scored_manifest, evidence_map, meta)
     draft = _validate_contract("Stage4:Drafter", DraftedProposal, draft, result)
+    _trace(trace_dir, "4_drafted_proposal", draft)
 
     # ── STAGE 5: VERIFIER ────────────────────────────────────────────────────
     verified_draft = None
@@ -128,6 +138,7 @@ def run_pipeline(input: dict) -> dict:
             # Post-verification numbers supersede the Scorer's.
             result["coverage_score"] = verified_draft.get("coverage_score")
             result["gap_count"] = verified_draft.get("gap_count", result["gap_count"])
+            _trace(trace_dir, "5_verified_proposal", verified_draft)
 
     # ── STAGE 6: REVIEW ──────────────────────────────────────────────────────
     # Unverified drafts do not ship — Review only runs on Verifier output.
@@ -164,6 +175,19 @@ def _agent1_intake(rfp_source: str) -> dict:
             ".pdf or .docx path (remote sources are deployment roadmap)"
         )
     return parse_rfp(rfp_source)
+
+
+def _trace(trace_dir: Path, name: str, data) -> None:
+    """Best-effort: dump a stage's output as JSON so each agent's contribution
+    is inspectable after a run (a per-stage reasoning trace). Never fails the
+    pipeline — observability must not break the run."""
+    try:
+        trace_dir.mkdir(parents=True, exist_ok=True)
+        (trace_dir / f"{name}.json").write_text(
+            json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8"
+        )
+    except Exception as e:  # noqa: BLE001 — tracing is non-critical
+        logger.warning(f"orchestrator: could not write trace '{name}': {e}")
 
 
 def _validate_contract(name: str, contract, data, result: dict):

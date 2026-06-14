@@ -6,6 +6,15 @@ from datetime import datetime
 from pathlib import Path
 
 from dotenv import load_dotenv
+from pydantic import ValidationError
+
+from tools.contracts import (
+    DraftedProposal,
+    EvidenceMap,
+    RequirementManifest,
+    ScoredManifest,
+    VerifiedProposal,
+)
 
 load_dotenv()
 logging.basicConfig(
@@ -70,12 +79,14 @@ def run_pipeline(input: dict) -> dict:
     # ── STAGE 2: RESEARCH ────────────────────────────────────────────────────
     from agents.intake_agent import run as intake_run
     manifest = _run_agent("Stage1:Extract", intake_run, result, parsed_doc)
+    manifest = _validate_contract("Stage1:Extract", RequirementManifest, manifest, result)
     if manifest is None:
         result["status"] = "failed"
         return result
 
     from agents.research_agent import run as research_run
     evidence_map = _run_agent("Stage2:Research", research_run, result, manifest)
+    evidence_map = _validate_contract("Stage2:Research", EvidenceMap, evidence_map, result)
     if evidence_map is None:
         result["status"] = "partial"
         evidence_map = {}
@@ -83,6 +94,7 @@ def run_pipeline(input: dict) -> dict:
     # ── STAGE 3: SCORER ──────────────────────────────────────────────────────
     from agents.scorer_agent import run as scorer_run
     scored_manifest = _run_agent("Stage3:Scorer", scorer_run, result, manifest, evidence_map)
+    scored_manifest = _validate_contract("Stage3:Scorer", ScoredManifest, scored_manifest, result)
     if scored_manifest is None:
         result["status"] = "partial"
         scored_manifest = {"scored_requirements": [], "win_probability": None, "gap_count": 0, "gaps_requiring_action": []}
@@ -90,23 +102,27 @@ def run_pipeline(input: dict) -> dict:
     result["win_probability"] = scored_manifest.get("win_probability")
     result["gap_count"] = scored_manifest.get("gap_count", 0)
 
-    # Enrich scored requirements with full requirement fields for the drafter
+    # Enrich scored requirements with full requirement fields for the drafter.
+    # The manifest is authoritative — contract validation fills these keys
+    # with defaults, so overwrite rather than setdefault.
     req_lookup = {r["id"]: r for r in manifest.get("requirements", [])}
     for sr in scored_manifest.get("scored_requirements", []):
         orig = req_lookup.get(sr["id"], {})
-        sr.setdefault("text", orig.get("text", ""))
-        sr.setdefault("priority", orig.get("priority", "medium"))
-        sr.setdefault("category", orig.get("category", "other"))
+        sr["text"] = orig.get("text") or sr.get("text", "")
+        sr["priority"] = orig.get("priority") or sr.get("priority", "medium")
+        sr["category"] = orig.get("category") or sr.get("category", "other")
 
     # ── STAGE 4: DRAFTER ─────────────────────────────────────────────────────
     from agents.drafter_agent import run as drafter_run
     draft = _run_agent("Stage4:Drafter", drafter_run, result, scored_manifest, evidence_map, meta)
+    draft = _validate_contract("Stage4:Drafter", DraftedProposal, draft, result)
 
     # ── STAGE 5: VERIFIER ────────────────────────────────────────────────────
     verified_draft = None
     if draft is not None:
         from agents.verifier import run as verifier_run
         verified_draft = _run_agent("Stage5:Verifier", verifier_run, result, draft, evidence_map)
+        verified_draft = _validate_contract("Stage5:Verifier", VerifiedProposal, verified_draft, result)
         if verified_draft is not None:
             # Post-verification numbers supersede the Scorer's.
             result["win_probability"] = verified_draft.get("win_probability")
@@ -146,6 +162,27 @@ def _agent1_intake(rfp_source: str) -> dict:
             ".pdf or .docx path (remote sources are deployment roadmap)"
         )
     return parse_rfp(rfp_source)
+
+
+def _validate_contract(name: str, contract, data, result: dict):
+    """Validate a stage's output against its inter-stage Pydantic contract.
+
+    Returns the normalised (model_dump) payload, or None — recorded as a
+    stage error — if the payload doesn't honour the contract. None input
+    (stage already failed) passes through.
+    """
+    if data is None:
+        return None
+    try:
+        return contract.model_validate(data).model_dump()
+    except ValidationError as e:
+        error_msg = (
+            f"{name} output violated the {contract.__name__} contract: "
+            f"{e.error_count()} validation error(s)"
+        )
+        logger.error(f"orchestrator: {error_msg}\n{e}")
+        result["errors"].append(error_msg)
+        return None
 
 
 def _run_agent(name: str, fn, result: dict, *args) -> object | None:

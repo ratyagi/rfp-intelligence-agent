@@ -11,13 +11,21 @@ retrieval engine. This script:
 Requires in .env:
   AZURE_SEARCH_ENDPOINT       https://<service>.search.windows.net
   AZURE_SEARCH_API_KEY        admin key (setup needs write access)
+  FOUNDRY_IQ_KNOWLEDGE_BASE   knowledge base name (default: rfp-evidence)
+
+Optional (needed only for step 3, the knowledge agent):
   AZURE_FOUNDRY_ENDPOINT      Foundry / Azure OpenAI resource endpoint
   AZURE_FOUNDRY_API_KEY
   FOUNDRY_MODEL_DEPLOYMENT    e.g. gpt-4o
-  FOUNDRY_IQ_KNOWLEDGE_BASE   knowledge base name (default: rfp-evidence)
 
-Note: agentic retrieval requires the search service to have semantic ranker
-enabled (Basic tier or above).
+If the Foundry variables are absent (free/student subscriptions cannot
+deploy models, which the knowledge agent needs for query planning), steps
+1–2 still run and the index is usable via RETRIEVAL_MODE=azure_search —
+the same index, queried directly.
+
+Note: agentic retrieval and semantic ranking require the search service to
+be Basic tier or above; on Free tier use RETRIEVAL_MODE=azure_search, which
+falls back to full-text ranking automatically.
 
 Usage:
     python scripts/setup_foundry_iq.py
@@ -48,8 +56,8 @@ def _require_env(name: str) -> str:
 def main() -> None:
     search_endpoint = _require_env("AZURE_SEARCH_ENDPOINT").rstrip("/")
     search_key = _require_env("AZURE_SEARCH_API_KEY")
-    foundry_endpoint = _require_env("AZURE_FOUNDRY_ENDPOINT").rstrip("/")
-    foundry_key = _require_env("AZURE_FOUNDRY_API_KEY")
+    foundry_endpoint = os.getenv("AZURE_FOUNDRY_ENDPOINT", "").rstrip("/")
+    foundry_key = os.getenv("AZURE_FOUNDRY_API_KEY", "")
     deployment = os.getenv("FOUNDRY_MODEL_DEPLOYMENT", "gpt-4o")
     kb_name = os.getenv("FOUNDRY_IQ_KNOWLEDGE_BASE", "rfp-evidence")
     index_name = f"{kb_name}-index"
@@ -84,6 +92,14 @@ def main() -> None:
         f"{search_endpoint}/indexes/{index_name}?api-version={API_VERSION}",
         headers=headers, json=index_def, timeout=60,
     )
+    if resp.status_code == 400 and "semantic" in resp.text.lower():
+        print("⚠ Semantic ranking not available on this service tier — "
+              "creating index without it (full-text ranking still works)")
+        del index_def["semantic"]
+        resp = requests.put(
+            f"{search_endpoint}/indexes/{index_name}?api-version={API_VERSION}",
+            headers=headers, json=index_def, timeout=60,
+        )
     if resp.status_code not in (200, 201, 204):
         raise SystemExit(f"Index creation failed: {resp.status_code} {resp.text[:800]}")
     print(f"✓ Index '{index_name}' ready")
@@ -118,6 +134,18 @@ def main() -> None:
     print(f"✓ Uploaded {len(actions)} corpus documents")
 
     # ── 3. Knowledge base (agentic retrieval agent) ──────────────────────
+    if not foundry_endpoint or not foundry_key:
+        print(
+            "\n⚠ Skipping knowledge-agent creation: AZURE_FOUNDRY_ENDPOINT / "
+            "AZURE_FOUNDRY_API_KEY not set.\n"
+            "  The agent needs an Azure OpenAI model deployment for query "
+            "planning, which free/student\n"
+            "  subscriptions cannot create. The index built above is fully "
+            "usable — set\n"
+            "  RETRIEVAL_MODE=azure_search in .env to query it directly."
+        )
+        return
+
     kb_def = {
         "name": kb_name,
         "models": [{

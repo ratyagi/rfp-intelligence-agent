@@ -34,7 +34,7 @@ _SCORE_COLORS = {"COVERED": _GREEN, "PARTIAL": _AMBER, "GAP": _RED}
 def build_report(verified_draft: dict, evidence_map: dict) -> dict:
     """Assemble the decision chain for every requirement and the bid summary."""
     requirements = verified_draft.get("requirements", [])
-    verification = verified_draft.get("verification", {})
+    verification = verified_draft.get("verification") or {}
     win_probability = verified_draft.get("win_probability", 0)
 
     recommendation, rationale = _recommend(win_probability)
@@ -64,7 +64,7 @@ def build_report(verified_draft: dict, evidence_map: dict) -> dict:
 
 
 def _entry(req: dict, evidence: list) -> dict:
-    verification = req.get("verification", {})
+    verification = req.get("verification") or {}
     actions = []
     if req.get("gap_note"):
         actions.append(req["gap_note"])

@@ -1,12 +1,19 @@
-"""Evidence retrieval — one interface, two backends.
+"""Evidence retrieval — one interface, three backends.
 
-RETRIEVAL_MODE=foundry_iq  → Foundry IQ knowledge base (agentic retrieval,
-                             powered by Azure AI Search). Used for the live demo.
-RETRIEVAL_MODE=local       → BM25 ranking over corpus/ on disk. Real retrieval
-                             over the same real corpus — used for development
-                             and for anyone cloning the repo without Azure.
+RETRIEVAL_MODE=foundry_iq    → Foundry IQ knowledge base (agentic retrieval,
+                               powered by Azure AI Search). Requires an Azure
+                               OpenAI model deployment for query planning.
+RETRIEVAL_MODE=azure_search  → Direct queries against the same Azure AI Search
+                               index that backs the Foundry IQ knowledge base.
+                               Used when subscription quota blocks creating the
+                               knowledge agent (no model deployment available
+                               on free/student subscriptions). Semantic ranking
+                               when the service tier supports it.
+RETRIEVAL_MODE=local         → BM25 ranking over corpus/ on disk. Real retrieval
+                               over the same real corpus — used for development
+                               and for anyone cloning the repo without Azure.
 
-Both backends return the same shape:
+All backends return the same shape:
     [{"doc_id", "title", "excerpt", "source_path", "score"}]
 
 The doc_id values are the citation keys the Verifier resolves against.
@@ -204,12 +211,112 @@ class FoundryIQRetriever:
         return results
 
 
+class AzureSearchRetriever:
+    """Direct queries against the Azure AI Search index built by
+    scripts/setup_foundry_iq.py — the same index a Foundry IQ knowledge base
+    targets.
+
+    This is the zero-model-quota path: Foundry IQ's knowledge agent needs an
+    Azure OpenAI deployment for query planning, which free/student
+    subscriptions cannot create. Querying the index directly keeps retrieval
+    live in Azure with the same corpus, citation keys, and grounded-evidence
+    contract. Semantic ranking is used when the service tier supports it
+    (Basic+); on Free tier the client falls back to full-text BM25 ranking.
+    """
+
+    API_VERSION = "2024-07-01"
+    SEMANTIC_RERANKER_FLOOR = 1.5  # same threshold the knowledge base would use
+
+    def __init__(self):
+        self._endpoint = os.getenv("AZURE_SEARCH_ENDPOINT", "").rstrip("/")
+        self._api_key = os.getenv("AZURE_SEARCH_API_KEY", "")
+        kb_name = os.getenv("FOUNDRY_IQ_KNOWLEDGE_BASE", "rfp-evidence")
+        self._index = f"{kb_name}-index"
+        self._semantic = True  # optimistic; downgraded on first 400 from the service
+        if not self._endpoint or not self._api_key:
+            raise EnvironmentError(
+                "RETRIEVAL_MODE=azure_search requires AZURE_SEARCH_ENDPOINT and "
+                "AZURE_SEARCH_API_KEY in .env (run scripts/setup_foundry_iq.py first)"
+            )
+
+    def search(self, query: str, top: int = 3) -> list[dict]:
+        body = self._query(query, top, semantic=self._semantic)
+        if body is None and self._semantic:
+            # Semantic ranking unavailable (Free tier) — fall back permanently.
+            logger.warning(
+                "retrieval: semantic ranking unavailable on this search service "
+                "— falling back to full-text ranking"
+            )
+            self._semantic = False
+            body = self._query(query, top, semantic=False)
+        if body is None:
+            raise RuntimeError("Azure AI Search query failed — see log for details")
+
+        hits = body.get("value", [])
+        results = []
+        for hit in hits[:top]:
+            score = hit.get("@search.rerankerScore") or hit.get("@search.score", 0.0)
+            if self._semantic and score < self.SEMANTIC_RERANKER_FLOOR:
+                continue  # below-threshold hits are noise, not evidence
+            results.append({
+                "doc_id": hit.get("doc_id", ""),
+                "title": hit.get("title", ""),
+                "excerpt": (hit.get("content") or "")[:320],
+                "source_path": hit.get("source_path", ""),
+                "score": round(float(score), 2),
+            })
+
+        if not self._semantic and results:
+            # Full-text scores are uncalibrated across queries — keep only hits
+            # close to the best one, mirroring the local BM25 cutoff.
+            best = results[0]["score"]
+            results = [r for r in results if r["score"] >= best * RELATIVE_SCORE_CUTOFF]
+        return results
+
+    def _query(self, query: str, top: int, *, semantic: bool) -> dict | None:
+        payload = {
+            "search": query,
+            "top": top,
+            "select": "doc_id,title,content,source_path",
+        }
+        if semantic:
+            payload.update({
+                "queryType": "semantic",
+                "semanticConfiguration": "default",
+            })
+        response = requests.post(
+            f"{self._endpoint}/indexes/{self._index}/docs/search"
+            f"?api-version={self.API_VERSION}",
+            headers={"api-key": self._api_key, "Content-Type": "application/json"},
+            json=payload,
+            timeout=60,
+        )
+        if response.status_code == 200:
+            return response.json()
+        if semantic and response.status_code == 400 and "semantic" in response.text.lower():
+            return None  # caller falls back to full-text
+        logger.error(
+            f"retrieval: Azure AI Search query failed: "
+            f"{response.status_code} {response.text[:300]}"
+        )
+        if response.status_code == 400:
+            return None
+        raise RuntimeError(
+            f"Azure AI Search query failed: {response.status_code} {response.text[:300]}"
+        )
+
+
 def get_retriever():
     mode = os.getenv("RETRIEVAL_MODE", "local").lower()
     if mode == "foundry_iq":
         logger.info("retrieval: using Foundry IQ knowledge base")
         return FoundryIQRetriever()
+    if mode == "azure_search":
+        logger.info("retrieval: using Azure AI Search index (Foundry IQ index, direct query)")
+        return AzureSearchRetriever()
     if mode == "local":
         logger.info("retrieval: using local BM25 over corpus/")
         return LocalRetriever()
-    raise ValueError(f"Unknown RETRIEVAL_MODE '{mode}' — expected 'foundry_iq' or 'local'")
+    raise ValueError(
+        f"Unknown RETRIEVAL_MODE '{mode}' — expected 'foundry_iq', 'azure_search', or 'local'"
+    )

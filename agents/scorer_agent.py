@@ -11,6 +11,9 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from pydantic import ValidationError
+
+from tools.contracts import ScoreJudgement
 from tools.foundry_client import chat_json
 
 load_dotenv()
@@ -60,31 +63,41 @@ def _score_one(req: dict, evidence: list) -> dict:
         }
 
     system_prompt = (PROMPTS_DIR / "scorer_system.md").read_text(encoding="utf-8")
-    result = chat_json(
-        system_prompt,
-        json.dumps({
-            "requirement": {
-                "id": req["id"],
-                "text": req["text"],
-                "priority": req.get("priority", "medium"),
-                "category": req.get("category", "other"),
-            },
-            "evidence": [
-                {"doc_id": e["doc_id"], "title": e["title"], "excerpt": e["excerpt"]}
-                for e in evidence
-            ],
-        }, ensure_ascii=False),
-        max_tokens=300,
-    )
+    try:
+        result = chat_json(
+            system_prompt,
+            json.dumps({
+                "requirement": {
+                    "id": req["id"],
+                    "text": req["text"],
+                    "priority": req.get("priority", "medium"),
+                    "category": req.get("category", "other"),
+                },
+                "evidence": [
+                    {"doc_id": e["doc_id"], "title": e["title"], "excerpt": e["excerpt"]}
+                    for e in evidence
+                ],
+            }, ensure_ascii=False),
+            max_tokens=300,
+            schema=ScoreJudgement,
+        )
+    except ValidationError as e:
+        # An unjudgeable requirement is a GAP, not a dead pipeline.
+        logger.warning(f"ScorerAgent: {req['id']} failed schema validation twice "
+                       f"({e.error_count()} error(s)) — treating as GAP")
+        return {
+            "id": req["id"],
+            "score": "GAP",
+            "confidence": 0.0,
+            "gap_note": ("Automated scoring failed for this requirement — "
+                         "review the evidence manually."),
+        }
 
-    score = result.get("score", "GAP")
-    if score not in SCORE_CREDIT:
-        logger.warning(f"ScorerAgent: invalid score '{score}' for {req['id']} — treating as GAP")
-        score = "GAP"
+    score = result["score"]
     return {
         "id": req["id"],
         "score": score,
-        "confidence": float(result.get("confidence", 0.5)),
+        "confidence": result["confidence"],
         "gap_note": result.get("gap_note") if score in ("GAP", "PARTIAL") else None,
     }
 

@@ -8,7 +8,7 @@
 
 Six-stage RFP reasoning pipeline (Reasoning Agents track, Foundry IQ as the
 mandatory Microsoft IQ layer). All work is on branch
-`claude/happy-noether-wc43vl`, tracked by PR #1. 32/32 tests pass:
+`claude/happy-noether-wc43vl`, tracked by PR #1. 42/42 tests pass:
 
 ```bash
 STUB_MODE=true RETRIEVAL_MODE=local python -m pytest tests/ -q
@@ -22,14 +22,38 @@ STUB_MODE=true RETRIEVAL_MODE=local python -m pytest tests/ -q
 | P0-2 | Evidence corpus + 8-page sample RFP | ✅ done |
 | P0-3 | Foundry IQ retrieval layer (local BM25 + knowledge-base client) | ✅ code done; live KB setup blocked on Azure creds |
 | P0-4 | Shared rate-limit-aware model client, fixed live paths | ✅ done |
-| P0-5 | **First live end-to-end run + Pydantic validation** | ⏳ ACTIVE — see below |
+| P0-5 | First live end-to-end run + Pydantic validation | ✅ done (June 12) |
 | P0-6 | Deterministic citation Verifier (stage 5) | ✅ done |
 | P1-7 | Bid Decision Report (reasoning trace) | ✅ done |
 | P1-8 | README rewrite | ⬜ not started |
 | P1-9 | Demo script + video prep | ⬜ not started |
 | P2-10 | Tests for real logic + repo hygiene | partially done along the way |
 
-## ACTIVE TASK: P0-5 — first live run
+## P0-5 COMPLETED — first live run results (June 12)
+
+Live end-to-end run on GitHub Models (`openai/gpt-4o-mini`,
+`RETRIEVAL_MODE=local`, pypdf fallback for parsing since no DI creds):
+
+- `status: complete` in 740s — 41 requirements extracted from the 8-page
+  sample RFP, 10 COVERED / 8 PARTIAL / 23 GAP, win probability 33%,
+  recommendation REVIEW BID DECISION.
+- Verifier: 24/24 citations verified, 0 stripped. No JSON/schema retries
+  were needed (gpt-4o-mini returned valid shapes throughout).
+- Pydantic contracts shipped in `tools/contracts.py`; `chat_json(schema=...)`
+  retries once on schema-invalid output; orchestrator validates every stage
+  boundary. pypdf fallback added to `tools/doc_intelligence.py` (DI remains
+  the documented path; warning logged).
+- Note: many of the 23 GAPs are RFP boilerplate (definitions, submission
+  instructions, conditions of tender) with legitimately no corpus coverage —
+  honest-gaps narrative, but consider down-ranking boilerplate or adding
+  corpus docs if a stronger demo number is wanted.
+- Security review (June 12): no vulnerabilities in the diff; no secrets in
+  git history. ACTION: user should rotate the GitHub PAT after the
+  hackathon (it was pasted in chat / lives in ephemeral containers).
+- Budget note: a full live run is ~50 calls vs the 150/day free tier —
+  at most 1–2 more full runs per day.
+
+## ARCHIVED: P0-5 task steps (done, kept for reference)
 
 The user has no Azure OpenAI quota (free-trial subscription, refuses
 pay-as-you-go — respect this). Model inference therefore uses the

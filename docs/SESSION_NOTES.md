@@ -25,9 +25,42 @@ STUB_MODE=true RETRIEVAL_MODE=local python -m pytest tests/ -q
 | P0-5 | First live end-to-end run + Pydantic validation | ✅ done (June 12) |
 | P0-6 | Deterministic citation Verifier (stage 5) | ✅ done |
 | P1-7 | Bid Decision Report (reasoning trace) | ✅ done |
-| P1-8 | README rewrite | ⬜ not started |
-| P1-9 | Demo script + video prep | ⬜ not started |
-| P2-10 | Tests for real logic + repo hygiene | partially done along the way |
+| P1-8 | README rewrite | ✅ done (June 14) |
+| P1-9 | Demo script + video prep | ⚠️ script exists but stale; **video unrecorded (user)** |
+| P2-10 | Tests for real logic + repo hygiene | ✅ 47 tests + hygiene done; ⚠️ all stub/mock, no live-integration tests |
+
+## CURRENT STATE (June 14) — both Microsoft layers live
+
+The project now runs fully on Microsoft Foundry, not fallbacks:
+
+- **Model:** Microsoft Foundry **gpt-4.1** deployment (`MODEL_PROVIDER=foundry`,
+  endpoint `rfp-agent-foundry-rt26.services.ai.azure.com`). gpt-4o-mini was
+  never deployable on the free/student subs (quota → PAYG only, refused);
+  gpt-4.1 *is* available. GitHub Models remains a zero-cost fallback in code.
+- **IQ layer:** **Foundry IQ** via Azure AI Search index `rfp-evidence-index`
+  on the `ratyagi-rfp-search` Free-tier service (`RETRIEVAL_MODE=azure_search`).
+  Free tier = full-text ranking (no semantic ranker). The full knowledge-agent
+  path is coded but skipped (needs a model deployment for query planning).
+- **Latest live run (June 14):** 59 requirements, 6 COVERED / 18 PARTIAL /
+  35 GAP, coverage score 29%, 52/52 citations verified, `status: complete`.
+- **Renamed** `win_probability` → `coverage_score` everywhere (it is a
+  requirement-coverage metric, not a real win probability).
+- **`samples/`** holds a committed real run so the repo self-demonstrates.
+- **README** rewritten honestly: 6-stage pipeline = 3 LLM stages
+  (Intake/Scorer/Drafter) + 3 deterministic (Research/Verifier/Review);
+  "Known limitations & roadmap" section added.
+- Merged to `main` via PRs #5 and #6.
+
+### What's genuinely left
+
+1. **Demo video** — refresh `demo/demo_script.md` for the all-Foundry +
+   coverage-score state, then the **user records** it (≤5 min, must be their
+   own filming per rules) and uploads to YouTube/Vimeo.
+2. **Submit** on the Contest Website (description draft + video link + repo
+   link + architecture diagram + MS Learn username).
+3. **Optional:** real public-RFP stress test; render Adaptive Card/bid report
+   as HTML for the video; claim-level (not just provenance) citation check.
+4. **After hackathon:** rotate the GitHub PAT and the Azure keys pasted in chat.
 
 ## P0-5 COMPLETED — first live run results (June 12)
 
@@ -117,14 +150,14 @@ Budget: GitHub Models free tier = 15 req/min, 150 req/day; a full run is
   parse errors; extend for schema errors).
 - Commit and push everything to `claude/happy-noether-wc43vl`.
 
-## Still waiting on the user (Azure side)
+## Azure status (mostly resolved June 14)
 
-1. Azure AI Search resource (try Free tier; Basic from trial credit if
-   semantic ranking needs it) → endpoint + admin key → then run
-   `python scripts/setup_foundry_iq.py` and flip `RETRIEVAL_MODE=foundry_iq`.
-2. Document Intelligence F0 (free) → endpoint + key.
-3. Verdict on whether gpt-4o-mini can be deployed on their free trial
-   (if yes, the recorded demo should use `MODEL_PROVIDER=foundry`).
+1. ✅ Azure AI Search created (Free tier, `ratyagi-rfp-search`); index built
+   and corpus uploaded; `RETRIEVAL_MODE=azure_search` live.
+2. ⬜ Document Intelligence F0 — still not created; pypdf fallback in use
+   (acceptable; DI is the documented higher-fidelity path).
+3. ✅ gpt-4.1 deploys on the student sub and is wired in
+   (`MODEL_PROVIDER=foundry`); gpt-4o-mini was never available.
 
 ## Hard constraints (do not violate)
 

@@ -114,7 +114,7 @@ python scripts/setup_foundry_iq.py     # builds index + uploads corpus (+ agent 
 STUB_MODE=true RETRIEVAL_MODE=local python -m pytest tests/ -q
 ```
 
-Outputs land in `output/`: the proposal DOCX (with the Bid Decision Report appendix), the machine-readable bid report JSON, and the approval Adaptive Card JSON. A real, unedited run is committed under [`samples/`](samples/) so you can see the output without running anything.
+Each run writes three files to `output/` — the proposal DOCX (with the Bid Decision Report appendix), the bid report JSON, and the approval Adaptive Card JSON. **`output/` is gitignored**, so a fresh clone won't contain them — they appear only when you run the pipeline. A real, unedited example run is committed under [`samples/`](samples/) so you can see the output without running anything.
 
 ## Reliability & safety patterns
 

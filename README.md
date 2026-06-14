@@ -2,7 +2,7 @@
 
 A six-stage agentic pipeline that turns a raw RFP PDF into a citation-grounded draft proposal — where **every citation must resolve to an internal document that was actually retrieved for that requirement, or it gets stripped before the proposal ships**.
 
-**Microsoft Agents League @ AI Skills Fest 2026 — 🧠 Reasoning Agents track · Microsoft IQ layer: Foundry IQ**
+**Microsoft Agents League @ AI Skills Fest 2026 🧠 Reasoning Agents track · Microsoft IQ layer: Foundry IQ**
 
 ## The Problem
 
@@ -26,7 +26,7 @@ flowchart TD
         S1 --> S2 --> S3 --> S4 --> S5 --> S6
     end
 
-    subgraph IQ["🧠 Microsoft IQ layer — Foundry IQ"]
+    subgraph IQ["🧠 Microsoft IQ layer - Foundry IQ"]
         KB["Azure AI Search index<br/>(evidence corpus, doc_id citation keys;<br/>full-text on Free tier, semantic ranker on Basic+)"]
         AGENT["Foundry IQ knowledge agent<br/>(agentic query planning — roadmap;<br/>needs a model deployment)"]
         AGENT -. targets .-> KB

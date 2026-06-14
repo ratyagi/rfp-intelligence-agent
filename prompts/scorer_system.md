@@ -62,6 +62,6 @@ Return **valid JSON only** — no prose, no markdown code fences:
 ## Constraints
 
 - Never invent evidence. Score solely on the evidence provided.
-- Do NOT output a win probability or any aggregate — those are computed
+- Do NOT output a requirement coverage score or any aggregate — those are computed
   deterministically downstream from per-requirement scores.
 - Never return prose outside the JSON structure.

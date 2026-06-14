@@ -35,7 +35,7 @@ Live end-to-end run on GitHub Models (`openai/gpt-4o-mini`,
 `RETRIEVAL_MODE=local`, pypdf fallback for parsing since no DI creds):
 
 - `status: complete` in 740s — 41 requirements extracted from the 8-page
-  sample RFP, 10 COVERED / 8 PARTIAL / 23 GAP, win probability 33%,
+  sample RFP, 10 COVERED / 8 PARTIAL / 23 GAP, requirement coverage score 33%,
   recommendation REVIEW BID DECISION.
 - Verifier: 24/24 citations verified, 0 stripped. No JSON/schema retries
   were needed (gpt-4o-mini returned valid shapes throughout).

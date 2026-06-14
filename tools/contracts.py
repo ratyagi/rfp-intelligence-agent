@@ -130,7 +130,7 @@ class ScoredRequirement(_Base, _SoftVocabMixin):
 class ScoredManifest(_Base):
     """Stage 3 (Scorer) → Stage 4 (Drafter)."""
     scored_requirements: list[ScoredRequirement]
-    win_probability: Optional[int] = None
+    coverage_score: Optional[int] = None
     gap_count: int = 0
     gaps_requiring_action: list[GapAction] = []
 
@@ -160,7 +160,7 @@ class DraftedProposal(_Base):
     rfp_title: str
     submission_date: str
     executive_summary: str
-    win_probability: Optional[int] = None
+    coverage_score: Optional[int] = None
     requirements: list[DraftedRequirement]
 
 

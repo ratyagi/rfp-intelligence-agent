@@ -5,7 +5,7 @@ from agents.verifier import run as verify
 def _draft(requirements):
     return {
         "rfp_title": "Test RFP",
-        "win_probability": 0,
+        "coverage_score": 0,
         "requirements": requirements,
     }
 
@@ -95,7 +95,7 @@ def test_gap_sections_pass_through():
     assert result["verification"]["citations_total"] == 0
 
 
-def test_win_probability_recomputed_after_downgrades():
+def test_coverage_score_recomputed_after_downgrades():
     draft = _draft([
         {"id": "REQ-001", "priority": "high", "score": "COVERED",
          "response_text": "Grounded [DOC-001].", "evidence_citations": "", "gap_note": None},
@@ -104,5 +104,5 @@ def test_win_probability_recomputed_after_downgrades():
     ])
     result = verify(draft, EVIDENCE_MAP)
     # REQ-002 drops to GAP: weights 3+3, earned 3*1.0 + 3*0.0 → 50%
-    assert result["win_probability"] == 50
+    assert result["coverage_score"] == 50
     assert result["gap_count"] == 1

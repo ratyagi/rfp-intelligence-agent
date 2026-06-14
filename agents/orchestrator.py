@@ -43,7 +43,7 @@ def run_pipeline(input: dict) -> dict:
         {
             "status": "complete|partial|failed",
             "docx_path": str|None,
-            "win_probability": int|None,
+            "coverage_score": int|None,
             "gap_count": int,
             "card_path": str|None
         }
@@ -63,7 +63,7 @@ def run_pipeline(input: dict) -> dict:
     result = {
         "status": "failed",
         "docx_path": None,
-        "win_probability": None,
+        "coverage_score": None,
         "gap_count": 0,
         "card_path": None,
         "report_path": None,
@@ -97,9 +97,9 @@ def run_pipeline(input: dict) -> dict:
     scored_manifest = _validate_contract("Stage3:Scorer", ScoredManifest, scored_manifest, result)
     if scored_manifest is None:
         result["status"] = "partial"
-        scored_manifest = {"scored_requirements": [], "win_probability": None, "gap_count": 0, "gaps_requiring_action": []}
+        scored_manifest = {"scored_requirements": [], "coverage_score": None, "gap_count": 0, "gaps_requiring_action": []}
 
-    result["win_probability"] = scored_manifest.get("win_probability")
+    result["coverage_score"] = scored_manifest.get("coverage_score")
     result["gap_count"] = scored_manifest.get("gap_count", 0)
 
     # Enrich scored requirements with full requirement fields for the drafter.
@@ -125,7 +125,7 @@ def run_pipeline(input: dict) -> dict:
         verified_draft = _validate_contract("Stage5:Verifier", VerifiedProposal, verified_draft, result)
         if verified_draft is not None:
             # Post-verification numbers supersede the Scorer's.
-            result["win_probability"] = verified_draft.get("win_probability")
+            result["coverage_score"] = verified_draft.get("coverage_score")
             result["gap_count"] = verified_draft.get("gap_count", result["gap_count"])
 
     # ── STAGE 6: REVIEW ──────────────────────────────────────────────────────
@@ -148,7 +148,7 @@ def run_pipeline(input: dict) -> dict:
 
     logger.info(
         f"orchestrator: pipeline done in {elapsed:.1f}s — "
-        f"status={result['status']}, win_prob={result['win_probability']}%, "
+        f"status={result['status']}, coverage_score={result['coverage_score']}%, "
         f"gaps={result['gap_count']}"
     )
     return result

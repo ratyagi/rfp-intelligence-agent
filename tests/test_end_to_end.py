@@ -36,11 +36,11 @@ def test_pipeline_docx_is_valid(pipeline_result):
     assert len(doc.paragraphs) > 0, "DOCX has no paragraphs"
 
 
-def test_pipeline_win_probability_in_range(pipeline_result):
-    wp = pipeline_result.get("win_probability")
-    assert wp is not None, "win_probability is None"
-    assert isinstance(wp, int), f"win_probability must be int, got {type(wp)}"
-    assert 0 <= wp <= 100, f"win_probability {wp} is out of range [0, 100]"
+def test_pipeline_coverage_score_in_range(pipeline_result):
+    wp = pipeline_result.get("coverage_score")
+    assert wp is not None, "coverage_score is None"
+    assert isinstance(wp, int), f"coverage_score must be int, got {type(wp)}"
+    assert 0 <= wp <= 100, f"coverage_score {wp} is out of range [0, 100]"
 
 
 def test_pipeline_gap_count_nonnegative(pipeline_result):

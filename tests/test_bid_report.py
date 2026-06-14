@@ -13,7 +13,7 @@ EVIDENCE_MAP = {
 
 VERIFIED_DRAFT = {
     "rfp_title": "Test RFP",
-    "win_probability": 60,
+    "coverage_score": 60,
     "gap_count": 1,
     "verification": {"citations_total": 1, "citations_verified": 1, "citations_stripped": 0},
     "requirements": [
@@ -36,7 +36,7 @@ VERIFIED_DRAFT = {
 
 def test_report_structure_and_decision_chain():
     report = build_report(VERIFIED_DRAFT, EVIDENCE_MAP)
-    assert report["win_probability"] == 60
+    assert report["coverage_score"] == 60
     assert report["recommendation"] == "BID WITH CONDITIONS"
     assert report["counts"] == {"total": 2, "covered": 1, "partial": 0, "gap": 1}
     assert report["citations"]["verified"] == 1
@@ -55,8 +55,8 @@ def test_report_structure_and_decision_chain():
 
 
 def test_recommendation_bands():
-    high = dict(VERIFIED_DRAFT, win_probability=85)
-    low = dict(VERIFIED_DRAFT, win_probability=30)
+    high = dict(VERIFIED_DRAFT, coverage_score=85)
+    low = dict(VERIFIED_DRAFT, coverage_score=30)
     assert build_report(high, EVIDENCE_MAP)["recommendation"] == "BID"
     assert build_report(low, EVIDENCE_MAP)["recommendation"] == "REVIEW BID DECISION"
 

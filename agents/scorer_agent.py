@@ -1,7 +1,7 @@
 """Agent 3: Scorer Agent — scores each requirement COVERED/PARTIAL/GAP.
 
 The model judges one requirement at a time (small calls — survives throttled
-free-trial subscriptions). The win probability is never produced by the
+free-trial subscriptions). The requirement coverage score is never produced by the
 model: it is deterministic, priority-weighted math computed in code.
 """
 import json
@@ -32,7 +32,7 @@ def run(manifest: dict, evidence_map: dict) -> dict:
     Returns:
         {
             "scored_requirements": [{"id", "score", "confidence", "gap_note"}],
-            "win_probability": int,
+            "coverage_score": int,
             "gap_count": int,
             "gaps_requiring_action": [{"id", "gap_note"}]
         }
@@ -125,9 +125,9 @@ def _stub_score_one(req: dict, evidence: list) -> dict:
 
 
 def _aggregate(requirements: list, scored: list) -> dict:
-    """Deterministic roll-up: priority-weighted win probability and gap list.
+    """Deterministic roll-up: priority-weighted requirement coverage score and gap list.
 
-    win_probability = Σ weight(req) × credit(score) / Σ weight(req)
+    coverage_score = Σ weight(req) × credit(score) / Σ weight(req)
     A gap on a high-priority requirement hurts three times as much as one on
     a low-priority requirement.
     """
@@ -139,7 +139,7 @@ def _aggregate(requirements: list, scored: list) -> dict:
         weight = PRIORITY_WEIGHTS.get(priority_by_id.get(s["id"], "medium"), 2)
         total_weight += weight
         earned += weight * SCORE_CREDIT[s["score"]]
-    win_probability = round(earned / total_weight * 100) if total_weight else 0
+    coverage_score = round(earned / total_weight * 100) if total_weight else 0
 
     gap_count = sum(1 for s in scored if s["score"] == "GAP")
     covered = sum(1 for s in scored if s["score"] == "COVERED")
@@ -151,11 +151,11 @@ def _aggregate(requirements: list, scored: list) -> dict:
 
     logger.info(
         f"ScorerAgent: {covered} COVERED, {partial} PARTIAL, {gap_count} GAP "
-        f"— priority-weighted win probability {win_probability}%"
+        f"— priority-weighted requirement coverage score {coverage_score}%"
     )
     return {
         "scored_requirements": scored,
-        "win_probability": win_probability,
+        "coverage_score": coverage_score,
         "gap_count": gap_count,
         "gaps_requiring_action": gaps_requiring_action,
     }

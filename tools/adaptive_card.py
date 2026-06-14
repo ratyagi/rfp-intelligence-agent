@@ -6,7 +6,7 @@ def build_approval_card(data: dict) -> dict:
 
     Args:
         data: dict with keys:
-            rfp_title (str), submission_deadline (str|None), win_probability (int),
+            rfp_title (str), submission_deadline (str|None), coverage_score (int),
             gap_count (int), requirements_found (int), covered_count (int),
             partial_count (int), docx_path (str)
 
@@ -15,14 +15,14 @@ def build_approval_card(data: dict) -> dict:
     """
     rfp_title = data.get("rfp_title", "Untitled RFP")
     deadline = data.get("submission_deadline", "Not specified")
-    win_prob = data.get("win_probability", 0)
+    coverage_score = data.get("coverage_score", 0)
     gap_count = data.get("gap_count", 0)
     reqs_found = data.get("requirements_found", 0)
     covered = data.get("covered_count", 0)
     partial = data.get("partial_count", 0)
     docx_path = data.get("docx_path", "")
 
-    win_color = "Good" if win_prob >= 70 else ("Warning" if win_prob >= 50 else "Attention")
+    coverage_color = "Good" if coverage_score >= 70 else ("Warning" if coverage_score >= 50 else "Attention")
 
     citations_verified = data.get("citations_verified", "")
 
@@ -60,8 +60,8 @@ def build_approval_card(data: dict) -> dict:
                     "width": "auto",
                     "items": [{
                         "type": "TextBlock",
-                        "text": f"Fit score: **{win_prob}%**",
-                        "color": win_color,
+                        "text": f"Coverage score: **{coverage_score}%**",
+                        "color": coverage_color,
                         "weight": "Bolder",
                         "size": "Medium",
                     }]
@@ -76,7 +76,7 @@ def build_approval_card(data: dict) -> dict:
                 {"title": "Partial", "value": str(partial)},
                 {"title": "Gaps", "value": str(gap_count)},
                 {"title": "Citations verified", "value": citations_verified or "n/a"},
-                {"title": "Win probability", "value": f"{win_prob}%"},
+                {"title": "Requirement coverage", "value": f"{coverage_score}%"},
             ]
         },
     ]

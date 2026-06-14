@@ -1,4 +1,4 @@
-# Submission copy — Agents League @ AI Skills Fest
+# Submission copy: Agents League @ AI Skills Fest
 
 ## Challenge / Track
 **Reasoning Agents (Microsoft Foundry).** The project is a multi-step reasoning

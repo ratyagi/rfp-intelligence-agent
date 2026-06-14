@@ -3,6 +3,8 @@
 A real, unedited run of the pipeline so you can see what it produces without
 running it yourself.
 
+- **`sample_dashboard.html`** — the human-facing results dashboard. Open it in
+  any browser (no server needed). This is the demo's main visual.
 - **`sample_proposal.docx`** — the drafted proposal, with the Bid Decision
   Report appended as an appendix (the full per-requirement reasoning trace).
 - **`sample_bid_report.json`** — the machine-readable reasoning trace.
@@ -17,10 +19,10 @@ running it yourself.
 
 | Metric | Value |
 |---|---|
-| Requirements extracted | 59 |
-| COVERED / PARTIAL / GAP | 6 / 18 / 35 |
-| Requirement coverage score | 29% |
-| Citations verified (resolve to a retrieved document) | **52 / 52, 0 stripped** |
+| Requirements extracted | 71 |
+| COVERED / PARTIAL / GAP | 7 / 22 / 42 |
+| Requirement coverage score | 28% |
+| Citations verified (resolve to a retrieved document) | **63 / 63, 0 stripped** |
 | Recommendation | REVIEW BID DECISION |
 | Status | `complete`, 0 errors |
 

@@ -9,6 +9,9 @@ running it yourself.
   Report appended as an appendix (the full per-requirement reasoning trace).
 - **`sample_bid_report.json`** — the machine-readable reasoning trace.
 - **`sample_approval_card.json`** — the human-approval Adaptive Card payload.
+- **`trace/`** — each agent's actual typed output for this run, stage by stage
+  (`1_requirement_manifest` … `5_verified_proposal`). This is the per-stage
+  reasoning trace the orchestrator writes on every run.
 
 ## Provenance of this run (June 14, 2026)
 
@@ -19,10 +22,10 @@ running it yourself.
 
 | Metric | Value |
 |---|---|
-| Requirements extracted | 71 |
-| COVERED / PARTIAL / GAP | 7 / 22 / 42 |
-| Requirement coverage score | 28% |
-| Citations verified (resolve to a retrieved document) | **63 / 63, 0 stripped** |
+| Requirements extracted | 65 |
+| COVERED / PARTIAL / GAP | 9 / 21 / 35 |
+| Requirement coverage score | 33% |
+| Citations verified (resolve to a retrieved document) | **68 / 68, 0 stripped** |
 | Recommendation | REVIEW BID DECISION |
 | Status | `complete`, 0 errors |
 

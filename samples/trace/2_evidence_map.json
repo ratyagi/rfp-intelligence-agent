@@ -1,0 +1,1218 @@
+{
+  "REQ-001": [
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 2.15
+    },
+    {
+      "doc_id": "DOC-013",
+      "title": "Client Reference Register — Government Engagements",
+      "excerpt": "# Client Reference Register — Government Engagements (fictional contacts)\n\n**Owner:** Sales Operations\n**Updated:** February 2026\n**Use:** Contactable references consented for inclusion in government\ntender responses. All names and details are fictional.\n\n## Consented references\n\n### 1. HealthGov Australia\n- **Engageme",
+      "source_path": "corpus/DOC-013-client-reference-register.md",
+      "score": 2.1
+    },
+    {
+      "doc_id": "DOC-007",
+      "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+      "excerpt": "# Executed SOW Extract — Fixed-Price Pricing Schedule\n\n**Engagement:** ClientCo Enterprises — Cloud Migration and Managed Services\n**Status:** Executed 22 July 2025 (signature pages held in contract register)\n**Extract purpose:** Internal evidence of accepted fixed-price commercial\nstructure for reuse in government pro",
+      "source_path": "corpus/DOC-007-sow-fixed-price-schedule.md",
+      "score": 2.03
+    }
+  ],
+  "REQ-002": [
+    {
+      "doc_id": "DOC-010",
+      "title": "Managed Services Incident Response Runbook (Extract)",
+      "excerpt": "# Incident Response Runbook — Managed Services (Extract)\n\n**Owner:** Head of Service Operations\n**Version:** 5.1 (October 2025)\n**Scope:** All managed Azure environments under 24/7 support\n\n## Service levels (standard government tier)\n\n- **Availability SLA: 99.95%** for Tier-1 production workloads, measured\n  monthly p",
+      "source_path": "corpus/DOC-010-incident-response-runbook.md",
+      "score": 1.85
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.84
+    },
+    {
+      "doc_id": "DOC-002",
+      "title": "Case Study — StateGov Authority Cloud Transition Program",
+      "excerpt": "# Case Study: StateGov Authority — Cloud Transition Program\n\n**Client:** StateGov Authority (state government shared-services provider)\n**Engagement:** Migration of shared-services platform to Azure\n**Duration:** 11 months (Oct 2024 – Sep 2025)\n**Contract value:** AUD 6.4M\n\n## Scope\n\nMigration of **540 virtual machines",
+      "source_path": "corpus/DOC-002-case-study-stategov-datacentre-exit.md",
+      "score": 1.83
+    }
+  ],
+  "REQ-003": [
+    {
+      "doc_id": "DOC-007",
+      "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+      "excerpt": "# Executed SOW Extract — Fixed-Price Pricing Schedule\n\n**Engagement:** ClientCo Enterprises — Cloud Migration and Managed Services\n**Status:** Executed 22 July 2025 (signature pages held in contract register)\n**Extract purpose:** Internal evidence of accepted fixed-price commercial\nstructure for reuse in government pro",
+      "source_path": "corpus/DOC-007-sow-fixed-price-schedule.md",
+      "score": 1.57
+    },
+    {
+      "doc_id": "DOC-004",
+      "title": "ISO/IEC 27001:2022 Certification Summary",
+      "excerpt": "# ISO/IEC 27001:2022 Certification — Summary of Currency and Scope\n\n**Certificate holder:** Contoso Cloud Solutions Pty Ltd\n**Certificate number:** AU-27001-48213 (fictional)\n**Certification body:** Southern Cross Assurance Services (fictional)\n**Standard:** ISO/IEC 27001:2022\n**Initial certification:** March 2019 (und",
+      "source_path": "corpus/DOC-004-iso27001-certification.md",
+      "score": 1.53
+    },
+    {
+      "doc_id": "DOC-013",
+      "title": "Client Reference Register — Government Engagements",
+      "excerpt": "# Client Reference Register — Government Engagements (fictional contacts)\n\n**Owner:** Sales Operations\n**Updated:** February 2026\n**Use:** Contactable references consented for inclusion in government\ntender responses. All names and details are fictional.\n\n## Consented references\n\n### 1. HealthGov Australia\n- **Engageme",
+      "source_path": "corpus/DOC-013-client-reference-register.md",
+      "score": 1.51
+    }
+  ],
+  "REQ-004": [
+    {
+      "doc_id": "DOC-007",
+      "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+      "excerpt": "# Executed SOW Extract — Fixed-Price Pricing Schedule\n\n**Engagement:** ClientCo Enterprises — Cloud Migration and Managed Services\n**Status:** Executed 22 July 2025 (signature pages held in contract register)\n**Extract purpose:** Internal evidence of accepted fixed-price commercial\nstructure for reuse in government pro",
+      "source_path": "corpus/DOC-007-sow-fixed-price-schedule.md",
+      "score": 1.71
+    },
+    {
+      "doc_id": "DOC-004",
+      "title": "ISO/IEC 27001:2022 Certification Summary",
+      "excerpt": "# ISO/IEC 27001:2022 Certification — Summary of Currency and Scope\n\n**Certificate holder:** Contoso Cloud Solutions Pty Ltd\n**Certificate number:** AU-27001-48213 (fictional)\n**Certification body:** Southern Cross Assurance Services (fictional)\n**Standard:** ISO/IEC 27001:2022\n**Initial certification:** March 2019 (und",
+      "source_path": "corpus/DOC-004-iso27001-certification.md",
+      "score": 1.68
+    },
+    {
+      "doc_id": "DOC-013",
+      "title": "Client Reference Register — Government Engagements",
+      "excerpt": "# Client Reference Register — Government Engagements (fictional contacts)\n\n**Owner:** Sales Operations\n**Updated:** February 2026\n**Use:** Contactable references consented for inclusion in government\ntender responses. All names and details are fictional.\n\n## Consented references\n\n### 1. HealthGov Australia\n- **Engageme",
+      "source_path": "corpus/DOC-013-client-reference-register.md",
+      "score": 1.62
+    }
+  ],
+  "REQ-005": [
+    {
+      "doc_id": "DOC-014",
+      "title": "Key Personnel CV — James Liu, Lead Cloud Architect",
+      "excerpt": "# Key Personnel CV — James Liu, Lead Cloud Architect (fictional)\n\n**Role for proposed engagements:** Lead Cloud / Migration Architect\n**Location:** Sydney\n**Security clearance:** NV1 (current)\n\n## Certifications\n\n- **Microsoft Certified: Azure Solutions Architect Expert** (current)\n- Microsoft Certified: Azure Security",
+      "source_path": "corpus/DOC-014-cv-lead-cloud-architect.md",
+      "score": 1.74
+    },
+    {
+      "doc_id": "DOC-009",
+      "title": "Key Personnel CV — Sarah Mitchell, Project Director",
+      "excerpt": "# Key Personnel CV — Sarah Mitchell, Project Director (fictional)\n\n**Role for proposed engagements:** Named Project Manager / Project Director\n**Location:** Canberra\n**Security clearance:** NV1 (current)\n\n## Certifications\n\n- **PRINCE2 Practitioner** (current, recertified 2025)\n- **PMP** — Project Management Profession",
+      "source_path": "corpus/DOC-009-cv-project-director.md",
+      "score": 1.68
+    },
+    {
+      "doc_id": "DOC-007",
+      "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+      "excerpt": "# Executed SOW Extract — Fixed-Price Pricing Schedule\n\n**Engagement:** ClientCo Enterprises — Cloud Migration and Managed Services\n**Status:** Executed 22 July 2025 (signature pages held in contract register)\n**Extract purpose:** Internal evidence of accepted fixed-price commercial\nstructure for reuse in government pro",
+      "source_path": "corpus/DOC-007-sow-fixed-price-schedule.md",
+      "score": 1.61
+    }
+  ],
+  "REQ-006": [
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 2.39
+    },
+    {
+      "doc_id": "DOC-012",
+      "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
+      "excerpt": "# Proposal Excerpt — GovCloud Services Panel 2025\n\n**Status:** Successful — appointed to panel, August 2025\n**Excerpt:** Technical approach section (reused with internal approval)\n\n## Migration methodology (as submitted)\n\nOur migration factory model executes discovery, dependency mapping, wave\nplanning, rehearsal, cuto",
+      "source_path": "corpus/DOC-012-proposal-excerpt-govcloud-2025.md",
+      "score": 2.3
+    },
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 1.66
+    }
+  ],
+  "REQ-007": [
+    {
+      "doc_id": "DOC-005",
+      "title": "IRAP Assessment Summary — ISM PROTECTED Level",
+      "excerpt": "# IRAP Assessment Summary — Australian Government ISM (PROTECTED)\n\n**Assessed entity:** Contoso Cloud Solutions Pty Ltd — Azure landing zone\nreference architecture and managed services practice\n**Assessment type:** IRAP (Infosec Registered Assessors Program) assessment\nagainst the Australian Government **Information Se",
+      "source_path": "corpus/DOC-005-irap-ism-assessment.md",
+      "score": 2.53
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 2.51
+    },
+    {
+      "doc_id": "DOC-014",
+      "title": "Key Personnel CV — James Liu, Lead Cloud Architect",
+      "excerpt": "# Key Personnel CV — James Liu, Lead Cloud Architect (fictional)\n\n**Role for proposed engagements:** Lead Cloud / Migration Architect\n**Location:** Sydney\n**Security clearance:** NV1 (current)\n\n## Certifications\n\n- **Microsoft Certified: Azure Solutions Architect Expert** (current)\n- Microsoft Certified: Azure Security",
+      "source_path": "corpus/DOC-014-cv-lead-cloud-architect.md",
+      "score": 2.48
+    }
+  ],
+  "REQ-008": [
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 2.45
+    },
+    {
+      "doc_id": "DOC-002",
+      "title": "Case Study — StateGov Authority Cloud Transition Program",
+      "excerpt": "# Case Study: StateGov Authority — Cloud Transition Program\n\n**Client:** StateGov Authority (state government shared-services provider)\n**Engagement:** Migration of shared-services platform to Azure\n**Duration:** 11 months (Oct 2024 – Sep 2025)\n**Contract value:** AUD 6.4M\n\n## Scope\n\nMigration of **540 virtual machines",
+      "source_path": "corpus/DOC-002-case-study-stategov-datacentre-exit.md",
+      "score": 2.27
+    },
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 2.26
+    }
+  ],
+  "REQ-009": [
+    {
+      "doc_id": "DOC-012",
+      "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
+      "excerpt": "# Proposal Excerpt — GovCloud Services Panel 2025\n\n**Status:** Successful — appointed to panel, August 2025\n**Excerpt:** Technical approach section (reused with internal approval)\n\n## Migration methodology (as submitted)\n\nOur migration factory model executes discovery, dependency mapping, wave\nplanning, rehearsal, cuto",
+      "source_path": "corpus/DOC-012-proposal-excerpt-govcloud-2025.md",
+      "score": 2.45
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.73
+    },
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 1.65
+    }
+  ],
+  "REQ-010": [
+    {
+      "doc_id": "DOC-004",
+      "title": "ISO/IEC 27001:2022 Certification Summary",
+      "excerpt": "# ISO/IEC 27001:2022 Certification — Summary of Currency and Scope\n\n**Certificate holder:** Contoso Cloud Solutions Pty Ltd\n**Certificate number:** AU-27001-48213 (fictional)\n**Certification body:** Southern Cross Assurance Services (fictional)\n**Standard:** ISO/IEC 27001:2022\n**Initial certification:** March 2019 (und",
+      "source_path": "corpus/DOC-004-iso27001-certification.md",
+      "score": 2.18
+    },
+    {
+      "doc_id": "DOC-007",
+      "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+      "excerpt": "# Executed SOW Extract — Fixed-Price Pricing Schedule\n\n**Engagement:** ClientCo Enterprises — Cloud Migration and Managed Services\n**Status:** Executed 22 July 2025 (signature pages held in contract register)\n**Extract purpose:** Internal evidence of accepted fixed-price commercial\nstructure for reuse in government pro",
+      "source_path": "corpus/DOC-007-sow-fixed-price-schedule.md",
+      "score": 1.98
+    },
+    {
+      "doc_id": "DOC-012",
+      "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
+      "excerpt": "# Proposal Excerpt — GovCloud Services Panel 2025\n\n**Status:** Successful — appointed to panel, August 2025\n**Excerpt:** Technical approach section (reused with internal approval)\n\n## Migration methodology (as submitted)\n\nOur migration factory model executes discovery, dependency mapping, wave\nplanning, rehearsal, cuto",
+      "source_path": "corpus/DOC-012-proposal-excerpt-govcloud-2025.md",
+      "score": 1.93
+    }
+  ],
+  "REQ-011": [
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 2.35
+    },
+    {
+      "doc_id": "DOC-002",
+      "title": "Case Study — StateGov Authority Cloud Transition Program",
+      "excerpt": "# Case Study: StateGov Authority — Cloud Transition Program\n\n**Client:** StateGov Authority (state government shared-services provider)\n**Engagement:** Migration of shared-services platform to Azure\n**Duration:** 11 months (Oct 2024 – Sep 2025)\n**Contract value:** AUD 6.4M\n\n## Scope\n\nMigration of **540 virtual machines",
+      "source_path": "corpus/DOC-002-case-study-stategov-datacentre-exit.md",
+      "score": 1.92
+    },
+    {
+      "doc_id": "DOC-013",
+      "title": "Client Reference Register — Government Engagements",
+      "excerpt": "# Client Reference Register — Government Engagements (fictional contacts)\n\n**Owner:** Sales Operations\n**Updated:** February 2026\n**Use:** Contactable references consented for inclusion in government\ntender responses. All names and details are fictional.\n\n## Consented references\n\n### 1. HealthGov Australia\n- **Engageme",
+      "source_path": "corpus/DOC-013-client-reference-register.md",
+      "score": 1.7
+    }
+  ],
+  "REQ-012": [
+    {
+      "doc_id": "DOC-013",
+      "title": "Client Reference Register — Government Engagements",
+      "excerpt": "# Client Reference Register — Government Engagements (fictional contacts)\n\n**Owner:** Sales Operations\n**Updated:** February 2026\n**Use:** Contactable references consented for inclusion in government\ntender responses. All names and details are fictional.\n\n## Consented references\n\n### 1. HealthGov Australia\n- **Engageme",
+      "source_path": "corpus/DOC-013-client-reference-register.md",
+      "score": 2.76
+    },
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 2.5
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 2.46
+    }
+  ],
+  "REQ-013": [
+    {
+      "doc_id": "DOC-010",
+      "title": "Managed Services Incident Response Runbook (Extract)",
+      "excerpt": "# Incident Response Runbook — Managed Services (Extract)\n\n**Owner:** Head of Service Operations\n**Version:** 5.1 (October 2025)\n**Scope:** All managed Azure environments under 24/7 support\n\n## Service levels (standard government tier)\n\n- **Availability SLA: 99.95%** for Tier-1 production workloads, measured\n  monthly p",
+      "source_path": "corpus/DOC-010-incident-response-runbook.md",
+      "score": 3.07
+    },
+    {
+      "doc_id": "DOC-002",
+      "title": "Case Study — StateGov Authority Cloud Transition Program",
+      "excerpt": "# Case Study: StateGov Authority — Cloud Transition Program\n\n**Client:** StateGov Authority (state government shared-services provider)\n**Engagement:** Migration of shared-services platform to Azure\n**Duration:** 11 months (Oct 2024 – Sep 2025)\n**Contract value:** AUD 6.4M\n\n## Scope\n\nMigration of **540 virtual machines",
+      "source_path": "corpus/DOC-002-case-study-stategov-datacentre-exit.md",
+      "score": 2.51
+    },
+    {
+      "doc_id": "DOC-014",
+      "title": "Key Personnel CV — James Liu, Lead Cloud Architect",
+      "excerpt": "# Key Personnel CV — James Liu, Lead Cloud Architect (fictional)\n\n**Role for proposed engagements:** Lead Cloud / Migration Architect\n**Location:** Sydney\n**Security clearance:** NV1 (current)\n\n## Certifications\n\n- **Microsoft Certified: Azure Solutions Architect Expert** (current)\n- Microsoft Certified: Azure Security",
+      "source_path": "corpus/DOC-014-cv-lead-cloud-architect.md",
+      "score": 2.18
+    }
+  ],
+  "REQ-014": [
+    {
+      "doc_id": "DOC-005",
+      "title": "IRAP Assessment Summary — ISM PROTECTED Level",
+      "excerpt": "# IRAP Assessment Summary — Australian Government ISM (PROTECTED)\n\n**Assessed entity:** Contoso Cloud Solutions Pty Ltd — Azure landing zone\nreference architecture and managed services practice\n**Assessment type:** IRAP (Infosec Registered Assessors Program) assessment\nagainst the Australian Government **Information Se",
+      "source_path": "corpus/DOC-005-irap-ism-assessment.md",
+      "score": 2.56
+    },
+    {
+      "doc_id": "DOC-006",
+      "title": "Data Residency and Sovereignty Policy",
+      "excerpt": "# Data Residency and Sovereignty Policy\n\n**Owner:** Chief Information Security Officer\n**Version:** 3.2 (January 2025)\n**Applies to:** All client engagements involving Australian government or\nregulated-industry data\n\n## Policy\n\n1. **Australian regions only.** All client workloads and data classified\n   OFFICIAL or abo",
+      "source_path": "corpus/DOC-006-data-residency-policy.md",
+      "score": 2.48
+    },
+    {
+      "doc_id": "DOC-004",
+      "title": "ISO/IEC 27001:2022 Certification Summary",
+      "excerpt": "# ISO/IEC 27001:2022 Certification — Summary of Currency and Scope\n\n**Certificate holder:** Contoso Cloud Solutions Pty Ltd\n**Certificate number:** AU-27001-48213 (fictional)\n**Certification body:** Southern Cross Assurance Services (fictional)\n**Standard:** ISO/IEC 27001:2022\n**Initial certification:** March 2019 (und",
+      "source_path": "corpus/DOC-004-iso27001-certification.md",
+      "score": 2.29
+    }
+  ],
+  "REQ-015": [
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 2.83
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 2.52
+    },
+    {
+      "doc_id": "DOC-002",
+      "title": "Case Study — StateGov Authority Cloud Transition Program",
+      "excerpt": "# Case Study: StateGov Authority — Cloud Transition Program\n\n**Client:** StateGov Authority (state government shared-services provider)\n**Engagement:** Migration of shared-services platform to Azure\n**Duration:** 11 months (Oct 2024 – Sep 2025)\n**Contract value:** AUD 6.4M\n\n## Scope\n\nMigration of **540 virtual machines",
+      "source_path": "corpus/DOC-002-case-study-stategov-datacentre-exit.md",
+      "score": 2.48
+    }
+  ],
+  "REQ-016": [
+    {
+      "doc_id": "DOC-012",
+      "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
+      "excerpt": "# Proposal Excerpt — GovCloud Services Panel 2025\n\n**Status:** Successful — appointed to panel, August 2025\n**Excerpt:** Technical approach section (reused with internal approval)\n\n## Migration methodology (as submitted)\n\nOur migration factory model executes discovery, dependency mapping, wave\nplanning, rehearsal, cuto",
+      "source_path": "corpus/DOC-012-proposal-excerpt-govcloud-2025.md",
+      "score": 2.41
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.83
+    },
+    {
+      "doc_id": "DOC-002",
+      "title": "Case Study — StateGov Authority Cloud Transition Program",
+      "excerpt": "# Case Study: StateGov Authority — Cloud Transition Program\n\n**Client:** StateGov Authority (state government shared-services provider)\n**Engagement:** Migration of shared-services platform to Azure\n**Duration:** 11 months (Oct 2024 – Sep 2025)\n**Contract value:** AUD 6.4M\n\n## Scope\n\nMigration of **540 virtual machines",
+      "source_path": "corpus/DOC-002-case-study-stategov-datacentre-exit.md",
+      "score": 1.71
+    }
+  ],
+  "REQ-017": [
+    {
+      "doc_id": "DOC-013",
+      "title": "Client Reference Register — Government Engagements",
+      "excerpt": "# Client Reference Register — Government Engagements (fictional contacts)\n\n**Owner:** Sales Operations\n**Updated:** February 2026\n**Use:** Contactable references consented for inclusion in government\ntender responses. All names and details are fictional.\n\n## Consented references\n\n### 1. HealthGov Australia\n- **Engageme",
+      "source_path": "corpus/DOC-013-client-reference-register.md",
+      "score": 1.77
+    },
+    {
+      "doc_id": "DOC-004",
+      "title": "ISO/IEC 27001:2022 Certification Summary",
+      "excerpt": "# ISO/IEC 27001:2022 Certification — Summary of Currency and Scope\n\n**Certificate holder:** Contoso Cloud Solutions Pty Ltd\n**Certificate number:** AU-27001-48213 (fictional)\n**Certification body:** Southern Cross Assurance Services (fictional)\n**Standard:** ISO/IEC 27001:2022\n**Initial certification:** March 2019 (und",
+      "source_path": "corpus/DOC-004-iso27001-certification.md",
+      "score": 1.58
+    },
+    {
+      "doc_id": "DOC-009",
+      "title": "Key Personnel CV — Sarah Mitchell, Project Director",
+      "excerpt": "# Key Personnel CV — Sarah Mitchell, Project Director (fictional)\n\n**Role for proposed engagements:** Named Project Manager / Project Director\n**Location:** Canberra\n**Security clearance:** NV1 (current)\n\n## Certifications\n\n- **PRINCE2 Practitioner** (current, recertified 2025)\n- **PMP** — Project Management Profession",
+      "source_path": "corpus/DOC-009-cv-project-director.md",
+      "score": 1.57
+    }
+  ],
+  "REQ-018": [
+    {
+      "doc_id": "DOC-007",
+      "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+      "excerpt": "# Executed SOW Extract — Fixed-Price Pricing Schedule\n\n**Engagement:** ClientCo Enterprises — Cloud Migration and Managed Services\n**Status:** Executed 22 July 2025 (signature pages held in contract register)\n**Extract purpose:** Internal evidence of accepted fixed-price commercial\nstructure for reuse in government pro",
+      "source_path": "corpus/DOC-007-sow-fixed-price-schedule.md",
+      "score": 3.28
+    },
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 1.86
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.74
+    }
+  ],
+  "REQ-019": [
+    {
+      "doc_id": "DOC-007",
+      "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+      "excerpt": "# Executed SOW Extract — Fixed-Price Pricing Schedule\n\n**Engagement:** ClientCo Enterprises — Cloud Migration and Managed Services\n**Status:** Executed 22 July 2025 (signature pages held in contract register)\n**Extract purpose:** Internal evidence of accepted fixed-price commercial\nstructure for reuse in government pro",
+      "source_path": "corpus/DOC-007-sow-fixed-price-schedule.md",
+      "score": 2.18
+    },
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 1.67
+    }
+  ],
+  "REQ-020": [
+    {
+      "doc_id": "DOC-008",
+      "title": "Commercial Terms Register — Milestone Payments and Invoicing History",
+      "excerpt": "# Commercial Terms Register — Milestone Payment Structures\n\n**Owner:** Commercial Director\n**Purpose:** Record of milestone-based payment structures agreed in prior\nengagements, for reuse in proposals.\n\n## Standard milestone payment model (as agreed in prior contracts)\n\n| Milestone | Trigger | Typical % of contract val",
+      "source_path": "corpus/DOC-008-milestone-payment-terms.md",
+      "score": 2.93
+    }
+  ],
+  "REQ-021": [
+    {
+      "doc_id": "DOC-009",
+      "title": "Key Personnel CV — Sarah Mitchell, Project Director",
+      "excerpt": "# Key Personnel CV — Sarah Mitchell, Project Director (fictional)\n\n**Role for proposed engagements:** Named Project Manager / Project Director\n**Location:** Canberra\n**Security clearance:** NV1 (current)\n\n## Certifications\n\n- **PRINCE2 Practitioner** (current, recertified 2025)\n- **PMP** — Project Management Profession",
+      "source_path": "corpus/DOC-009-cv-project-director.md",
+      "score": 2.68
+    },
+    {
+      "doc_id": "DOC-014",
+      "title": "Key Personnel CV — James Liu, Lead Cloud Architect",
+      "excerpt": "# Key Personnel CV — James Liu, Lead Cloud Architect (fictional)\n\n**Role for proposed engagements:** Lead Cloud / Migration Architect\n**Location:** Sydney\n**Security clearance:** NV1 (current)\n\n## Certifications\n\n- **Microsoft Certified: Azure Solutions Architect Expert** (current)\n- Microsoft Certified: Azure Security",
+      "source_path": "corpus/DOC-014-cv-lead-cloud-architect.md",
+      "score": 2.0
+    },
+    {
+      "doc_id": "DOC-007",
+      "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+      "excerpt": "# Executed SOW Extract — Fixed-Price Pricing Schedule\n\n**Engagement:** ClientCo Enterprises — Cloud Migration and Managed Services\n**Status:** Executed 22 July 2025 (signature pages held in contract register)\n**Extract purpose:** Internal evidence of accepted fixed-price commercial\nstructure for reuse in government pro",
+      "source_path": "corpus/DOC-007-sow-fixed-price-schedule.md",
+      "score": 1.66
+    }
+  ],
+  "REQ-022": [
+    {
+      "doc_id": "DOC-009",
+      "title": "Key Personnel CV — Sarah Mitchell, Project Director",
+      "excerpt": "# Key Personnel CV — Sarah Mitchell, Project Director (fictional)\n\n**Role for proposed engagements:** Named Project Manager / Project Director\n**Location:** Canberra\n**Security clearance:** NV1 (current)\n\n## Certifications\n\n- **PRINCE2 Practitioner** (current, recertified 2025)\n- **PMP** — Project Management Profession",
+      "source_path": "corpus/DOC-009-cv-project-director.md",
+      "score": 2.02
+    }
+  ],
+  "REQ-023": [
+    {
+      "doc_id": "DOC-014",
+      "title": "Key Personnel CV — James Liu, Lead Cloud Architect",
+      "excerpt": "# Key Personnel CV — James Liu, Lead Cloud Architect (fictional)\n\n**Role for proposed engagements:** Lead Cloud / Migration Architect\n**Location:** Sydney\n**Security clearance:** NV1 (current)\n\n## Certifications\n\n- **Microsoft Certified: Azure Solutions Architect Expert** (current)\n- Microsoft Certified: Azure Security",
+      "source_path": "corpus/DOC-014-cv-lead-cloud-architect.md",
+      "score": 2.6
+    },
+    {
+      "doc_id": "DOC-009",
+      "title": "Key Personnel CV — Sarah Mitchell, Project Director",
+      "excerpt": "# Key Personnel CV — Sarah Mitchell, Project Director (fictional)\n\n**Role for proposed engagements:** Named Project Manager / Project Director\n**Location:** Canberra\n**Security clearance:** NV1 (current)\n\n## Certifications\n\n- **PRINCE2 Practitioner** (current, recertified 2025)\n- **PMP** — Project Management Profession",
+      "source_path": "corpus/DOC-009-cv-project-director.md",
+      "score": 1.79
+    },
+    {
+      "doc_id": "DOC-013",
+      "title": "Client Reference Register — Government Engagements",
+      "excerpt": "# Client Reference Register — Government Engagements (fictional contacts)\n\n**Owner:** Sales Operations\n**Updated:** February 2026\n**Use:** Contactable references consented for inclusion in government\ntender responses. All names and details are fictional.\n\n## Consented references\n\n### 1. HealthGov Australia\n- **Engageme",
+      "source_path": "corpus/DOC-013-client-reference-register.md",
+      "score": 1.7
+    }
+  ],
+  "REQ-024": [
+    {
+      "doc_id": "DOC-009",
+      "title": "Key Personnel CV — Sarah Mitchell, Project Director",
+      "excerpt": "# Key Personnel CV — Sarah Mitchell, Project Director (fictional)\n\n**Role for proposed engagements:** Named Project Manager / Project Director\n**Location:** Canberra\n**Security clearance:** NV1 (current)\n\n## Certifications\n\n- **PRINCE2 Practitioner** (current, recertified 2025)\n- **PMP** — Project Management Profession",
+      "source_path": "corpus/DOC-009-cv-project-director.md",
+      "score": 2.25
+    }
+  ],
+  "REQ-025": [
+    {
+      "doc_id": "DOC-011",
+      "title": "Privacy Act 1988 Compliance Statement and Breach Notification Procedure",
+      "excerpt": "# Privacy Act 1988 (Cth) Compliance Statement\n\n**Owner:** General Counsel / Privacy Officer\n**Version:** 2.4 (May 2025)\n\n## Compliance posture\n\n- Contoso Cloud Solutions operates a privacy management framework aligned\n  to the **Privacy Act 1988 (Cth)** and the Australian Privacy Principles\n  (APPs), reviewed annually ",
+      "source_path": "corpus/DOC-011-privacy-act-compliance.md",
+      "score": 3.0
+    },
+    {
+      "doc_id": "DOC-004",
+      "title": "ISO/IEC 27001:2022 Certification Summary",
+      "excerpt": "# ISO/IEC 27001:2022 Certification — Summary of Currency and Scope\n\n**Certificate holder:** Contoso Cloud Solutions Pty Ltd\n**Certificate number:** AU-27001-48213 (fictional)\n**Certification body:** Southern Cross Assurance Services (fictional)\n**Standard:** ISO/IEC 27001:2022\n**Initial certification:** March 2019 (und",
+      "source_path": "corpus/DOC-004-iso27001-certification.md",
+      "score": 1.81
+    },
+    {
+      "doc_id": "DOC-006",
+      "title": "Data Residency and Sovereignty Policy",
+      "excerpt": "# Data Residency and Sovereignty Policy\n\n**Owner:** Chief Information Security Officer\n**Version:** 3.2 (January 2025)\n**Applies to:** All client engagements involving Australian government or\nregulated-industry data\n\n## Policy\n\n1. **Australian regions only.** All client workloads and data classified\n   OFFICIAL or abo",
+      "source_path": "corpus/DOC-006-data-residency-policy.md",
+      "score": 1.7
+    }
+  ],
+  "REQ-026": [
+    {
+      "doc_id": "DOC-011",
+      "title": "Privacy Act 1988 Compliance Statement and Breach Notification Procedure",
+      "excerpt": "# Privacy Act 1988 (Cth) Compliance Statement\n\n**Owner:** General Counsel / Privacy Officer\n**Version:** 2.4 (May 2025)\n\n## Compliance posture\n\n- Contoso Cloud Solutions operates a privacy management framework aligned\n  to the **Privacy Act 1988 (Cth)** and the Australian Privacy Principles\n  (APPs), reviewed annually ",
+      "source_path": "corpus/DOC-011-privacy-act-compliance.md",
+      "score": 2.83
+    },
+    {
+      "doc_id": "DOC-006",
+      "title": "Data Residency and Sovereignty Policy",
+      "excerpt": "# Data Residency and Sovereignty Policy\n\n**Owner:** Chief Information Security Officer\n**Version:** 3.2 (January 2025)\n**Applies to:** All client engagements involving Australian government or\nregulated-industry data\n\n## Policy\n\n1. **Australian regions only.** All client workloads and data classified\n   OFFICIAL or abo",
+      "source_path": "corpus/DOC-006-data-residency-policy.md",
+      "score": 1.59
+    },
+    {
+      "doc_id": "DOC-010",
+      "title": "Managed Services Incident Response Runbook (Extract)",
+      "excerpt": "# Incident Response Runbook — Managed Services (Extract)\n\n**Owner:** Head of Service Operations\n**Version:** 5.1 (October 2025)\n**Scope:** All managed Azure environments under 24/7 support\n\n## Service levels (standard government tier)\n\n- **Availability SLA: 99.95%** for Tier-1 production workloads, measured\n  monthly p",
+      "source_path": "corpus/DOC-010-incident-response-runbook.md",
+      "score": 1.53
+    }
+  ],
+  "REQ-027": [
+    {
+      "doc_id": "DOC-011",
+      "title": "Privacy Act 1988 Compliance Statement and Breach Notification Procedure",
+      "excerpt": "# Privacy Act 1988 (Cth) Compliance Statement\n\n**Owner:** General Counsel / Privacy Officer\n**Version:** 2.4 (May 2025)\n\n## Compliance posture\n\n- Contoso Cloud Solutions operates a privacy management framework aligned\n  to the **Privacy Act 1988 (Cth)** and the Australian Privacy Principles\n  (APPs), reviewed annually ",
+      "source_path": "corpus/DOC-011-privacy-act-compliance.md",
+      "score": 2.47
+    },
+    {
+      "doc_id": "DOC-006",
+      "title": "Data Residency and Sovereignty Policy",
+      "excerpt": "# Data Residency and Sovereignty Policy\n\n**Owner:** Chief Information Security Officer\n**Version:** 3.2 (January 2025)\n**Applies to:** All client engagements involving Australian government or\nregulated-industry data\n\n## Policy\n\n1. **Australian regions only.** All client workloads and data classified\n   OFFICIAL or abo",
+      "source_path": "corpus/DOC-006-data-residency-policy.md",
+      "score": 1.75
+    },
+    {
+      "doc_id": "DOC-013",
+      "title": "Client Reference Register — Government Engagements",
+      "excerpt": "# Client Reference Register — Government Engagements (fictional contacts)\n\n**Owner:** Sales Operations\n**Updated:** February 2026\n**Use:** Contactable references consented for inclusion in government\ntender responses. All names and details are fictional.\n\n## Consented references\n\n### 1. HealthGov Australia\n- **Engageme",
+      "source_path": "corpus/DOC-013-client-reference-register.md",
+      "score": 1.67
+    }
+  ],
+  "REQ-028": [
+    {
+      "doc_id": "DOC-008",
+      "title": "Commercial Terms Register — Milestone Payments and Invoicing History",
+      "excerpt": "# Commercial Terms Register — Milestone Payment Structures\n\n**Owner:** Commercial Director\n**Purpose:** Record of milestone-based payment structures agreed in prior\nengagements, for reuse in proposals.\n\n## Standard milestone payment model (as agreed in prior contracts)\n\n| Milestone | Trigger | Typical % of contract val",
+      "source_path": "corpus/DOC-008-milestone-payment-terms.md",
+      "score": 2.01
+    },
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 1.94
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.62
+    }
+  ],
+  "REQ-029": [],
+  "REQ-030": [
+    {
+      "doc_id": "DOC-013",
+      "title": "Client Reference Register — Government Engagements",
+      "excerpt": "# Client Reference Register — Government Engagements (fictional contacts)\n\n**Owner:** Sales Operations\n**Updated:** February 2026\n**Use:** Contactable references consented for inclusion in government\ntender responses. All names and details are fictional.\n\n## Consented references\n\n### 1. HealthGov Australia\n- **Engageme",
+      "source_path": "corpus/DOC-013-client-reference-register.md",
+      "score": 1.82
+    },
+    {
+      "doc_id": "DOC-002",
+      "title": "Case Study — StateGov Authority Cloud Transition Program",
+      "excerpt": "# Case Study: StateGov Authority — Cloud Transition Program\n\n**Client:** StateGov Authority (state government shared-services provider)\n**Engagement:** Migration of shared-services platform to Azure\n**Duration:** 11 months (Oct 2024 – Sep 2025)\n**Contract value:** AUD 6.4M\n\n## Scope\n\nMigration of **540 virtual machines",
+      "source_path": "corpus/DOC-002-case-study-stategov-datacentre-exit.md",
+      "score": 1.63
+    }
+  ],
+  "REQ-031": [
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.61
+    },
+    {
+      "doc_id": "DOC-007",
+      "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+      "excerpt": "# Executed SOW Extract — Fixed-Price Pricing Schedule\n\n**Engagement:** ClientCo Enterprises — Cloud Migration and Managed Services\n**Status:** Executed 22 July 2025 (signature pages held in contract register)\n**Extract purpose:** Internal evidence of accepted fixed-price commercial\nstructure for reuse in government pro",
+      "source_path": "corpus/DOC-007-sow-fixed-price-schedule.md",
+      "score": 1.6
+    },
+    {
+      "doc_id": "DOC-002",
+      "title": "Case Study — StateGov Authority Cloud Transition Program",
+      "excerpt": "# Case Study: StateGov Authority — Cloud Transition Program\n\n**Client:** StateGov Authority (state government shared-services provider)\n**Engagement:** Migration of shared-services platform to Azure\n**Duration:** 11 months (Oct 2024 – Sep 2025)\n**Contract value:** AUD 6.4M\n\n## Scope\n\nMigration of **540 virtual machines",
+      "source_path": "corpus/DOC-002-case-study-stategov-datacentre-exit.md",
+      "score": 1.52
+    }
+  ],
+  "REQ-032": [],
+  "REQ-033": [
+    {
+      "doc_id": "DOC-012",
+      "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
+      "excerpt": "# Proposal Excerpt — GovCloud Services Panel 2025\n\n**Status:** Successful — appointed to panel, August 2025\n**Excerpt:** Technical approach section (reused with internal approval)\n\n## Migration methodology (as submitted)\n\nOur migration factory model executes discovery, dependency mapping, wave\nplanning, rehearsal, cuto",
+      "source_path": "corpus/DOC-012-proposal-excerpt-govcloud-2025.md",
+      "score": 1.65
+    },
+    {
+      "doc_id": "DOC-007",
+      "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+      "excerpt": "# Executed SOW Extract — Fixed-Price Pricing Schedule\n\n**Engagement:** ClientCo Enterprises — Cloud Migration and Managed Services\n**Status:** Executed 22 July 2025 (signature pages held in contract register)\n**Extract purpose:** Internal evidence of accepted fixed-price commercial\nstructure for reuse in government pro",
+      "source_path": "corpus/DOC-007-sow-fixed-price-schedule.md",
+      "score": 1.63
+    },
+    {
+      "doc_id": "DOC-006",
+      "title": "Data Residency and Sovereignty Policy",
+      "excerpt": "# Data Residency and Sovereignty Policy\n\n**Owner:** Chief Information Security Officer\n**Version:** 3.2 (January 2025)\n**Applies to:** All client engagements involving Australian government or\nregulated-industry data\n\n## Policy\n\n1. **Australian regions only.** All client workloads and data classified\n   OFFICIAL or abo",
+      "source_path": "corpus/DOC-006-data-residency-policy.md",
+      "score": 1.62
+    }
+  ],
+  "REQ-034": [
+    {
+      "doc_id": "DOC-012",
+      "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
+      "excerpt": "# Proposal Excerpt — GovCloud Services Panel 2025\n\n**Status:** Successful — appointed to panel, August 2025\n**Excerpt:** Technical approach section (reused with internal approval)\n\n## Migration methodology (as submitted)\n\nOur migration factory model executes discovery, dependency mapping, wave\nplanning, rehearsal, cuto",
+      "source_path": "corpus/DOC-012-proposal-excerpt-govcloud-2025.md",
+      "score": 2.22
+    },
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 1.78
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.77
+    }
+  ],
+  "REQ-035": [
+    {
+      "doc_id": "DOC-007",
+      "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+      "excerpt": "# Executed SOW Extract — Fixed-Price Pricing Schedule\n\n**Engagement:** ClientCo Enterprises — Cloud Migration and Managed Services\n**Status:** Executed 22 July 2025 (signature pages held in contract register)\n**Extract purpose:** Internal evidence of accepted fixed-price commercial\nstructure for reuse in government pro",
+      "source_path": "corpus/DOC-007-sow-fixed-price-schedule.md",
+      "score": 1.79
+    },
+    {
+      "doc_id": "DOC-008",
+      "title": "Commercial Terms Register — Milestone Payments and Invoicing History",
+      "excerpt": "# Commercial Terms Register — Milestone Payment Structures\n\n**Owner:** Commercial Director\n**Purpose:** Record of milestone-based payment structures agreed in prior\nengagements, for reuse in proposals.\n\n## Standard milestone payment model (as agreed in prior contracts)\n\n| Milestone | Trigger | Typical % of contract val",
+      "source_path": "corpus/DOC-008-milestone-payment-terms.md",
+      "score": 1.75
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.62
+    }
+  ],
+  "REQ-036": [
+    {
+      "doc_id": "DOC-009",
+      "title": "Key Personnel CV — Sarah Mitchell, Project Director",
+      "excerpt": "# Key Personnel CV — Sarah Mitchell, Project Director (fictional)\n\n**Role for proposed engagements:** Named Project Manager / Project Director\n**Location:** Canberra\n**Security clearance:** NV1 (current)\n\n## Certifications\n\n- **PRINCE2 Practitioner** (current, recertified 2025)\n- **PMP** — Project Management Profession",
+      "source_path": "corpus/DOC-009-cv-project-director.md",
+      "score": 1.65
+    }
+  ],
+  "REQ-037": [],
+  "REQ-038": [
+    {
+      "doc_id": "DOC-007",
+      "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+      "excerpt": "# Executed SOW Extract — Fixed-Price Pricing Schedule\n\n**Engagement:** ClientCo Enterprises — Cloud Migration and Managed Services\n**Status:** Executed 22 July 2025 (signature pages held in contract register)\n**Extract purpose:** Internal evidence of accepted fixed-price commercial\nstructure for reuse in government pro",
+      "source_path": "corpus/DOC-007-sow-fixed-price-schedule.md",
+      "score": 1.63
+    }
+  ],
+  "REQ-039": [
+    {
+      "doc_id": "DOC-013",
+      "title": "Client Reference Register — Government Engagements",
+      "excerpt": "# Client Reference Register — Government Engagements (fictional contacts)\n\n**Owner:** Sales Operations\n**Updated:** February 2026\n**Use:** Contactable references consented for inclusion in government\ntender responses. All names and details are fictional.\n\n## Consented references\n\n### 1. HealthGov Australia\n- **Engageme",
+      "source_path": "corpus/DOC-013-client-reference-register.md",
+      "score": 1.74
+    },
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 1.63
+    }
+  ],
+  "REQ-040": [
+    {
+      "doc_id": "DOC-014",
+      "title": "Key Personnel CV — James Liu, Lead Cloud Architect",
+      "excerpt": "# Key Personnel CV — James Liu, Lead Cloud Architect (fictional)\n\n**Role for proposed engagements:** Lead Cloud / Migration Architect\n**Location:** Sydney\n**Security clearance:** NV1 (current)\n\n## Certifications\n\n- **Microsoft Certified: Azure Solutions Architect Expert** (current)\n- Microsoft Certified: Azure Security",
+      "source_path": "corpus/DOC-014-cv-lead-cloud-architect.md",
+      "score": 1.56
+    },
+    {
+      "doc_id": "DOC-007",
+      "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+      "excerpt": "# Executed SOW Extract — Fixed-Price Pricing Schedule\n\n**Engagement:** ClientCo Enterprises — Cloud Migration and Managed Services\n**Status:** Executed 22 July 2025 (signature pages held in contract register)\n**Extract purpose:** Internal evidence of accepted fixed-price commercial\nstructure for reuse in government pro",
+      "source_path": "corpus/DOC-007-sow-fixed-price-schedule.md",
+      "score": 1.54
+    },
+    {
+      "doc_id": "DOC-009",
+      "title": "Key Personnel CV — Sarah Mitchell, Project Director",
+      "excerpt": "# Key Personnel CV — Sarah Mitchell, Project Director (fictional)\n\n**Role for proposed engagements:** Named Project Manager / Project Director\n**Location:** Canberra\n**Security clearance:** NV1 (current)\n\n## Certifications\n\n- **PRINCE2 Practitioner** (current, recertified 2025)\n- **PMP** — Project Management Profession",
+      "source_path": "corpus/DOC-009-cv-project-director.md",
+      "score": 1.53
+    }
+  ],
+  "REQ-041": [],
+  "REQ-042": [],
+  "REQ-043": [
+    {
+      "doc_id": "DOC-005",
+      "title": "IRAP Assessment Summary — ISM PROTECTED Level",
+      "excerpt": "# IRAP Assessment Summary — Australian Government ISM (PROTECTED)\n\n**Assessed entity:** Contoso Cloud Solutions Pty Ltd — Azure landing zone\nreference architecture and managed services practice\n**Assessment type:** IRAP (Infosec Registered Assessors Program) assessment\nagainst the Australian Government **Information Se",
+      "source_path": "corpus/DOC-005-irap-ism-assessment.md",
+      "score": 1.63
+    },
+    {
+      "doc_id": "DOC-013",
+      "title": "Client Reference Register — Government Engagements",
+      "excerpt": "# Client Reference Register — Government Engagements (fictional contacts)\n\n**Owner:** Sales Operations\n**Updated:** February 2026\n**Use:** Contactable references consented for inclusion in government\ntender responses. All names and details are fictional.\n\n## Consented references\n\n### 1. HealthGov Australia\n- **Engageme",
+      "source_path": "corpus/DOC-013-client-reference-register.md",
+      "score": 1.6
+    }
+  ],
+  "REQ-044": [
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 1.82
+    },
+    {
+      "doc_id": "DOC-007",
+      "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+      "excerpt": "# Executed SOW Extract — Fixed-Price Pricing Schedule\n\n**Engagement:** ClientCo Enterprises — Cloud Migration and Managed Services\n**Status:** Executed 22 July 2025 (signature pages held in contract register)\n**Extract purpose:** Internal evidence of accepted fixed-price commercial\nstructure for reuse in government pro",
+      "source_path": "corpus/DOC-007-sow-fixed-price-schedule.md",
+      "score": 1.82
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.67
+    }
+  ],
+  "REQ-045": [
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.6
+    },
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 1.58
+    },
+    {
+      "doc_id": "DOC-002",
+      "title": "Case Study — StateGov Authority Cloud Transition Program",
+      "excerpt": "# Case Study: StateGov Authority — Cloud Transition Program\n\n**Client:** StateGov Authority (state government shared-services provider)\n**Engagement:** Migration of shared-services platform to Azure\n**Duration:** 11 months (Oct 2024 – Sep 2025)\n**Contract value:** AUD 6.4M\n\n## Scope\n\nMigration of **540 virtual machines",
+      "source_path": "corpus/DOC-002-case-study-stategov-datacentre-exit.md",
+      "score": 1.57
+    }
+  ],
+  "REQ-046": [],
+  "REQ-047": [
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.73
+    },
+    {
+      "doc_id": "DOC-012",
+      "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
+      "excerpt": "# Proposal Excerpt — GovCloud Services Panel 2025\n\n**Status:** Successful — appointed to panel, August 2025\n**Excerpt:** Technical approach section (reused with internal approval)\n\n## Migration methodology (as submitted)\n\nOur migration factory model executes discovery, dependency mapping, wave\nplanning, rehearsal, cuto",
+      "source_path": "corpus/DOC-012-proposal-excerpt-govcloud-2025.md",
+      "score": 1.66
+    },
+    {
+      "doc_id": "DOC-004",
+      "title": "ISO/IEC 27001:2022 Certification Summary",
+      "excerpt": "# ISO/IEC 27001:2022 Certification — Summary of Currency and Scope\n\n**Certificate holder:** Contoso Cloud Solutions Pty Ltd\n**Certificate number:** AU-27001-48213 (fictional)\n**Certification body:** Southern Cross Assurance Services (fictional)\n**Standard:** ISO/IEC 27001:2022\n**Initial certification:** March 2019 (und",
+      "source_path": "corpus/DOC-004-iso27001-certification.md",
+      "score": 1.56
+    }
+  ],
+  "REQ-048": [
+    {
+      "doc_id": "DOC-008",
+      "title": "Commercial Terms Register — Milestone Payments and Invoicing History",
+      "excerpt": "# Commercial Terms Register — Milestone Payment Structures\n\n**Owner:** Commercial Director\n**Purpose:** Record of milestone-based payment structures agreed in prior\nengagements, for reuse in proposals.\n\n## Standard milestone payment model (as agreed in prior contracts)\n\n| Milestone | Trigger | Typical % of contract val",
+      "source_path": "corpus/DOC-008-milestone-payment-terms.md",
+      "score": 2.0
+    },
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 1.72
+    },
+    {
+      "doc_id": "DOC-013",
+      "title": "Client Reference Register — Government Engagements",
+      "excerpt": "# Client Reference Register — Government Engagements (fictional contacts)\n\n**Owner:** Sales Operations\n**Updated:** February 2026\n**Use:** Contactable references consented for inclusion in government\ntender responses. All names and details are fictional.\n\n## Consented references\n\n### 1. HealthGov Australia\n- **Engageme",
+      "source_path": "corpus/DOC-013-client-reference-register.md",
+      "score": 1.5
+    }
+  ],
+  "REQ-049": [
+    {
+      "doc_id": "DOC-002",
+      "title": "Case Study — StateGov Authority Cloud Transition Program",
+      "excerpt": "# Case Study: StateGov Authority — Cloud Transition Program\n\n**Client:** StateGov Authority (state government shared-services provider)\n**Engagement:** Migration of shared-services platform to Azure\n**Duration:** 11 months (Oct 2024 – Sep 2025)\n**Contract value:** AUD 6.4M\n\n## Scope\n\nMigration of **540 virtual machines",
+      "source_path": "corpus/DOC-002-case-study-stategov-datacentre-exit.md",
+      "score": 2.01
+    },
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 1.92
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.92
+    }
+  ],
+  "REQ-050": [
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 2.07
+    },
+    {
+      "doc_id": "DOC-012",
+      "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
+      "excerpt": "# Proposal Excerpt — GovCloud Services Panel 2025\n\n**Status:** Successful — appointed to panel, August 2025\n**Excerpt:** Technical approach section (reused with internal approval)\n\n## Migration methodology (as submitted)\n\nOur migration factory model executes discovery, dependency mapping, wave\nplanning, rehearsal, cuto",
+      "source_path": "corpus/DOC-012-proposal-excerpt-govcloud-2025.md",
+      "score": 1.99
+    },
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 1.91
+    }
+  ],
+  "REQ-051": [
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.62
+    },
+    {
+      "doc_id": "DOC-002",
+      "title": "Case Study — StateGov Authority Cloud Transition Program",
+      "excerpt": "# Case Study: StateGov Authority — Cloud Transition Program\n\n**Client:** StateGov Authority (state government shared-services provider)\n**Engagement:** Migration of shared-services platform to Azure\n**Duration:** 11 months (Oct 2024 – Sep 2025)\n**Contract value:** AUD 6.4M\n\n## Scope\n\nMigration of **540 virtual machines",
+      "source_path": "corpus/DOC-002-case-study-stategov-datacentre-exit.md",
+      "score": 1.61
+    },
+    {
+      "doc_id": "DOC-004",
+      "title": "ISO/IEC 27001:2022 Certification Summary",
+      "excerpt": "# ISO/IEC 27001:2022 Certification — Summary of Currency and Scope\n\n**Certificate holder:** Contoso Cloud Solutions Pty Ltd\n**Certificate number:** AU-27001-48213 (fictional)\n**Certification body:** Southern Cross Assurance Services (fictional)\n**Standard:** ISO/IEC 27001:2022\n**Initial certification:** March 2019 (und",
+      "source_path": "corpus/DOC-004-iso27001-certification.md",
+      "score": 1.53
+    }
+  ],
+  "REQ-052": [
+    {
+      "doc_id": "DOC-013",
+      "title": "Client Reference Register — Government Engagements",
+      "excerpt": "# Client Reference Register — Government Engagements (fictional contacts)\n\n**Owner:** Sales Operations\n**Updated:** February 2026\n**Use:** Contactable references consented for inclusion in government\ntender responses. All names and details are fictional.\n\n## Consented references\n\n### 1. HealthGov Australia\n- **Engageme",
+      "source_path": "corpus/DOC-013-client-reference-register.md",
+      "score": 1.63
+    },
+    {
+      "doc_id": "DOC-008",
+      "title": "Commercial Terms Register — Milestone Payments and Invoicing History",
+      "excerpt": "# Commercial Terms Register — Milestone Payment Structures\n\n**Owner:** Commercial Director\n**Purpose:** Record of milestone-based payment structures agreed in prior\nengagements, for reuse in proposals.\n\n## Standard milestone payment model (as agreed in prior contracts)\n\n| Milestone | Trigger | Typical % of contract val",
+      "source_path": "corpus/DOC-008-milestone-payment-terms.md",
+      "score": 1.51
+    }
+  ],
+  "REQ-053": [
+    {
+      "doc_id": "DOC-002",
+      "title": "Case Study — StateGov Authority Cloud Transition Program",
+      "excerpt": "# Case Study: StateGov Authority — Cloud Transition Program\n\n**Client:** StateGov Authority (state government shared-services provider)\n**Engagement:** Migration of shared-services platform to Azure\n**Duration:** 11 months (Oct 2024 – Sep 2025)\n**Contract value:** AUD 6.4M\n\n## Scope\n\nMigration of **540 virtual machines",
+      "source_path": "corpus/DOC-002-case-study-stategov-datacentre-exit.md",
+      "score": 1.64
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.56
+    }
+  ],
+  "REQ-054": [
+    {
+      "doc_id": "DOC-006",
+      "title": "Data Residency and Sovereignty Policy",
+      "excerpt": "# Data Residency and Sovereignty Policy\n\n**Owner:** Chief Information Security Officer\n**Version:** 3.2 (January 2025)\n**Applies to:** All client engagements involving Australian government or\nregulated-industry data\n\n## Policy\n\n1. **Australian regions only.** All client workloads and data classified\n   OFFICIAL or abo",
+      "source_path": "corpus/DOC-006-data-residency-policy.md",
+      "score": 1.53
+    }
+  ],
+  "REQ-055": [
+    {
+      "doc_id": "DOC-010",
+      "title": "Managed Services Incident Response Runbook (Extract)",
+      "excerpt": "# Incident Response Runbook — Managed Services (Extract)\n\n**Owner:** Head of Service Operations\n**Version:** 5.1 (October 2025)\n**Scope:** All managed Azure environments under 24/7 support\n\n## Service levels (standard government tier)\n\n- **Availability SLA: 99.95%** for Tier-1 production workloads, measured\n  monthly p",
+      "source_path": "corpus/DOC-010-incident-response-runbook.md",
+      "score": 2.42
+    },
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 2.41
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 2.34
+    }
+  ],
+  "REQ-056": [
+    {
+      "doc_id": "DOC-012",
+      "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
+      "excerpt": "# Proposal Excerpt — GovCloud Services Panel 2025\n\n**Status:** Successful — appointed to panel, August 2025\n**Excerpt:** Technical approach section (reused with internal approval)\n\n## Migration methodology (as submitted)\n\nOur migration factory model executes discovery, dependency mapping, wave\nplanning, rehearsal, cuto",
+      "source_path": "corpus/DOC-012-proposal-excerpt-govcloud-2025.md",
+      "score": 1.94
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.9
+    },
+    {
+      "doc_id": "DOC-007",
+      "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+      "excerpt": "# Executed SOW Extract — Fixed-Price Pricing Schedule\n\n**Engagement:** ClientCo Enterprises — Cloud Migration and Managed Services\n**Status:** Executed 22 July 2025 (signature pages held in contract register)\n**Extract purpose:** Internal evidence of accepted fixed-price commercial\nstructure for reuse in government pro",
+      "source_path": "corpus/DOC-007-sow-fixed-price-schedule.md",
+      "score": 1.83
+    }
+  ],
+  "REQ-057": [
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.87
+    },
+    {
+      "doc_id": "DOC-007",
+      "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+      "excerpt": "# Executed SOW Extract — Fixed-Price Pricing Schedule\n\n**Engagement:** ClientCo Enterprises — Cloud Migration and Managed Services\n**Status:** Executed 22 July 2025 (signature pages held in contract register)\n**Extract purpose:** Internal evidence of accepted fixed-price commercial\nstructure for reuse in government pro",
+      "source_path": "corpus/DOC-007-sow-fixed-price-schedule.md",
+      "score": 1.82
+    },
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 1.75
+    }
+  ],
+  "REQ-058": [
+    {
+      "doc_id": "DOC-012",
+      "title": "Winning Proposal Excerpt — GovCloud Services Panel 2025 (Technical Approach)",
+      "excerpt": "# Proposal Excerpt — GovCloud Services Panel 2025\n\n**Status:** Successful — appointed to panel, August 2025\n**Excerpt:** Technical approach section (reused with internal approval)\n\n## Migration methodology (as submitted)\n\nOur migration factory model executes discovery, dependency mapping, wave\nplanning, rehearsal, cuto",
+      "source_path": "corpus/DOC-012-proposal-excerpt-govcloud-2025.md",
+      "score": 2.12
+    },
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 1.76
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.74
+    }
+  ],
+  "REQ-059": [
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 2.09
+    },
+    {
+      "doc_id": "DOC-002",
+      "title": "Case Study — StateGov Authority Cloud Transition Program",
+      "excerpt": "# Case Study: StateGov Authority — Cloud Transition Program\n\n**Client:** StateGov Authority (state government shared-services provider)\n**Engagement:** Migration of shared-services platform to Azure\n**Duration:** 11 months (Oct 2024 – Sep 2025)\n**Contract value:** AUD 6.4M\n\n## Scope\n\nMigration of **540 virtual machines",
+      "source_path": "corpus/DOC-002-case-study-stategov-datacentre-exit.md",
+      "score": 2.04
+    },
+    {
+      "doc_id": "DOC-008",
+      "title": "Commercial Terms Register — Milestone Payments and Invoicing History",
+      "excerpt": "# Commercial Terms Register — Milestone Payment Structures\n\n**Owner:** Commercial Director\n**Purpose:** Record of milestone-based payment structures agreed in prior\nengagements, for reuse in proposals.\n\n## Standard milestone payment model (as agreed in prior contracts)\n\n| Milestone | Trigger | Typical % of contract val",
+      "source_path": "corpus/DOC-008-milestone-payment-terms.md",
+      "score": 1.89
+    }
+  ],
+  "REQ-060": [
+    {
+      "doc_id": "DOC-002",
+      "title": "Case Study — StateGov Authority Cloud Transition Program",
+      "excerpt": "# Case Study: StateGov Authority — Cloud Transition Program\n\n**Client:** StateGov Authority (state government shared-services provider)\n**Engagement:** Migration of shared-services platform to Azure\n**Duration:** 11 months (Oct 2024 – Sep 2025)\n**Contract value:** AUD 6.4M\n\n## Scope\n\nMigration of **540 virtual machines",
+      "source_path": "corpus/DOC-002-case-study-stategov-datacentre-exit.md",
+      "score": 1.73
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.58
+    }
+  ],
+  "REQ-061": [
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 1.99
+    },
+    {
+      "doc_id": "DOC-007",
+      "title": "Executed SOW Extract — Fixed-Price Multi-Year Schedule (ClientCo)",
+      "excerpt": "# Executed SOW Extract — Fixed-Price Pricing Schedule\n\n**Engagement:** ClientCo Enterprises — Cloud Migration and Managed Services\n**Status:** Executed 22 July 2025 (signature pages held in contract register)\n**Extract purpose:** Internal evidence of accepted fixed-price commercial\nstructure for reuse in government pro",
+      "source_path": "corpus/DOC-007-sow-fixed-price-schedule.md",
+      "score": 1.95
+    },
+    {
+      "doc_id": "DOC-001",
+      "title": "Case Study — HealthGov Australia Datacentre-to-Azure Migration",
+      "excerpt": "# Case Study: HealthGov Australia — Datacentre-to-Azure Migration\n\n**Client:** HealthGov Australia (federal health services agency)\n**Engagement:** Full datacentre exit and migration to Microsoft Azure\n**Duration:** 14 months (Sep 2023 – Nov 2024)\n**Contract value:** AUD 8.2M\n\n## Scope\n\nMigration of HealthGov's two on-",
+      "source_path": "corpus/DOC-001-case-study-healthgov-migration.md",
+      "score": 1.82
+    }
+  ],
+  "REQ-062": [
+    {
+      "doc_id": "DOC-008",
+      "title": "Commercial Terms Register — Milestone Payments and Invoicing History",
+      "excerpt": "# Commercial Terms Register — Milestone Payment Structures\n\n**Owner:** Commercial Director\n**Purpose:** Record of milestone-based payment structures agreed in prior\nengagements, for reuse in proposals.\n\n## Standard milestone payment model (as agreed in prior contracts)\n\n| Milestone | Trigger | Typical % of contract val",
+      "source_path": "corpus/DOC-008-milestone-payment-terms.md",
+      "score": 2.28
+    }
+  ],
+  "REQ-063": [
+    {
+      "doc_id": "DOC-011",
+      "title": "Privacy Act 1988 Compliance Statement and Breach Notification Procedure",
+      "excerpt": "# Privacy Act 1988 (Cth) Compliance Statement\n\n**Owner:** General Counsel / Privacy Officer\n**Version:** 2.4 (May 2025)\n\n## Compliance posture\n\n- Contoso Cloud Solutions operates a privacy management framework aligned\n  to the **Privacy Act 1988 (Cth)** and the Australian Privacy Principles\n  (APPs), reviewed annually ",
+      "source_path": "corpus/DOC-011-privacy-act-compliance.md",
+      "score": 2.14
+    },
+    {
+      "doc_id": "DOC-003",
+      "title": "Case Study — FinanceDept Agency Core Systems Migration",
+      "excerpt": "# Case Study: FinanceDept Agency — Core Systems Migration to Azure\n\n**Client:** FinanceDept Agency (federal financial administration agency)\n**Engagement:** Migration of core financial systems to Azure IaaS/PaaS\n**Duration:** 9 months (Mar 2025 – Nov 2025)\n**Contract value:** AUD 4.9M\n\n## Scope\n\nMigration of **510 virt",
+      "source_path": "corpus/DOC-003-case-study-financedept-cutover.md",
+      "score": 1.59
+    },
+    {
+      "doc_id": "DOC-005",
+      "title": "IRAP Assessment Summary — ISM PROTECTED Level",
+      "excerpt": "# IRAP Assessment Summary — Australian Government ISM (PROTECTED)\n\n**Assessed entity:** Contoso Cloud Solutions Pty Ltd — Azure landing zone\nreference architecture and managed services practice\n**Assessment type:** IRAP (Infosec Registered Assessors Program) assessment\nagainst the Australian Government **Information Se",
+      "source_path": "corpus/DOC-005-irap-ism-assessment.md",
+      "score": 1.55
+    }
+  ],
+  "REQ-064": [
+    {
+      "doc_id": "DOC-006",
+      "title": "Data Residency and Sovereignty Policy",
+      "excerpt": "# Data Residency and Sovereignty Policy\n\n**Owner:** Chief Information Security Officer\n**Version:** 3.2 (January 2025)\n**Applies to:** All client engagements involving Australian government or\nregulated-industry data\n\n## Policy\n\n1. **Australian regions only.** All client workloads and data classified\n   OFFICIAL or abo",
+      "source_path": "corpus/DOC-006-data-residency-policy.md",
+      "score": 1.84
+    },
+    {
+      "doc_id": "DOC-004",
+      "title": "ISO/IEC 27001:2022 Certification Summary",
+      "excerpt": "# ISO/IEC 27001:2022 Certification — Summary of Currency and Scope\n\n**Certificate holder:** Contoso Cloud Solutions Pty Ltd\n**Certificate number:** AU-27001-48213 (fictional)\n**Certification body:** Southern Cross Assurance Services (fictional)\n**Standard:** ISO/IEC 27001:2022\n**Initial certification:** March 2019 (und",
+      "source_path": "corpus/DOC-004-iso27001-certification.md",
+      "score": 1.72
+    },
+    {
+      "doc_id": "DOC-005",
+      "title": "IRAP Assessment Summary — ISM PROTECTED Level",
+      "excerpt": "# IRAP Assessment Summary — Australian Government ISM (PROTECTED)\n\n**Assessed entity:** Contoso Cloud Solutions Pty Ltd — Azure landing zone\nreference architecture and managed services practice\n**Assessment type:** IRAP (Infosec Registered Assessors Program) assessment\nagainst the Australian Government **Information Se",
+      "source_path": "corpus/DOC-005-irap-ism-assessment.md",
+      "score": 1.7
+    }
+  ],
+  "REQ-065": [
+    {
+      "doc_id": "DOC-006",
+      "title": "Data Residency and Sovereignty Policy",
+      "excerpt": "# Data Residency and Sovereignty Policy\n\n**Owner:** Chief Information Security Officer\n**Version:** 3.2 (January 2025)\n**Applies to:** All client engagements involving Australian government or\nregulated-industry data\n\n## Policy\n\n1. **Australian regions only.** All client workloads and data classified\n   OFFICIAL or abo",
+      "source_path": "corpus/DOC-006-data-residency-policy.md",
+      "score": 1.63
+    },
+    {
+      "doc_id": "DOC-011",
+      "title": "Privacy Act 1988 Compliance Statement and Breach Notification Procedure",
+      "excerpt": "# Privacy Act 1988 (Cth) Compliance Statement\n\n**Owner:** General Counsel / Privacy Officer\n**Version:** 2.4 (May 2025)\n\n## Compliance posture\n\n- Contoso Cloud Solutions operates a privacy management framework aligned\n  to the **Privacy Act 1988 (Cth)** and the Australian Privacy Principles\n  (APPs), reviewed annually ",
+      "source_path": "corpus/DOC-011-privacy-act-compliance.md",
+      "score": 1.58
+    },
+    {
+      "doc_id": "DOC-004",
+      "title": "ISO/IEC 27001:2022 Certification Summary",
+      "excerpt": "# ISO/IEC 27001:2022 Certification — Summary of Currency and Scope\n\n**Certificate holder:** Contoso Cloud Solutions Pty Ltd\n**Certificate number:** AU-27001-48213 (fictional)\n**Certification body:** Southern Cross Assurance Services (fictional)\n**Standard:** ISO/IEC 27001:2022\n**Initial certification:** March 2019 (und",
+      "source_path": "corpus/DOC-004-iso27001-certification.md",
+      "score": 1.52
+    }
+  ]
+}

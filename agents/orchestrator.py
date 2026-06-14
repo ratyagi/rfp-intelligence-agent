@@ -67,6 +67,7 @@ def run_pipeline(input: dict) -> dict:
         "gap_count": 0,
         "card_path": None,
         "report_path": None,
+        "dashboard_path": None,
         "errors": [],
     }
 
@@ -137,6 +138,7 @@ def run_pipeline(input: dict) -> dict:
             result["docx_path"] = review_result.get("docx_path")
             result["card_path"] = review_result.get("card_path")
             result["report_path"] = review_result.get("report_path")
+            result["dashboard_path"] = review_result.get("dashboard_path")
     else:
         logger.warning("orchestrator: skipping Review — no verified draft available")
 

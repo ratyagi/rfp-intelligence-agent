@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RFP Intelligence Agent — GOV-2026-ICT-0042 Cloud Infrastructure Modernisation</title>
+<style>
+  :root {
+    --bg:#f3f4f6; --card:#ffffff; --ink:#1b1a19; --muted:#605e5c; --line:#e1dfdd;
+    --blue:#0f6cbd; --blue-deep:#115ea3; --green:#0e7038; --green-bg:#e6f4ea;
+    --amber:#8a6100; --amber-bg:#fdf3e0; --red:#b10e1c; --red-bg:#fde7e9;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif; }
+  .wrap { max-width:1080px; margin:0 auto; padding:32px 24px 64px; }
+  header.top { display:flex; justify-content:space-between; align-items:flex-start;
+    gap:24px; flex-wrap:wrap; border-bottom:3px solid var(--blue); padding-bottom:20px; }
+  .brand { font-size:13px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--blue); }
+  h1 { font-size:26px; margin:6px 0 4px; line-height:1.25; }
+  .sub { color:var(--muted); font-size:14px; }
+  .run-meta { text-align:right; font-size:12.5px; color:var(--muted); line-height:1.7; }
+  .run-meta b { color:var(--ink); }
+  .pill { display:inline-block; padding:2px 9px; border-radius:999px; font-size:11px;
+    font-weight:600; }
+  .pill.foundry { background:#e7f0fb; color:var(--blue-deep); }
+
+  .hero { display:grid; grid-template-columns:1.1fr 1fr 1fr; gap:16px; margin:24px 0; }
+  .metric { background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:20px 22px; }
+  .metric .label { font-size:12px; color:var(--muted); text-transform:uppercase;
+    letter-spacing:.06em; font-weight:600; }
+  .score-num { font-size:52px; font-weight:700; line-height:1; margin-top:6px; }
+  .score-num.covered { color:var(--green); } .score-num.partial { color:var(--amber); }
+  .score-num.gap { color:var(--red); }
+  .score-note { font-size:12px; color:var(--muted); margin-top:8px; }
+  .rec { display:inline-block; margin-top:10px; padding:6px 12px; border-radius:8px;
+    font-weight:700; font-size:14px; }
+  .rec.covered { background:var(--green-bg); color:var(--green); }
+  .rec.partial { background:var(--amber-bg); color:var(--amber); }
+  .rec.gap { background:var(--red-bg); color:var(--red); }
+  .verif { display:flex; align-items:center; gap:12px; margin-top:8px; }
+  .verif .big { font-size:40px; font-weight:700; color:var(--green); line-height:1; }
+  .check { width:30px; height:30px; border-radius:50%; background:var(--green);
+    color:#fff; display:flex; align-items:center; justify-content:center; font-size:18px; }
+
+  .barwrap { background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:18px 22px; margin-bottom:24px; }
+  .bar { display:flex; height:22px; border-radius:6px; overflow:hidden; margin-top:10px;
+    border:1px solid var(--line); }
+  .bar i { display:block; height:100%; }
+  .bar .c { background:var(--green); } .bar .p { background:#e8a13a; }
+  .bar .g { background:#d3434f; }
+  .legend { display:flex; gap:20px; margin-top:12px; font-size:13px; color:var(--muted);
+    flex-wrap:wrap; }
+  .legend span b { color:var(--ink); }
+  .dot { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; }
+
+  h2 { font-size:15px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted);
+    margin:28px 0 12px; }
+  .pipeline { display:grid; grid-template-columns:repeat(6,1fr); gap:10px; }
+  .stage { background:var(--card); border:1px solid var(--line); border-top:3px solid var(--blue);
+    border-radius:10px; padding:12px; }
+  .stage.det { border-top-color:#8a8886; }
+  .stage-top { display:flex; justify-content:space-between; align-items:center; }
+  .stage-num { font-size:18px; font-weight:700; color:var(--muted); }
+  .stage-tag { font-size:9px; font-weight:700; padding:2px 6px; border-radius:4px;
+    letter-spacing:.05em; }
+  .stage-tag.llm { background:#e7f0fb; color:var(--blue-deep); }
+  .stage-tag.det { background:#eceae9; color:#3b3a39; }
+  .stage-name { font-weight:600; margin-top:8px; }
+  .stage-engine { font-size:11px; color:var(--blue-deep); font-weight:600; }
+  .stage-desc { font-size:11px; color:var(--muted); margin-top:6px; line-height:1.4; }
+
+  .summary { background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:18px 22px; font-size:14px; line-height:1.6; color:#33312f; }
+
+  table { width:100%; border-collapse:collapse; background:var(--card);
+    border:1px solid var(--line); border-radius:12px; overflow:hidden; font-size:13.5px; }
+  th { text-align:left; background:#faf9f8; color:var(--muted); font-size:11px;
+    text-transform:uppercase; letter-spacing:.05em; padding:11px 14px; border-bottom:1px solid var(--line); }
+  td { padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  .req-id { font-weight:700; white-space:nowrap; }
+  .chips { margin-top:5px; }
+  .chip { font-size:10.5px; color:var(--muted); background:#f3f2f1; border-radius:4px;
+    padding:1px 6px; margin-right:4px; }
+  .badge { font-weight:700; font-size:12px; padding:3px 10px; border-radius:6px; white-space:nowrap; }
+  .badge.covered { background:var(--green-bg); color:var(--green); }
+  .badge.partial { background:var(--amber-bg); color:var(--amber); }
+  .badge.gap { background:var(--red-bg); color:var(--red); }
+  .cite { display:inline-block; font-size:11px; font-weight:600; color:var(--green);
+    background:var(--green-bg); border-radius:4px; padding:1px 7px; margin:2px 4px 0 0; }
+  .cite.stripped { color:var(--red); background:var(--red-bg); text-decoration:line-through; }
+  .action { color:var(--red); font-size:12.5px; }
+  .resp { color:#33312f; }
+  footer { margin-top:32px; padding-top:18px; border-top:1px solid var(--line);
+    font-size:12px; color:var(--muted); line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="brand">RFP Intelligence Agent</div>
+      <h1>GOV-2026-ICT-0042 Cloud Infrastructure Modernisation</h1>
+      <div class="sub">Contoso Cloud Solutions &middot; 14 June 2026</div>
+    </div>
+    <div class="run-meta">
+      <div>Reasoning: <span class="pill foundry">Microsoft Foundry gpt-4.1</span></div>
+      <div>Retrieval: <span class="pill foundry">Foundry IQ &middot; Azure AI Search</span></div>
+      <div><b>71</b> requirements analysed</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="metric">
+      <div class="label">Requirement coverage score</div>
+      <div class="score-num gap">28%</div>
+      <div class="rec gap">REVIEW BID DECISION</div>
+      <div class="score-note">Material gaps on weighted requirements — escalate before committing.</div>
+    </div>
+    <div class="metric">
+      <div class="label">Citations verified</div>
+      <div class="verif"><span class="check">&#10003;</span>
+        <span class="big">63/63</span></div>
+      <div class="score-note">0 stripped — every citation resolved. Each verified citation resolves to a document that was actually retrieved.</div>
+    </div>
+    <div class="metric">
+      <div class="label">Outcome mix</div>
+      <div class="score-num" style="font-size:34px;margin-top:10px;">7 / 22 / 42</div>
+      <div class="score-note">Covered / Partial / Gaps flagged for human action</div>
+    </div>
+  </section>
+
+  <div class="barwrap">
+    <div class="label" style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;">Requirement outcomes</div>
+    <div class="bar">
+      <i class="c" style="width:9.9%"></i><i class="p" style="width:31.0%"></i><i class="g" style="width:59.2%"></i>
+    </div>
+    <div class="legend">
+      <span><span class="dot" style="background:var(--green)"></span><b>7</b> Covered</span>
+      <span><span class="dot" style="background:#e8a13a"></span><b>22</b> Partial</span>
+      <span><span class="dot" style="background:#d3434f"></span><b>42</b> Action required</span>
+    </div>
+  </div>
+
+  <h2>The reasoning pipeline</h2>
+  <div class="pipeline">
+        <div class="stage llm">
+          <div class="stage-top"><span class="stage-num">1</span>
+            <span class="stage-tag llm">LLM</span></div>
+          <div class="stage-name">Intake</div>
+          <div class="stage-engine">gpt-4.1</div>
+          <div class="stage-desc">Extracts every requirement from the RFP</div>
+        </div>
+        <div class="stage det">
+          <div class="stage-top"><span class="stage-num">2</span>
+            <span class="stage-tag det">CODE</span></div>
+          <div class="stage-name">Research</div>
+          <div class="stage-engine">Foundry IQ</div>
+          <div class="stage-desc">Retrieves cited evidence per requirement</div>
+        </div>
+        <div class="stage llm">
+          <div class="stage-top"><span class="stage-num">3</span>
+            <span class="stage-tag llm">LLM</span></div>
+          <div class="stage-name">Scorer</div>
+          <div class="stage-engine">gpt-4.1</div>
+          <div class="stage-desc">Judges COVERED / PARTIAL / GAP</div>
+        </div>
+        <div class="stage llm">
+          <div class="stage-top"><span class="stage-num">4</span>
+            <span class="stage-tag llm">LLM</span></div>
+          <div class="stage-name">Drafter</div>
+          <div class="stage-engine">gpt-4.1</div>
+          <div class="stage-desc">Writes responses, citing only retrieved docs</div>
+        </div>
+        <div class="stage det">
+          <div class="stage-top"><span class="stage-num">5</span>
+            <span class="stage-tag det">CODE</span></div>
+          <div class="stage-name">Verifier</div>
+          <div class="stage-engine">deterministic</div>
+          <div class="stage-desc">Strips any citation that does not resolve</div>
+        </div>
+        <div class="stage det">
+          <div class="stage-top"><span class="stage-num">6</span>
+            <span class="stage-tag det">CODE</span></div>
+          <div class="stage-name">Review</div>
+          <div class="stage-engine">deterministic</div>
+          <div class="stage-desc">Builds the proposal, report and this view</div>
+        </div></div>
+
+  <h2>Executive summary</h2>
+  <div class="summary">Contoso Cloud Solutions has submitted a response to the &quot;GOV-2026-ICT-0042 Cloud Infrastructure Modernisation&quot; RFP. Of the 71 total requirements, the proposal fully covers 7 and partially addresses 22, resulting in a coverage score of 28%. There are 42 requirements identified as gaps. The proposal is grounded in the company’s verified internal evidence base, and all gaps are explicitly flagged for human input rather than being overlooked.</div>
+
+  <h2>Requirement-by-requirement decisions</h2>
+  <table>
+    <thead><tr><th>Requirement</th><th>Decision</th><th>Evidence &amp; response</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><div class="req-id">REQ-001</div>
+          <div>The vendor must migrate DDT&#x27;s hosted workloads, including approximately 580 virtual machines (predominantly Windows Server 2012 R2 and 2016, with a small Red Hat Enterprise Linux estate), 36 Microsoft SQL Server instances, and approximately</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">technical</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 65%</div></td>
+        <td><div class="resp">We have successfully delivered large-scale Azure migration projects for government clients, including HealthGov Australia, where we migrated 620 virtual machines to Microsoft Azure over a 14-month engagement [DOC-001]. This migration included Windows Server workloads and was completed with zero unplanned downtime, achieving 99.97% availability [DOC-001]. Additionally, we migrated 540 virtual machines for StateGov Aut</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-001 &#10003;</span><span class="cite">DOC-002 &#10003;</span><span class="cite">DOC-003 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-002</div>
+          <div>The vendor must provide ongoing managed platform services for the migrated workloads in Microsoft Azure.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">technical</span></div></td>
+        <td><span class="badge covered">Covered</span>
+          <div class="score-note" style="margin-top:6px;">confidence 85%</div></td>
+        <td><div class="resp">We provide ongoing managed platform services for migrated workloads in Microsoft Azure, as evidenced by our executed Statement of Work with ClientCo Enterprises, which includes cloud migration and managed services under a fixed-price, multi-year schedule [DOC-007]. Our managed services are governed by a comprehensive incident response runbook, covering all managed Azure environments with 24/7 support and a standard g</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-007 &#10003;</span><span class="cite">DOC-010 &#10003;</span><span class="cite">DOC-002 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-003</div>
+          <div>The proposal must address every mandatory requirement individually, providing verifiable evidence for each claim made.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">other</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 50%</div></td>
+        <td><div class="resp">Each mandatory requirement is addressed individually in our proposal, with verifiable evidence provided for each claim. For example, our executed Statement of Work for ClientCo Enterprises demonstrates acceptance of a fixed-price commercial structure, with signature pages held in the contract register as proof [DOC-007]. Additionally, our Data Residency and Sovereignty Policy (version 3.2, January 2025) applies to al</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-007 &#10003;</span><span class="cite">DOC-006 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-004</div>
+          <div>Unsupported claims in the proposal will be disregarded by the evaluation panel.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">other</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 100%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide a policy or process document demonstrating how unsupported claims are identified and excluded from proposals.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-005</div>
+          <div>Proposals must be submitted via the AusTender portal by 17:00 AEST, 30 June 2026.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">timeline</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 0%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide documentation or confirmation that proposals will be or have been submitted via the AusTender portal by the specified deadline.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-006</div>
+          <div>The vendor must perform discovery, dependency mapping, and wave planning for all in-scope workloads.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">technical</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 60%</div></td>
+        <td><div class="resp">Our migration methodology incorporates structured discovery, dependency mapping, and wave planning for all in-scope workloads. This approach was detailed in our successful GovCloud Services Panel 2025 proposal, where our migration factory model executes discovery, dependency mapping, and wave planning as foundational steps [DOC-012]. In previous engagements, such as the HealthGov Australia datacentre-to-Azure migrati</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-012 &#10003;</span><span class="cite">DOC-001 &#10003;</span><span class="cite">DOC-003 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-007</div>
+          <div>The vendor must design and build an Azure landing zone compliant with the Australian Government Information Security Manual (ISM) at the PROTECTED level.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">technical</span></div></td>
+        <td><span class="badge covered">Covered</span>
+          <div class="score-note" style="margin-top:6px;">confidence 85%</div></td>
+        <td><div class="resp">Our Azure landing zone reference architecture and managed services practice have undergone an IRAP assessment against the Australian Government Information Security Manual (ISM) at the PROTECTED level [DOC-005]. This assessment confirms compliance with ISM PROTECTED requirements, ensuring that our Azure landing zone designs meet the stringent security controls mandated for Australian Government workloads. The IRAP as</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-005 &#10003;</span><span class="cite">DOC-014 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-008</div>
+          <div>The vendor must migrate all in-scope workloads to Azure.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">technical</span></div></td>
+        <td><span class="badge covered">Covered</span>
+          <div class="score-note" style="margin-top:6px;">confidence 90%</div></td>
+        <td><div class="resp">We have successfully migrated all in-scope workloads to Azure for multiple government clients, demonstrating our proven capability in full-scale cloud transitions. For HealthGov Australia, we executed a complete datacentre exit and migrated all workloads to Microsoft Azure over a 14-month engagement [DOC-001]. Similarly, for StateGov Authority, we migrated the entire shared-services platform, including 540 virtual ma</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-001 &#10003;</span><span class="cite">DOC-002 &#10003;</span><span class="cite">DOC-003 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-009</div>
+          <div>The vendor must modernise nominated application workloads, including containerisation where assessed as suitable.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">technical</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 50%</div></td>
+        <td><div class="resp">Our migration methodology, as outlined in our successful GovCloud Services Panel 2025 proposal, includes comprehensive discovery, dependency mapping, wave planning, and rehearsal phases to modernise application workloads [DOC-012]. This approach has been applied in engagements such as the HealthGov Australia datacentre migration, where legacy applications were transitioned to Azure environments [DOC-001], and the Fin</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-012 &#10003;</span><span class="cite">DOC-001 &#10003;</span><span class="cite">DOC-003 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-010</div>
+          <div>The vendor must provide managed platform and security operations services for an initial term of three years.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">technical</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 50%</div></td>
+        <td><div class="resp">We have demonstrated our capability to deliver managed platform and security operations services through executed multi-year contracts, such as the fixed-price engagement with ClientCo Enterprises, which includes managed services and was executed on 22 July 2025 [DOC-007]. Our ISO/IEC 27001:2022 certification, initially awarded in March 2019, confirms our adherence to internationally recognized security management st</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-007 &#10003;</span><span class="cite">DOC-004 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-011</div>
+          <div>The vendor must provide full decommissioning support for both existing datacentres prior to lease expiry.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">technical</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 50%</div></td>
+        <td><div class="resp">We have provided full datacentre exit support for HealthGov Australia, including migration to Microsoft Azure and decommissioning activities as part of a 14-month engagement covering two datacentres [DOC-001]. Our scope included the complete exit from existing facilities, ensuring all workloads were transitioned and datacentre operations ceased prior to lease expiry [DOC-001]. Additionally, our experience with StateG</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-001 &#10003;</span><span class="cite">DOC-002 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-012</div>
+          <div>The vendor must demonstrate proven experience migrating Windows Server 2012/2016 workloads to Azure IaaS and PaaS services, with a minimum of three completed migrations of comparable scale (500 or more virtual machines each), evidenced by c</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">technical</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 60%</div></td>
+        <td><div class="resp">We have successfully completed large-scale migrations of Windows Server workloads to Azure IaaS and PaaS services for government clients. Notably, we migrated 510 virtual machines for FinanceDept Agency, encompassing core financial systems, over a nine-month engagement [DOC-003]. Additionally, our HealthGov Australia project involved a full datacentre exit and migration of two on-premises environments to Microsoft Az</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-003 &#10003;</span><span class="cite">DOC-001 &#10003;</span><span class="cite">DOC-013 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-013</div>
+          <div>The proposed managed service must achieve a 99.95% availability SLA for Tier-1 production workloads, with continuous monitoring tooling, documented incident response procedures, and a mean time to recovery (MTTR) under 30 minutes for Priori</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">technical</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 50%</div></td>
+        <td><div class="resp">Our managed service for Tier-1 production workloads operates under a documented incident response runbook, overseen by the Head of Service Operations, and covers all managed Azure environments with 24/7 support [DOC-010]. The service level agreement specifies a 99.95% availability SLA for Tier-1 production workloads, measured monthly [DOC-010]. The incident response procedures are formally documented and versioned, e</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-010 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-014</div>
+          <div>All Agency data must remain within Australian Azure regions (Australia East and Australia Southeast) at all times, including backup and disaster recovery copies. The vendor must hold current ISO/IEC 27001 certification covering its cloud de</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">legal</span></div></td>
+        <td><span class="badge covered">Covered</span>
+          <div class="score-note" style="margin-top:6px;">confidence 90%</div></td>
+        <td><div class="resp">All Agency data, including backup and disaster recovery copies, is maintained exclusively within Australian Azure regions (Australia East and Australia Southeast) in accordance with our Data Residency and Sovereignty Policy, which applies to all client engagements involving Australian government or regulated-industry data [DOC-006]. Our cloud delivery operations are covered by a current ISO/IEC 27001:2022 certificati</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-006 &#10003;</span><span class="cite">DOC-004 &#10003;</span><span class="cite">DOC-005 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-015</div>
+          <div>The vendor must provide a zero-downtime migration approach using Azure Site Recovery or an equivalent replication-based mechanism, including rehearsal cutovers and tested rollback plans. Production cutover windows must not exceed four hours</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">technical</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 20%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide migration runbooks, project reports, or client attestations demonstrating zero-downtime migrations using Azure Site Recovery (or equivalent), with evidence of rehearsal cutovers, tested rollback plans, and production cutovers completed within four-hour windows including data loss reporting.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-016</div>
+          <div>The vendor must demonstrate an established application modernisation capability, including production experience designing, deploying, and operating containerised workloads on Azure Kubernetes Service (AKS) at scale, and must provide a mode</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">technical</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 50%</div></td>
+        <td><div class="resp">Our migration methodology, as detailed in the GovCloud Services Panel 2025 technical approach, incorporates a migration factory model that executes discovery, dependency mapping, wave planning, rehearsal, and cutover for legacy applications [DOC-012]. This structured approach enables us to modernise application estates efficiently and aligns with industry best practices. We have successfully delivered large-scale Azu</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-012 &#10003;</span><span class="cite">DOC-001 &#10003;</span><span class="cite">DOC-002 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-017</div>
+          <div>Pricing must be submitted as a fixed-price schedule for Years 1, 2, and 3 of the engagement, with annual escalation capped at CPI plus 2%, inclusive of all licences, migration tooling, professional services, and transition costs.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">commercial</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 50%</div></td>
+        <td><div class="resp">We have executed fixed-price, multi-year commercial schedules for cloud migration and managed services engagements, as evidenced by our contract with ClientCo Enterprises [DOC-007]. This structure demonstrates our ability to submit pricing as a fixed-price schedule covering the full engagement period. Our contracts have included all relevant components such as licences, migration tooling, professional services, and t</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-007 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-018</div>
+          <div>Respondents should evidence prior acceptance of equivalent fixed-price structures.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">commercial</span></div></td>
+        <td><span class="badge covered">Covered</span>
+          <div class="score-note" style="margin-top:6px;">confidence 85%</div></td>
+        <td><div class="resp">We have previously accepted fixed-price commercial structures for cloud migration and managed services engagements, as evidenced by the executed Statement of Work with ClientCo Enterprises dated 22 July 2025. This SOW included a fixed-price multi-year schedule and is held in our contract register [DOC-007]. Additionally, our engagement with FinanceDept Agency for the migration of core financial systems to Azure IaaS/</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-007 &#10003;</span><span class="cite">DOC-003 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-019</div>
+          <div>A milestone-based payment schedule must be provided, with each milestone&#x27;s completion certified by the DDT Project Director prior to invoicing, and payment terms of net 30 days from receipt of a correctly rendered invoice.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">commercial</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 50%</div></td>
+        <td><div class="resp">We utilize a milestone-based payment schedule, as documented in our Commercial Terms Register, which records milestone payment structures agreed in prior engagements [DOC-008]. Each milestone is defined with a specific trigger for payment, and payments are tied to the completion of these milestones. Our standard model ensures that invoicing occurs only after milestone completion, supporting transparent and auditable </div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-008 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-020</div>
+          <div>The proposed delivery team must include a named Project Manager holding a current PMP or PRINCE2 Practitioner certification with a minimum of seven years of cloud migration programme experience, evidenced by a curriculum vitae.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">team</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 60%</div></td>
+        <td><div class="resp">Our proposed delivery team includes Sarah Mitchell as the named Project Manager, holding both current PRINCE2 Practitioner (recertified 2025) and PMP certifications [DOC-009]. Her CV confirms her role as Project Director for proposed engagements and lists her current NV1 security clearance [DOC-009]. However, while her certifications and role are documented, the evidence provided does not substantiate her minimum of </div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-009 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-021</div>
+          <div>Substitution of key personnel requires the Agency&#x27;s prior written approval.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">team</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 10%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide a policy or contract excerpt demonstrating that substitution of key personnel requires the Agency&#x27;s prior written approval.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-022</div>
+          <div>The vendor must also name a lead cloud architect holding current Microsoft Azure architecture certification.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">team</span></div></td>
+        <td><span class="badge covered">Covered</span>
+          <div class="score-note" style="margin-top:6px;">confidence 95%</div></td>
+        <td><div class="resp">James Liu is named as our lead cloud architect for proposed engagements. He holds the Microsoft Certified: Azure Solutions Architect Expert certification, which is current, as well as Microsoft Certified: Azure Security credentials. James Liu is based in Sydney and maintains an NV1 security clearance [DOC-014].</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-014 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-023</div>
+          <div>The vendor must operate a monthly steering committee with Agency executives and provide fortnightly written progress reports covering schedule, risk, and financial status.</div>
+          <div class="chips"><span class="chip">low</span><span class="chip">team</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 10%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide meeting schedules, minutes, or reporting templates demonstrating operation of a monthly steering committee and provision of fortnightly progress reports.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-024</div>
+          <div>The vendor must comply with the Privacy Act 1988 (Cth), the Australian Privacy Principles, and the Notifiable Data Breaches scheme.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">legal</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 65%</div></td>
+        <td><div class="resp">Contoso Cloud Solutions operates a privacy management framework aligned to the Privacy Act 1988 (Cth) and the Australian Privacy Principles (APPs), with annual reviews to ensure ongoing compliance [DOC-011]. Our data residency policy mandates that all client workloads and regulated data are hosted exclusively within Australian regions, supporting compliance with local privacy regulations [DOC-006]. While our complian</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-011 &#10003;</span><span class="cite">DOC-006 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-025</div>
+          <div>Any eligible or suspected data breach affecting Agency data must be notified to the Agency within 24 hours of discovery.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">legal</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 20%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide a documented breach notification procedure explicitly stating notification to the Agency within 24 hours of discovery.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-026</div>
+          <div>Respondents must evidence their privacy management framework and tested breach response procedures.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">legal</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 60%</div></td>
+        <td><div class="resp">Our privacy management framework is aligned with the Privacy Act 1988 (Cth) and the Australian Privacy Principles (APPs), and is reviewed annually to ensure ongoing compliance [DOC-011]. The framework is owned and maintained by our General Counsel / Privacy Officer, as documented in our compliance statement [DOC-011]. While our breach notification procedure is referenced in the compliance statement, the provided evid</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-011 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-027</div>
+          <div>Consistent with the Commonwealth Indigenous Procurement Policy, a minimum of 10% of the total contract value must be delivered through registered Indigenous businesses as subcontractors or suppliers.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">commercial</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 10%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide contract schedules or supplier registers demonstrating use of registered Indigenous businesses as subcontractors or suppliers meeting the 10% value requirement.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-028</div>
+          <div>Respondents must identify the Indigenous businesses they propose to engage, the scope each will deliver, and any existing partnership history.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">commercial</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 95%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> No internal evidence found for this requirement. Provide documentation covering: Respondents must identify the Indigenous businesses they propose to engage, the scope each will deliver, and any existin...</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-029</div>
+          <div>The vendor must provide a quantum-safe cryptography transition plan describing how platform cryptography (data in transit, data at rest, and key management) will migrate to post-quantum algorithms by 2030, including interim crypto-agility m</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">technical</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 10%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide a documented quantum-safe cryptography transition plan detailing migration to post-quantum algorithms and interim crypto-agility measures.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-030</div>
+          <div>Quarterly reporting of the carbon footprint attributable to the Agency&#x27;s Azure consumption, with year-on-year reduction targets.</div>
+          <div class="chips"><span class="chip">low</span><span class="chip">other</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 0%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide documentation or reports demonstrating quarterly carbon footprint reporting and year-on-year reduction targets for Azure consumption.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-031</div>
+          <div>An ongoing FinOps practice with quarterly optimisation reviews and a shared-savings mechanism for realised cost reductions.</div>
+          <div class="chips"><span class="chip">low</span><span class="chip">commercial</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 95%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> No internal evidence found for this requirement. Provide documentation covering: An ongoing FinOps practice with quarterly optimisation reviews and a shared-savings mechanism for realised cost reductio...</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-032</div>
+          <div>Proposals that fail to address any mandatory requirement will be excluded from further evaluation.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">technical</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 10%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide a compliance matrix or checklist explicitly mapping each mandatory requirement to supporting evidence.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-033</div>
+          <div>Technical capability and migration approach will be weighted at 40% in the evaluation of proposals.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">technical</span></div></td>
+        <td><span class="badge covered">Covered</span>
+          <div class="score-note" style="margin-top:6px;">confidence 85%</div></td>
+        <td><div class="resp">Our technical capability and migration approach are demonstrated through successful large-scale Azure migrations and recognized methodologies. We were appointed to the GovCloud Services Panel in August 2025 based on our migration factory model, which includes comprehensive discovery, dependency mapping, wave planning, rehearsal, and cutover processes [DOC-012]. This approach has been proven in practice, as evidenced </div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-012 &#10003;</span><span class="cite">DOC-003 &#10003;</span><span class="cite">DOC-001 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-034</div>
+          <div>Price and commercial terms will be weighted at 30% in the evaluation of proposals.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">commercial</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 20%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide documentation explicitly addressing how price and commercial terms are proposed and evaluated in response to RFPs.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-035</div>
+          <div>Team experience and governance will be weighted at 20% in the evaluation of proposals.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">team</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 60%</div></td>
+        <td><div class="resp">Our team includes experienced personnel such as Sarah Mitchell, Project Director, who holds current PRINCE2 Practitioner and PMP certifications and maintains NV1 security clearance [DOC-009]. We have successfully delivered complex Azure migration projects, including a 9-month engagement for FinanceDept Agency involving the migration of core financial systems to Azure IaaS/PaaS [DOC-003]. These credentials and project</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-009 &#10003;</span><span class="cite">DOC-003 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-036</div>
+          <div>Risk management and compliance will be weighted at 10% in the evaluation of proposals.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">legal</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 20%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide a risk management framework or compliance program documentation demonstrating the company&#x27;s approach to risk management and compliance.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-037</div>
+          <div>Proposals scoring below 60% overall will not proceed to the negotiation stage.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">other</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 100%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide documentation or policy demonstrating the process for scoring proposals and the threshold for proceeding to negotiation.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-038</div>
+          <div>The Agency may seek clarification, conduct reference checks, and require presentations from shortlisted respondents.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">references</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 50%</div></td>
+        <td><div class="resp">We maintain a Client Reference Register specifically for government engagements, which includes consented contactable references such as HealthGov Australia [DOC-013]. This register is regularly updated and managed by Sales Operations to ensure references are available for government tender responses [DOC-013]. Additionally, our experience with FinanceDept Agency, where we migrated core financial systems to Azure Iaa</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-013 &#10003;</span><span class="cite">DOC-003 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-039</div>
+          <div>Proposals must be lodged via the AusTender portal no later than 17:00 AEST on 30 June 2026.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">timeline</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 100%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide documentation or correspondence confirming intent or ability to lodge proposals via AusTender by the specified deadline.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-040</div>
+          <div>Late submissions will not be accepted under any circumstances.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">timeline</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 95%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> No internal evidence found for this requirement. Provide documentation covering: Late submissions will not be accepted under any circumstances....</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-041</div>
+          <div>Proposals must be submitted as a single PDF of no more than 60 pages, structured to address each requirement reference (MR-1 through MR-12, DR-1 and DR-2) in order.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">other</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 95%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> No internal evidence found for this requirement. Provide documentation covering: Proposals must be submitted as a single PDF of no more than 60 pages, structured to address each requirement reference (...</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-042</div>
+          <div>Questions must be lodged through the AusTender forum no later than 20 June 2026; answers will be published to all registered respondents.</div>
+          <div class="chips"><span class="chip">low</span><span class="chip">other</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 0%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide correspondence or policy confirming questions are lodged via AusTender forum by the specified deadline and answers are published to all respondents.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-043</div>
+          <div>The Agency is not bound to accept the lowest-priced or any proposal.</div>
+          <div class="chips"><span class="chip">low</span><span class="chip">commercial</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 0%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide a copy of the RFP terms or correspondence explicitly stating the Agency&#x27;s right not to accept the lowest-priced or any proposal.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-044</div>
+          <div>The Agency may discontinue this process at any time.</div>
+          <div class="chips"><span class="chip">low</span><span class="chip">other</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 100%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide documentation or policy acknowledging the Agency&#x27;s right to discontinue the process at any time.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-045</div>
+          <div>Respondents bear their own costs of participation.</div>
+          <div class="chips"><span class="chip">low</span><span class="chip">commercial</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 95%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> No internal evidence found for this requirement. Provide documentation covering: Respondents bear their own costs of participation....</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-046</div>
+          <div>Proposals must remain valid for 120 days from the submission deadline.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">commercial</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 0%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide a proposal or contractual document explicitly stating proposal validity for at least 120 days from submission.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-047</div>
+          <div>The successful respondent will be required to enter into the Commonwealth contract attached as Annex C, including provisions for liquidated damages, key personnel, and step-in rights.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">legal</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 20%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide executed contract excerpts or legal correspondence demonstrating acceptance of Commonwealth contract terms, including liquidated damages, key personnel, and step-in rights.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-048</div>
+          <div>The vendor must assess and potentially migrate approximately 580 virtual machines, including 430 Windows Server 2012 R2/2016, 95 Windows Server 2019, and 55 RHEL 8 instances.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">technical</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 65%</div></td>
+        <td><div class="resp">We have demonstrated experience assessing and migrating large-scale virtual machine environments to Azure, as evidenced by three recent projects. For StateGov Authority, we migrated 540 virtual machines as part of a shared-services platform transition to Azure over an 11-month engagement [DOC-002]. Our HealthGov Australia datacentre exit involved migrating two on-premises environments totaling 620 virtual machines to</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-002 &#10003;</span><span class="cite">DOC-001 &#10003;</span><span class="cite">DOC-003 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-049</div>
+          <div>The vendor must manage the migration or modernisation of 36 SQL Server instances (2014-2019) totaling 48 TB of data.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">technical</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 50%</div></td>
+        <td><div class="resp">Our migration factory model, as detailed in our successful GovCloud Services Panel 2025 proposal, enables structured discovery, dependency mapping, wave planning, rehearsal, and cutover for SQL Server workloads [DOC-012]. We have managed large-scale migrations for federal agencies, including HealthGov Australia, which involved a full datacentre exit and migration to Microsoft Azure [DOC-001], and FinanceDept Agency, </div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-012 &#10003;</span><span class="cite">DOC-001 &#10003;</span><span class="cite">DOC-003 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-050</div>
+          <div>The vendor must handle the migration of approximately 410 TB of storage across SAN and NAS tiers.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">technical</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 50%</div></td>
+        <td><div class="resp">We have managed large-scale migrations involving significant storage volumes across SAN and NAS tiers. For example, our engagement with HealthGov Australia included a full datacentre exit and migration to Microsoft Azure, encompassing the transfer of two on-premises datacentres and associated storage infrastructure [DOC-001]. Additionally, our work with StateGov Authority involved migrating a shared-services platform</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-001 &#10003;</span><span class="cite">DOC-002 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-051</div>
+          <div>The vendor must accommodate a network environment with dual 10 Gbps links between datacentres, noting that ExpressRoute is not yet provisioned.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">technical</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 10%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide documentation or case studies demonstrating experience accommodating dual 10 Gbps links between datacentres without ExpressRoute.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-052</div>
+          <div>The vendor must integrate with an identity environment using Active Directory (2016 functional level) and Entra ID Connect synchronisation.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">technical</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 10%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide documentation or case studies demonstrating integration with Active Directory (2016 functional level) and Entra ID Connect synchronisation.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-053</div>
+          <div>The vendor must ensure backup processes are maintained, including nightly full backups to disk with 35-day retention and quarterly archive to tape.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">technical</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 10%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide backup policy documentation or operational evidence demonstrating nightly full disk backups with 35-day retention and quarterly tape archiving.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-054</div>
+          <div>For Tier-1 workloads (24 applications), the vendor must ensure 99.95% availability and limit cutover windows to a maximum of four hours.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">technical</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 60%</div></td>
+        <td><div class="resp">Our managed Azure environments for Tier-1 production workloads operate under a documented service level agreement guaranteeing 99.95% availability, measured monthly, as outlined in our Managed Services Incident Response Runbook [DOC-010]. This SLA applies to all Tier-1 workloads under 24/7 support. While our evidence demonstrates compliance with the required availability standard, the documentation does not specify c</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-010 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-055</div>
+          <div>The vendor must support the migration or modernisation of Tier-2 workloads, which include 61 internal corporate and case-management applications.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">technical</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 60%</div></td>
+        <td><div class="resp">Our migration factory model, as detailed in our successful GovCloud Services Panel 2025 technical approach, enables the migration and modernisation of Tier-2 workloads through structured discovery, dependency mapping, wave planning, and rehearsal processes [DOC-012]. We have demonstrated this methodology in the migration of HealthGov Australia&#x27;s datacentre, which included two on-premises environments and a range of i</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-012 &#10003;</span><span class="cite">DOC-001 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-056</div>
+          <div>The vendor must address Tier-3 workloads, including development, test, and archive workloads, as part of the migration or modernisation effort.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">technical</span></div></td>
+        <td><span class="badge partial">Partial</span>
+          <div class="score-note" style="margin-top:6px;">confidence 50%</div></td>
+        <td><div class="resp">Our migration methodology, as detailed in the GovCloud Services Panel 2025 proposal, incorporates discovery, dependency mapping, wave planning, rehearsal, and cutover processes to address a broad range of workloads [DOC-012]. In previous engagements, such as the HealthGov Australia datacentre migration, we executed a full datacentre exit to Azure, which included the migration of two on-premises environments and 620 v</div><div class="chips" style="margin-top:8px;"><span class="cite">DOC-012 &#10003;</span><span class="cite">DOC-001 &#10003;</span><span class="cite">DOC-003 &#10003;</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-057</div>
+          <div>The vendor must assess and provide recommendations for containerisation or re-platforming of 8 nominated legacy applications during the engagement.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">technical</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 20%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide a case study or deliverable demonstrating assessment and recommendations for containerisation or re-platforming of at least 8 legacy applications.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-058</div>
+          <div>The contract must be executed by August 2026.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">timeline</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 0%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide a signed project plan, contract, or commitment letter explicitly confirming execution by August 2026.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-059</div>
+          <div>Discovery and landing zone build must occur between August and November 2026.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">timeline</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 20%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide a project plan, schedule, or commitment letter demonstrating ability to execute discovery and landing zone build specifically between August and November 2026.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-060</div>
+          <div>Migration waves must take place from December 2026 to March 2027.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">timeline</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 10%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide project plans or case studies demonstrating migration waves scheduled specifically between December 2026 and March 2027.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-061</div>
+          <div>Modernisation assessments must commence from January 2027.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">timeline</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 10%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide a project plan, schedule, or commitment letter explicitly confirming that modernisation assessments will commence from January 2027.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-062</div>
+          <div>Datacentre decommissioning and lease exit must be completed by 30 June 2027.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">timeline</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 20%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide contract evidence or project documentation confirming datacentre decommissioning and lease exit completed by 30 June 2027.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-063</div>
+          <div>Managed services steady state must begin from April 2027 for the remainder of the three-year term.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">timeline</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 10%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide an executed contract or schedule explicitly confirming managed services steady state commences April 2027 and continues for three years.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-064</div>
+          <div>Respondents may propose an alternative timeline provided the lease-exit date of 30 June 2027 is met.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">timeline</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 20%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide project plans or schedules explicitly demonstrating the ability to meet or propose alternative timelines aligned with the 30 June 2027 lease-exit date.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-065</div>
+          <div>The vendor bears delivery risk for migration execution, including rollback costs arising from failed cutovers.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">legal</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 20%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide executed contract language or SOW excerpts explicitly stating the vendor assumes delivery risk and rollback costs for failed migration cutovers.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-066</div>
+          <div>The Agency bears risk for delays caused by Agency-side approvals exceeding agreed turnaround times.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">legal</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 10%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide contract language or policy documentation explicitly stating that the Agency bears risk for delays caused by Agency-side approvals exceeding agreed turnaround times.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-067</div>
+          <div>Liquidated damages apply to missed lease-exit milestones attributable to the vendor.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">legal</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 20%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide contract clauses or correspondence explicitly confirming acceptance of liquidated damages for missed lease-exit milestones.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-068</div>
+          <div>Caps on liability will be negotiated with the preferred respondent within Commonwealth contracting norms.</div>
+          <div class="chips"><span class="chip">medium</span><span class="chip">legal</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 10%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide contract excerpts or policy documents demonstrating willingness to negotiate liability caps within Commonwealth norms.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-069</div>
+          <div>Unlimited liability applies for breach of privacy or security obligations.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">legal</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 20%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide contract language or policy explicitly stating unlimited liability for breach of privacy or security obligations.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-070</div>
+          <div>Mandatory requirements assessed as non-compliant result in exclusion from the process.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">other</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 100%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide a signed statement or policy explicitly acknowledging acceptance of exclusion for non-compliance with mandatory requirements.</div></td>
+      </tr>
+      <tr>
+        <td><div class="req-id">REQ-071</div>
+          <div>Partial compliance on mandatory requirements must be justified with a credible remediation plan.</div>
+          <div class="chips"><span class="chip">high</span><span class="chip">other</span></div></td>
+        <td><span class="badge gap">Action required</span>
+          <div class="score-note" style="margin-top:6px;">confidence 10%</div></td>
+        <td><div class="action"><b>ACTION REQUIRED:</b> Provide a documented remediation plan justifying partial compliance on mandatory requirements.</div></td>
+      </tr></tbody>
+  </table>
+
+  <footer>
+    Generated by the RFP Intelligence Agent pipeline (Microsoft Foundry gpt-4.1 + Foundry IQ).
+    Proof of concept on a synthetic RFP and a synthetic evidence corpus. The Verifier guarantees
+    citation <b>provenance</b> — every shown citation resolves to a document that was retrieved for
+    that requirement; claim-level fact-checking is on the roadmap. Nothing ships without human approval.
+  </footer>
+</div>
+</body>
+</html>

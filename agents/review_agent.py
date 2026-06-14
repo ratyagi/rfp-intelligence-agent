@@ -17,6 +17,7 @@ from dotenv import load_dotenv
 
 from tools.adaptive_card import build_approval_card
 from tools.bid_report import append_report_to_docx, build_report
+from tools.dashboard import build_dashboard
 from tools.docx_builder import build_proposal
 
 load_dotenv()
@@ -74,9 +75,16 @@ def run(verified_draft: dict, evidence_map: dict, meta: dict | None = None) -> d
     card_path.write_text(json.dumps(card, indent=2, ensure_ascii=False), encoding="utf-8")
     logger.info(f"ReviewAgent: approval card written to {card_path}")
 
+    dashboard_path = build_dashboard(
+        verified_draft, report,
+        str(OUTPUT_DIR / f"draft_proposal_{timestamp}_dashboard.html"),
+    )
+    logger.info(f"ReviewAgent: dashboard written to {dashboard_path}")
+
     return {
         "docx_path": docx_path,
         "card_path": str(card_path),
         "report_path": str(report_path),
+        "dashboard_path": dashboard_path,
         "status": "pending_human_review",
     }
